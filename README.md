@@ -87,3 +87,11 @@ Questions now include a stable topicId, so Practice does not depend on exact dis
 - Hover 3D card tilt on larger screens
 - Answer success/wrong motion, confetti, flash and optional feedback tone
 - Toast notifications for saves and answers
+
+## v10 — simplified UI
+- Same 1000-question bank and six-topic syllabus
+- Fewer controls and less visual clutter
+- Simple Home, Topics, Practice and Monday Mock navigation
+- Clear topic cards and larger buttons
+- Lightweight answer animations without the heavy visual effects
+- Creator credit: @thesonukumar80
