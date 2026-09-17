@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#071b45">
-<meta name="description" content="BEEE Monday Test Preparation - 1000 practice questions">
+<meta name="description" content="BEEE Monday Test Preparation - 1000 practice questions • Created by @thesonukumar80">
 <link rel="manifest" href="manifest.webmanifest">
 <title>BEEE Monday Test Preparation</title>
 <style>
@@ -48,9 +48,28 @@ main{max-width:1180px;margin:auto;padding:12px 14px 42px}
 .conf{position:fixed;z-index:950;width:8px;height:13px;border-radius:2px;pointer-events:none;animation:conf 900ms ease-out forwards}@keyframes conf{to{transform:translate(var(--dx),var(--dy)) rotate(720deg);opacity:0}}
 @media(max-width:900px){.top-inner{grid-template-columns:1fr;gap:8px}.top-actions{justify-content:flex-end}.grid2{grid-template-columns:1fr}.side{position:relative;top:auto}.topic-grid{grid-template-columns:repeat(2,1fr)}.hero-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.nav{overflow-x:auto}.nav button{min-width:105px}.topic-grid{grid-template-columns:1fr}.hero h2{font-size:27px}.stats{grid-template-columns:repeat(2,1fr)}.grid2{display:block}.side{margin-bottom:10px}.hello{display:none}}
+
+.credit-mini{display:block;margin-top:2px;font-size:9px;color:#69dcff}
+.social-mini{display:grid;place-items:center;text-decoration:none;font-size:20px;color:#ff77d2!important}
+.today-chip{display:inline-block;padding:6px 9px;border-radius:999px;background:#ffffff10;border:1px solid #ffffff35;color:#d8e8ff;font-size:10px;font-weight:900;letter-spacing:.8px;margin-bottom:6px}
+.creator-card{background:linear-gradient(135deg,#111d3e,#2b1557,#0e344b)!important}
+.credit-link{display:inline-block;text-decoration:none;color:#63e6ff!important}
+.reveal{animation:reveal .65s cubic-bezier(.2,.8,.2,1) both}
+@keyframes reveal{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+.float-glow{animation:floatGlow 3.5s ease-in-out infinite}
+@keyframes floatGlow{50%{transform:translateY(-4px);box-shadow:0 20px 42px #4f7cff25}}
+.answerPulse{animation:answerPulse .65s ease}
+@keyframes answerPulse{0%{transform:scale(1)}35%{transform:scale(1.012);box-shadow:0 0 0 4px #00e5ff14,0 0 40px #00e5ff18}100%{transform:none}}
+.count-pop{animation:countPop .4s ease}
+@keyframes countPop{50%{transform:scale(1.18);color:#5ffff2}}
+.shock{animation:shock .42s ease}
+@keyframes shock{20%,70%{transform:translateX(-5px)}45%,90%{transform:translateX(5px)}}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;z-index:2000;background:#0c1c3d;border:1px solid #375898;color:#eaf3ff;padding:11px 15px;border-radius:999px;box-shadow:0 14px 30px #0008;font-size:12px;font-weight:850;transition:.28s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
 </style>
 </head>
 <body>
+<div id="toast" class="toast"></div>
 <div id="splash" class="splash"><div class="floaters" id="floaters"></div><div class="splash-inner"><div class="splash-logo">⚡</div><div class="splash-title">BEEE MONDAY</div><div class="splash-sub">Test Preparation</div><div class="loader"><i></i></div><div class="splash-sub">Loading 1000 questions…</div></div></div>
 
 <header class="top">
@@ -59,8 +78,8 @@ main{max-width:1180px;margin:auto;padding:12px 14px 42px}
   <div class="searchbox"><span class="searchicon">⌕</span><input id="globalSearch" placeholder="Search questions, topics, keywords…"></div>
   <div class="top-actions">
     <button class="icon-btn" id="notify">🔔</button>
-    <button class="icon-btn" id="theme">☀️</button>
-    <div class="user"><div class="avatar">S</div><div class="hello">Hello,<b>Student</b></div></div>
+    <button class="icon-btn" id="theme">☀️</button><a class="icon-btn social-mini" id="instagramTop" href="https://www.instagram.com/thesonukumar80/" target="_blank" rel="noopener" title="Instagram @thesonukumar80">◎</a>
+    <div class="user"><div class="avatar">S</div><div class="hello">Hello,<b>Student</b><span class="credit-mini">Made by @thesonukumar80</span></div></div>
   </div>
 </div>
 <nav class="nav">
@@ -73,7 +92,7 @@ main{max-width:1180px;margin:auto;padding:12px 14px 42px}
 <div class="hero">
   <div class="hero-grid">
     <div><div class="eyebrow">BEEE • Monday Class Test</div><h2><span>Practice Today.</span><br>Perform Tomorrow.</h2><p class="hero-quote">Small steps, big engineers 🚀</p><div class="row"><button class="pillbtn primary" id="heroPractice">Start Practicing →</button><button class="pillbtn green" id="heroMock">30 Q Mock Test</button></div></div>
-    <div class="glow-card"><b id="heroBank">1000+</b><div style="font-weight:900;font-size:18px">Practice Questions</div><div class="muted" style="margin-top:7px">6 Core Topics • Real Exam Style • Track Your Progress</div></div>
+    <div class="glow-card"><div class="today-chip" id="todayChip">TODAY</div><b id="heroBank">1000</b><div style="font-weight:900;font-size:18px">Practice Questions</div><div class="muted" style="margin-top:7px">6 Core Topics • Real Exam Style • Track Your Progress</div></div>
   </div>
 </div>
 <div class="stats" id="stats"></div>
@@ -118,12 +137,18 @@ main{max-width:1180px;margin:auto;padding:12px 14px 42px}
 <div class="topic-card t1" style="padding:18px"><div class="topic-icon">📒</div><h3>My Notes</h3><p>Keep short notes beside practice.</p><div class="qcount">Local notes</div></div>
 <div class="topic-card t2" style="padding:18px"><div class="topic-icon">🎯</div><h3>Weak Topics</h3><p>Topics where your accuracy is lowest.</p><div class="qcount">View in Stats</div></div>
 <div class="topic-card t3" style="padding:18px"><div class="topic-icon">⚙️</div><h3>Settings</h3><p>Theme, progress and local storage.</p><div class="qcount" id="clearData">Clear progress</div></div>
+<div class="topic-card t4 creator-card" style="padding:18px">
+  <div class="topic-icon">💙</div>
+  <h3>Creator</h3>
+  <p>BEEE Monday Test Preparation</p>
+  <a class="qcount credit-link" href="https://www.instagram.com/thesonukumar80/" target="_blank" rel="noopener">Instagram • @thesonukumar80</a>
+</div>
 </div></div>
 </section>
 </main>
 
 <div id="modal" class="modal hidden"><div class="modal-card"><div class="panel-head"><div class="panel-title" id="modalTitle">Info</div><button class="icon-btn" id="modalClose">✕</button></div><div class="muted" id="modalBody" style="margin-top:12px"></div></div></div>
-<footer style="max-width:1180px;margin:auto;padding:18px 14px 34px;color:#6c80a5">BEEE Monday Test Preparation • 1000 practice questions • Keep Learning 🚀</footer>
+<footer style="max-width:1180px;margin:auto;padding:18px 14px 34px;color:#6c80a5;text-align:center"><div style="font-weight:900;color:#bcd0f2">BEEE Monday Test Preparation • 1000 practice questions</div><div style="margin-top:7px">Made with ❤️ by <a href="https://www.instagram.com/thesonukumar80/" target="_blank" rel="noopener" style="color:#58dfff;text-decoration:none;font-weight:900">@thesonukumar80</a> • Keep Learning 🚀</div></footer>
 
 <script>
 const $=id=>document.getElementById(id), esc=s=>String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
@@ -157,6 +182,52 @@ function renderHome(){
 function openModal(title,body){$("modalTitle").textContent=title;$("modalBody").innerHTML=body;$("modal").classList.remove("hidden")}
 $("modalClose").onclick=()=>$("modal").classList.add("hidden");$("modal").onclick=e=>{if(e.target.id==="modal")$("modal").classList.add("hidden")}
 
+
+function toast(msg){
+  const t=$("toast"); if(!t) return;
+  t.textContent=msg; t.classList.add("show");
+  clearTimeout(window.__toastTimer); window.__toastTimer=setTimeout(()=>t.classList.remove("show"),1800);
+}
+function updateRealTime(){
+  const d=new Date();
+  const day=d.toLocaleDateString(undefined,{weekday:"long"});
+  const date=d.toLocaleDateString(undefined,{day:"2-digit",month:"short",year:"numeric"});
+  const el=$("todayChip"); if(el) el.textContent=day.toUpperCase()+" • "+date.toUpperCase();
+}
+function enhancedSplash(){
+  const splash=$("splash"); if(!splash) return;
+  const tip=splash.querySelector(".splash-sub:last-child");
+  const loader=splash.querySelector(".loader i");
+  let n=0;
+  const iv=setInterval(()=>{
+    n=Math.min(100,n+Math.floor(8+Math.random()*17));
+    if(loader) loader.style.width=n+"%";
+    if(tip) tip.textContent="Loading 1000 questions • "+n+"%";
+    if(n>=100){clearInterval(iv); setTimeout(()=>splash.classList.add("hide"),420);}
+  },150);
+}
+function enhanceCards(){
+  const cards=[...document.querySelectorAll(".topic-card,.glow-card,.stat,.mainpanel,.hero")];
+  cards.forEach(card=>{card.classList.add("reveal");
+    card.addEventListener("mousemove",e=>{
+      if(innerWidth<850) return;
+      const r=card.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+      card.style.transform=`perspective(900px) rotateX(${(-y*2.2).toFixed(2)}deg) rotateY(${(x*2.2).toFixed(2)}deg) translateY(-2px)`;
+    });
+    card.addEventListener("mouseleave",()=>{card.style.transform=""});
+  });
+}
+function answerSound(ok){
+  try{
+    const C=window.AudioContext||window.webkitAudioContext;if(!C)return;
+    const ctx=new C(),o=ctx.createOscillator(),g=ctx.createGain();
+    o.type="sine";o.frequency.value=ok?740:210;g.gain.value=.035;o.connect(g);g.connect(ctx.destination);o.start();
+    setTimeout(()=>{o.frequency.value=ok?980:150;g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.12)},80);
+    setTimeout(()=>ctx.close(),220);
+  }catch(_){}
+}
+
 function chooseColor(){return ["#00e5ff","#26e58b","#ff5db8","#ffc857","#5d8fff","#a26cff"][Math.floor(Math.random()*6)]}
 function confetti(x,y){
  for(let i=0;i<26;i++){const c=document.createElement("span");c.className="conf";c.style.left=x+"px";c.style.top=y+"px";c.style.background=chooseColor();c.style.setProperty("--dx",((Math.random()-.5)*280)+"px");c.style.setProperty("--dy",((Math.random()-.9)*260)+"px");document.body.appendChild(c);setTimeout(()=>c.remove(),950)}
@@ -180,19 +251,21 @@ function renderQuestion(){
  <div class="navigator" id="navigator"></div>
  </div>`;
  q.options.forEach((o,i)=>{const b=document.createElement("button");b.className="opt";b.innerHTML=`<span class="letter">${"ABCD"[i]}</span><span>${esc(o)}</span>`;b.onclick=()=>selectAnswer(i,b);$("options").appendChild(b)});
- $("mark").onclick=()=>{state.marked[q.id]=!state.marked[q.id];$("mark").textContent=state.marked[q.id]?"🔖":"🔗";save();updateProgress()};
+ $("mark").onclick=()=>{state.marked[q.id]=!state.marked[q.id];$("mark").textContent=state.marked[q.id]?"🔖":"🔗";save();updateProgress();toast(state.marked[q.id]?"🔖 Question saved":"↩️ Question unmarked")};
  $("mark").textContent=state.marked[q.id]?"🔖":"🔖";
  $("ask").onclick=()=>openModal("AI Explanation",`<p><b>${esc(q.q)}</b></p><p>${esc(q.explanation)}</p><p style="margin-top:10px;color:#8ddcff">Tip: write the formula first, then substitute values.</p>`);
  $("youtube").onclick=()=>window.open("https://www.youtube.com/results?search_query="+encodeURIComponent("BEEE "+q.q)," _blank");
- $("notes").onclick=()=>openModal("Saved to Notes",`<p>✅ This question is saved for your revision.</p><p class="muted">${esc(q.q)}</p>`);
+ $("notes").onclick=()=>{toast("📒 Added to revision notes");openModal("Saved to Notes",`<p>✅ This question is saved for your revision.</p><p class="muted">${esc(q.q)}</p>`)};
  $("next").onclick=()=>{if(c.idx<c.list.length-1){c.idx++;c.selected=null;renderQuestion()}else{openModal("Topic complete",`<div style="text-align:center;font-size:46px">🎉</div><h3 style="text-align:center">${c.score}/${c.list.length}</h3><p style="text-align:center">Accuracy: ${Math.round(c.score/c.list.length*100)}%</p>`)}};
  const nav=$("navigator"); const start=Math.max(0,c.idx-5),end=Math.min(c.list.length,start+12);for(let i=start;i<end;i++){const b=document.createElement("button");b.textContent=i+1;if(i===c.idx)b.classList.add("active");if(state.attempted[c.list[i].id])b.classList.add("done");b.onclick=()=>{c.idx=i;renderQuestion()};nav.appendChild(b)}
 }
 function selectAnswer(i,btn){
  const c=state.current,q=c.list[c.idx]; if(c.selected!==null)return;c.selected=i;const opts=[...$("options").children];opts.forEach(x=>x.style.pointerEvents="none");
  const ok=i===q.answer;opts[q.answer].classList.add("correct");if(!ok)opts[i].classList.add("wrong");
- state.attempted[q.id]=1;if(ok)state.correct++;else state.wrong++;save();updateProgress();answerFlash(ok);
- if(ok)confetti(innerWidth/2,innerHeight/2);
+ state.attempted[q.id]=1;
+ if(ok){state.correct++;$("practicePanel").classList.add("answerPulse");confetti(innerWidth/2,innerHeight/2);answerSound(true);toast("✅ Correct! Great job.");setTimeout(()=>$("practicePanel").classList.remove("answerPulse"),700)}
+ else{state.wrong++;$("practicePanel").classList.add("shock");answerSound(false);toast("❌ Review the explanation and try again.");setTimeout(()=>$("practicePanel").classList.remove("shock"),480)}
+ save();updateProgress();answerFlash(ok);
  $("feedback").innerHTML=`<div class="feedback ${ok?"good":"bad"}"><div class="fb-icon">${ok?"✅":"❌"}</div><div><b>${ok?"Correct!":"Not quite."}</b><span class="muted">${esc(q.explanation)}</span></div></div>`;
  $("next").disabled=false;
 }
@@ -224,7 +297,7 @@ $("notify").onclick=()=>openModal("Monday Test Reminder","📚 Revise all 6 BEEE
 $("clearData").onclick=()=>{if(confirm("Clear local progress?")){localStorage.removeItem("beeeV8");localStorage.removeItem("beeeBestMock");location.reload()}}
 
 function makeFloaters(){const box=$("floaters");for(let i=0;i<28;i++){const s=document.createElement("span");s.className="floater";s.style.left=Math.random()*100+"%";s.style.animationDuration=6+Math.random()*9+"s";s.style.animationDelay=-Math.random()*9+"s";box.appendChild(s)}}
-makeFloaters();loadState();if(localStorage.getItem("beeeTheme")==="light"){$("theme").textContent="🌙";document.body.classList.add("light")}
+makeFloaters();updateRealTime();setInterval(updateRealTime,30000);enhancedSplash();loadState();if(localStorage.getItem("beeeTheme")==="light"){$("theme").textContent="🌙";document.body.classList.add("light")}
 (async()=>{try{const [s,t,q]=await Promise.all([fetch("data/settings.json?v="+Date.now()).then(r=>r.json()),fetch("data/topics.json?v="+Date.now()).then(r=>r.json()),fetch("data/questions.json?v="+Date.now()).then(r=>r.json())]);settings=s;topics=t;questions=q;renderHome();setTimeout(()=>$("splash").classList.add("hide"),1500);if("serviceWorker"in navigator)navigator.serviceWorker.register("./sw.js")}catch(e){$("status").textContent="Data load error";setTimeout(()=>$("splash").classList.add("hide"),1200)}})();
 </script>
 </body>

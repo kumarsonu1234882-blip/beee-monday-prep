@@ -77,3 +77,13 @@ Questions now include a stable topicId, so Practice does not depend on exact dis
 - Search questions/topics, mark questions, add-note feedback, YouTube search and mock test.
 - Local progress, accuracy, best mock score and light/dark theme saved in browser.
 - PWA manifest + service worker included for a more app-like experience.
+
+
+## v9 visual upgrade
+- Creator credit: Instagram @thesonukumar80
+- Exact 1000-question bank remains unchanged
+- Dynamic date/day chip
+- Animated opening loader
+- Hover 3D card tilt on larger screens
+- Answer success/wrong motion, confetti, flash and optional feedback tone
+- Toast notifications for saves and answers
