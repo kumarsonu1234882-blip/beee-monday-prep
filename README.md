@@ -1,6 +1,6 @@
 # BEEE Monday Test Preparation App
 
-This version is a **preparation app**, not a Monday-only locked app.
+This version is a **preparation app**, not a Monday-only locked app. v2 fixes mobile navigation/buttons and makes topic cards actionable.
 
 ## What it does
 - Topic-wise revision for the BEEE class-test syllabus from the uploaded notes.
