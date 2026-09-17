@@ -1,56 +1,44 @@
 [
   {
-    "id": "resistance",
-    "name": "Resistance & Ohm's Law",
-    "summary": "Resistance, resistivity, Ohm's law and basic relations.",
-    "pages": "1, 7"
-  },
-  {
-    "id": "lcr",
-    "name": "Inductance & Capacitance",
-    "summary": "Definitions, units and basic relations for L and C.",
-    "pages": "1–2"
-  },
-  {
     "id": "elements",
-    "name": "Circuit Elements",
-    "summary": "Active/passive, bilateral/unilateral, linear/non-linear elements.",
-    "pages": "2–6"
+    "name": "Electrical Circuit Elements",
+    "short": "R, L, C • Active & Passive",
+    "summary": "Resistance, inductance and capacitance; active and passive elements.",
+    "pages": "1–5"
   },
   {
-    "id": "kclkvl",
-    "name": "KCL & KVL",
-    "summary": "Current law at junctions and voltage law around closed loops.",
+    "id": "classification",
+    "name": "Classification of Elements",
+    "short": "Unilateral/Bilateral • Linear/Nonlinear",
+    "summary": "Unilateral and bilateral elements; linear and nonlinear elements.",
+    "pages": "5–6"
+  },
+  {
+    "id": "laws",
+    "name": "Basic Circuit Laws",
+    "short": "Ohm’s Law • KCL • KVL",
+    "summary": "Ohm’s law and Kirchhoff’s current and voltage laws.",
     "pages": "7–9"
   },
   {
-    "id": "sources",
-    "name": "Electrical Sources",
-    "summary": "Ideal/practical voltage and current sources and source transformation.",
+    "id": "config",
+    "name": "Circuit Configurations",
+    "short": "Series/Parallel • Sources • Transformation",
+    "summary": "Series/parallel circuits, voltage/current sources and source transformation.",
     "pages": "10–12"
   },
   {
-    "id": "mesh",
-    "name": "Mesh Analysis",
-    "summary": "Mesh-current equations and worked examples.",
-    "pages": "13–15"
+    "id": "analysis",
+    "name": "Circuit Analysis Methods",
+    "short": "Mesh • Node Analysis",
+    "summary": "Mesh-current and node-voltage analysis methods.",
+    "pages": "13–18"
   },
   {
-    "id": "node",
-    "name": "Node Analysis",
-    "summary": "Node equations and current calculations.",
-    "pages": "16–18"
-  },
-  {
-    "id": "divider",
-    "name": "Voltage & Current Divider",
-    "summary": "VDR and CDR formulas with worked examples.",
-    "pages": "19–24"
-  },
-  {
-    "id": "star_delta",
-    "name": "Star–Delta Conversion",
-    "summary": "Δ→Y and Y→Δ network transformation formulas and examples.",
-    "pages": "21–25"
+    "id": "network",
+    "name": "Network Theorems & Transformations",
+    "short": "VDR • CDR • Star–Delta",
+    "summary": "Voltage divider, current divider and star-delta transformations.",
+    "pages": "19–25"
   }
 ]

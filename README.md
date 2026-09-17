@@ -52,3 +52,11 @@ Questions now include a stable topicId, so Practice does not depend on exact dis
 - Topic question counts
 - Expanded question bank from the supplied BEEE notes
 - Practice streak indicator
+
+
+## v6
+- Exactly 6 top-level syllabus topics
+- 60 practice questions (10 per topic)
+- Dark colorful animated UI inspired by the supplied reference screenshot
+- Topic actions: Ask AI placeholder, YouTube search, Mark as Done
+- Topic-wise question counts and animated practice feedback

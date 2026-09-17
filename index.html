@@ -3,160 +3,125 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#2563eb">
+<meta name="theme-color" content="#071228">
 <title>BEEE Monday Test Preparation</title>
 <style>
-:root{--bg:#f4f7fb;--card:#fff;--txt:#172033;--muted:#697386;--primary:#2563eb;--primary2:#1d4ed8;--accent:#7c3aed;--soft:#eef4ff;--border:#d9e1ec;--ok:#15803d;--bad:#dc2626;--gold:#f59e0b}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:radial-gradient(circle at 15% 0%,#e8efff 0,#f4f7fb 28%,#f4f7fb 100%);color:var(--txt);overflow-x:hidden}
-.wrap{max-width:1050px;margin:0 auto}
-header{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--primary2),#3b82f6 55%,var(--accent));color:#fff;padding:24px 14px 34px}
-header:before,header:after{content:"";position:absolute;border-radius:50%;filter:blur(5px);opacity:.25;animation:float 8s ease-in-out infinite}
-header:before{width:180px;height:180px;background:#fff;right:-70px;top:-90px}header:after{width:120px;height:120px;background:#fff;left:-70px;bottom:-70px;animation-delay:-3s}
-@keyframes float{50%{transform:translate(20px,12px) scale(1.08)}}
-.header-row{position:relative;z-index:1;display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
-h1{font-size:27px;line-height:1.15;margin:0 0 6px;letter-spacing:-.3px}.sub{opacity:.92;line-height:1.45}.status{padding:8px 11px;border:1px solid #ffffff3a;background:#ffffff20;border-radius:999px;font-size:12px;font-weight:900;white-space:nowrap;backdrop-filter:blur(8px)}
-.nav{position:sticky;top:0;z-index:10;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0;padding:8px 0;background:#f4f7fbe8;backdrop-filter:blur(12px)}
-.nav button{appearance:none;border:1px solid var(--border);border-radius:14px;background:#fff;color:var(--txt);padding:12px 8px;font-weight:900;font-size:14px;cursor:pointer;min-height:48px;box-shadow:0 5px 14px #0b1b3710;transition:.2s transform,.2s box-shadow,.2s background}
-.nav button:hover{transform:translateY(-2px);box-shadow:0 8px 18px #0b1b3720}.nav button.active{background:linear-gradient(135deg,var(--primary),#4f46e5);color:#fff;border-color:transparent;box-shadow:0 8px 18px #2563eb33}
-main{padding:6px 12px 40px}.card{background:#fffffff2;border:1px solid var(--border);border-radius:20px;padding:18px;margin:12px 0;box-shadow:0 10px 30px #20304a0c;animation:slideIn .45s ease both}
-@keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}.stat{border:1px solid var(--border);border-radius:16px;padding:14px;background:linear-gradient(180deg,#fff,#f9fbff);transition:.2s transform}.stat:hover{transform:translateY(-3px)}.stat span{display:block;color:var(--muted);font-size:13px}.stat b{display:block;font-size:24px;margin-top:5px}
-.hero{font-size:21px;line-height:1.4;font-weight:900}.muted{color:var(--muted);font-size:14px;line-height:1.55}.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
-.action{border:0;border-radius:13px;background:linear-gradient(135deg,var(--primary),#4f46e5);color:#fff;padding:12px 16px;font-weight:900;cursor:pointer;min-height:46px;box-shadow:0 7px 16px #2563eb24;transition:.2s transform,.2s box-shadow}.action:hover{transform:translateY(-2px);box-shadow:0 10px 20px #2563eb30}.action.secondary{background:#eaf0ff;color:#17366f;box-shadow:none}.action:disabled{opacity:.5;cursor:not-allowed}
-.page.hidden{display:none}.topic{border:1px solid var(--border);border-radius:16px;padding:15px;margin:9px 0;background:linear-gradient(180deg,#fff,#fbfdff);transition:.2s transform,.2s border,.2s box-shadow}.topic:hover{transform:translateY(-2px);border-color:#b8c9ee;box-shadow:0 8px 20px #19346f0c}.topic h3{margin:0 0 5px;font-size:18px}
-.pill{display:inline-block;padding:6px 9px;border-radius:999px;background:#edf3ff;color:#1e40af;font-size:12px;font-weight:900;margin:4px 4px 0 0}
-.search{width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:12px;font-size:16px;outline:none}.search:focus{border-color:#7aa2ff;box-shadow:0 0 0 4px #2563eb15}
-.question{font-size:20px;line-height:1.45;font-weight:900;margin-top:10px}.option{width:100%;display:block;text-align:left;border:1px solid var(--border);background:#f8fafc;color:var(--txt);padding:13px 14px;border-radius:13px;margin:9px 0;font-size:15px;cursor:pointer;transition:.2s transform,.2s border,.2s background}.option:hover{transform:translateX(3px);border-color:#96b2ed}.option.selected{border-color:var(--primary);background:var(--soft)}.option.correct{border-color:var(--ok);background:#effcf3;animation:pop .35s ease}.option.wrong{border-color:var(--bad);background:#fff1f2;animation:shake .35s ease}
+:root{--bg:#071228;--card:#0d1b3b;--card2:#111f46;--text:#eef4ff;--muted:#aeb9d1;--cyan:#00e5ff;--blue:#4f7cff;--purple:#9b5cff;--pink:#ff4f9a;--green:#31e981;--red:#ff4f6d;--gold:#ffc857;--line:#25365f}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:radial-gradient(circle at 15% 5%,#172d62 0,#071228 34%,#050b18 100%);color:var(--text);overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(55px);opacity:.25;pointer-events:none;animation:drift 11s ease-in-out infinite}
+body:before{width:220px;height:220px;background:#00e5ff;top:-80px;right:-70px}body:after{width:260px;height:260px;background:#9b5cff;left:-130px;bottom:10%;animation-delay:-5s}
+@keyframes drift{50%{transform:translate(28px,-18px) scale(1.12)}}
+.wrap{max-width:1100px;margin:auto}
+header{position:relative;overflow:hidden;padding:24px 14px 34px;background:linear-gradient(125deg,#071b45,#103d9a 45%,#4e2a98 80%,#c12a69);box-shadow:0 10px 40px #0008}
+header .shine{position:absolute;inset:-50%;background:conic-gradient(from 90deg,transparent,rgba(255,255,255,.12),transparent 30%);animation:spin 14s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}.header-row{position:relative;display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+h1{margin:0;font-size:27px;line-height:1.12;letter-spacing:.2px}.sub{margin-top:7px;color:#dce8ff;line-height:1.45}.status{padding:8px 11px;border:1px solid #ffffff30;background:#ffffff14;border-radius:999px;font-size:12px;font-weight:900;white-space:nowrap;backdrop-filter:blur(12px)}
+.nav{position:sticky;top:0;z-index:20;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:9px 0;background:#071228d9;backdrop-filter:blur(16px);border-bottom:1px solid #ffffff0c}
+.nav button{border:1px solid #2c4170;background:#0d1936;color:#dbe7ff;border-radius:14px;padding:12px 8px;font-weight:900;cursor:pointer;min-height:48px;transition:.25s transform,.25s box-shadow,.25s border,.25s background}
+.nav button:hover,.nav button.active{transform:translateY(-2px);background:linear-gradient(135deg,#1558d9,#7c4dff);border-color:#73b9ff;box-shadow:0 9px 22px #2876ff3b}
+main{padding:8px 12px 40px}.page.hidden{display:none}.card{background:linear-gradient(180deg,#0e1d41f2,#0b1732f2);border:1px solid var(--line);border-radius:20px;padding:18px;margin:13px 0;box-shadow:0 14px 35px #0006;animation:enter .5s ease both}
+@keyframes enter{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+.hero{font-size:21px;line-height:1.4;font-weight:950}.muted{color:var(--muted);font-size:14px;line-height:1.55}.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.stat{padding:13px;border:1px solid var(--line);border-radius:16px;background:#102149;box-shadow:inset 0 1px 0 #ffffff08}.stat span{display:block;color:#9fb0d0;font-size:12px}.stat b{display:block;font-size:23px;margin-top:4px}
+.topic{position:relative;overflow:hidden;border:1px solid #243762;border-radius:18px;padding:15px;margin:10px 0;background:linear-gradient(135deg,#0d1b3b,#111f46);transition:.25s transform,.25s border,.25s box-shadow}.topic:hover{transform:translateY(-3px);border-color:#4e78cf;box-shadow:0 12px 25px #0006}.topic:before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--topic,#00e5ff);box-shadow:0 0 18px var(--topic,#00e5ff)}
+.topic h3{margin:0;font-size:18px;padding-left:8px}.topic .desc{padding-left:8px;margin-top:5px;color:#afbdd5}.chips{padding-left:8px;margin-top:9px}.chip{display:inline-block;padding:6px 9px;margin:3px 4px 0 0;border-radius:999px;background:#162957;border:1px solid #2b4579;color:#cfe1ff;font-size:11px;font-weight:900}
+.actions{padding-left:8px;margin-top:10px;display:flex;gap:7px;flex-wrap:wrap}.action{border:0;border-radius:11px;padding:10px 12px;font-weight:900;cursor:pointer;transition:.2s transform,.2s box-shadow;min-height:42px}.action:hover{transform:translateY(-2px)}.ai{color:#36edff;background:#06354a;border:1px solid #0586ae}.yt{color:#ff6176;background:#451325;border:1px solid #9d2942}.done{color:#4ff48e;background:#0b3b2a;border:1px solid #1d9b62}.primary{color:#fff;background:linear-gradient(135deg,#1c6aff,#8b5cff);box-shadow:0 8px 18px #4b7dff3a}.secondary{color:#d8e5ff;background:#15264d;border:1px solid #2a416f}
+.search{width:100%;padding:12px 14px;border:1px solid #2b416d;border-radius:12px;background:#09152e;color:#fff;font-size:16px;outline:none}.search:focus{border-color:#36a5ff;box-shadow:0 0 0 4px #36a5ff16}
+.question{font-size:20px;line-height:1.45;font-weight:900;margin-top:10px}.option{width:100%;display:block;text-align:left;border:1px solid #293e69;background:#0a1730;color:#e8f0ff;padding:13px 14px;border-radius:13px;margin:9px 0;font-size:15px;cursor:pointer;transition:.2s transform,.2s border,.2s background}.option:hover{transform:translateX(4px);border-color:#4f8cff}.option.correct{border-color:#32f08f;background:#082e22;animation:pop .35s ease}.option.wrong{border-color:#ff526f;background:#3a1020;animation:shake .35s ease}.option.selected{border-color:#5e8bff;background:#10295b}
 @keyframes pop{50%{transform:scale(1.02)}}@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
-.progress{height:9px;background:#e7edf6;border-radius:99px;overflow:hidden}.progress>div{height:100%;background:linear-gradient(90deg,var(--primary),#7c3aed);width:0;transition:width .4s ease}.timer{font-size:23px;font-weight:950;margin-left:auto}.score{text-align:center;font-size:48px;font-weight:950}.center{text-align:center}
-.streak{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:#fff7df;color:#925e00;font-size:12px;font-weight:900}.flash{animation:glow 1.2s ease infinite}@keyframes glow{50%{box-shadow:0 0 0 7px #f59e0b12}}
-.error{padding:12px;border-radius:12px;background:#fff1f2;color:#991b1b;border:1px solid #fecaca}footer{text-align:center;color:var(--muted);font-size:13px;padding:16px}
-.ripple{position:relative;overflow:hidden}.ripple:after{content:"";position:absolute;width:10px;height:10px;border-radius:50%;background:#fff7;transform:scale(0);left:var(--x);top:var(--y);pointer-events:none}.ripple:active:after{animation:ripple .45s ease}@keyframes ripple{to{transform:scale(16);opacity:0}}
-@media(max-width:620px){.header-row{flex-direction:column}.status{align-self:flex-start}h1{font-size:23px}.nav{grid-template-columns:repeat(2,1fr)}}
+.progress{height:9px;background:#122344;border-radius:99px;overflow:hidden}.progress>div{height:100%;background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));transition:width .35s ease}.timer{font-size:23px;font-weight:950;margin-left:auto;color:#ffe07a}
+.score{text-align:center;font-size:50px;font-weight:950;background:linear-gradient(90deg,#45efff,#9b72ff,#ff6fb3);-webkit-background-clip:text;color:transparent}.streak{padding:7px 10px;border-radius:999px;background:#2a220e;border:1px solid #73550f;color:#ffd86a;font-size:12px;font-weight:900}.error{padding:12px;border-radius:12px;background:#35101b;color:#ffafbb;border:1px solid #8e2336}
+footer{text-align:center;color:#6f82a6;font-size:13px;padding:18px}
+@media(max-width:700px){.header-row{flex-direction:column}.status{align-self:flex-start}.stats{grid-template-columns:repeat(2,1fr)}h1{font-size:23px}.nav{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
-<header>
-  <div class="wrap header-row">
-    <div><h1 id="appName">BEEE Monday Test Preparation</h1><div class="sub" id="appSub">B.Tech 1st Semester • Basic Electrical & Electronics Engineering</div></div>
-    <div class="status" id="status">Loading…</div>
-  </div>
-</header>
+<header><div class="shine"></div><div class="wrap header-row">
+<div><h1 id="appName">BEEE Monday Test Preparation</h1><div class="sub" id="appSub">B.Tech 1st Semester • Basic Electrical & Electronics Engineering</div></div>
+<div class="status" id="status">Online data: loading…</div>
+</div></header>
 
 <main class="wrap">
 <nav class="nav">
-<button type="button" class="active ripple" data-page="home">🏠 Home</button>
-<button type="button" class="ripple" data-page="learn">📖 Learn</button>
-<button type="button" class="ripple" data-page="practice">✏️ Practice</button>
-<button type="button" class="ripple" data-page="mock">⏱️ Monday Mock</button>
+<button class="active" data-page="home">🏠 Home</button><button data-page="learn">📚 Topics</button><button data-page="practice">✏️ Practice</button><button data-page="mock">⏱️ Monday Mock</button>
 </nav>
 
 <section id="home" class="page">
 <div class="card">
-  <div class="hero">🚀 Prepare smart for Monday’s BEEE class test.</div>
-  <p class="muted">Revision + topic practice + timed mock. Your question bank is expanded from the uploaded BEEE notes.</p>
-  <div class="row"><span class="streak flash">🔥 Daily Practice Mode</span><span class="pill">60+ target questions</span></div>
-  <div class="grid" id="stats" style="margin-top:13px"></div>
+<div class="hero">🔥 Monday Test Mission: Revise all 6 topics and finish the mock.</div>
+<p class="muted">The app keeps the syllabus limited to six top-level topics, while the question bank gives you more practice inside each topic.</p>
+<div class="row"><span class="streak">🎯 6 Topics</span><span class="streak">🧠 60 Questions</span><span class="streak">⏱️ 20-min Mock</span></div>
+<div class="stats" id="stats"></div>
 </div>
-<div class="card">
-  <h2>⚡ Quick Start</h2>
-  <div class="row">
-    <button type="button" class="action ripple" id="quickPractice">✏️ Start Practice</button>
-    <button type="button" class="action secondary ripple" id="quickMock">⏱️ Start Monday Mock</button>
-  </div>
-</div>
-<div class="card">
-  <h2>📚 What to revise</h2>
-  <div id="homeTopics"></div>
-</div>
+<div class="card"><h2>⚡ Quick Start</h2><div class="row">
+<button class="action primary" id="quickPractice">✏️ Start Practice</button>
+<button class="action secondary" id="quickMock">🚀 Start Monday Mock</button>
+</div></div>
+<div class="card"><h2>📘 Syllabus</h2><div id="homeTopics"></div></div>
 </section>
 
 <section id="learn" class="page hidden">
-<div class="card">
-  <h2>📖 Topic-wise Revision</h2>
-  <input class="search" id="topicSearch" placeholder="Search topic…">
-  <div id="topicList"></div>
-</div>
+<div class="card"><h2>📚 Six Topics</h2><p class="muted">No extra top-level topics—only these six.</p><input id="topicSearch" class="search" placeholder="Search these six topics…"><div id="topicList"></div></div>
 </section>
 
 <section id="practice" class="page hidden">
-<div class="card">
-  <h2>✏️ Practice</h2>
-  <p class="muted">Choose a topic. Get instant feedback, explanation and a progress bar.</p>
-  <div id="practiceTopicButtons" class="row"></div>
-</div>
+<div class="card"><h2>✏️ Practice Questions</h2><p class="muted">Choose a topic. Question count is shown on each button.</p><div id="practiceTopicButtons" class="row"></div></div>
 <div id="practiceQuiz" class="card hidden"></div>
 </section>
 
 <section id="mock" class="page hidden">
-<div class="card">
-  <h2>⏱️ Monday Mock Test</h2>
-  <p class="muted">30 random questions • 20 minutes • score at the end.</p>
-  <div class="grid">
-    <div class="stat"><span>Question bank</span><b id="mockBank">0</b></div>
-    <div class="stat"><span>Mock questions</span><b>30</b></div>
-    <div class="stat"><span>Time</span><b>20 min</b></div>
-  </div>
-  <div class="row" style="margin-top:13px">
-    <button type="button" class="action ripple" id="startMock">🚀 Start Mock</button>
-    <button type="button" class="action secondary ripple" id="resetBest">Reset Best</button>
-    <span class="streak">🏆 Best: <span id="bestScore">0%</span></span>
-  </div>
-</div>
-<div id="mockQuiz" class="card hidden"></div>
-<div id="mockResult" class="card hidden center"></div>
+<div class="card"><h2>⏱️ Monday Mock Test</h2><p class="muted">30 random questions from the six-topic bank • 20 minutes.</p>
+<div class="stats"><div class="stat"><span>Bank</span><b id="mockBank">60</b></div><div class="stat"><span>Mock</span><b>30 Q</b></div><div class="stat"><span>Time</span><b>20 min</b></div><div class="stat"><span>Topics</span><b>6</b></div></div>
+<div class="row" style="margin-top:13px"><button class="action primary" id="startMock">🚀 Start Mock</button><button class="action secondary" id="resetBest">Reset Best</button><span class="streak">🏆 Best: <span id="bestScore">0%</span></span></div>
+</div><div id="mockQuiz" class="card hidden"></div><div id="mockResult" class="card hidden"></div>
 </section>
 </main>
-<footer>Online BEEE preparation • Updated through Termux + Git</footer>
+<footer>BEEE Monday Test Preparation • Questions based on your BEEE class notes</footer>
 
 <script>
-(function(){
-"use strict";
-const state={settings:{appName:"BEEE Monday Test Preparation",semester:"B.Tech 1st Semester",subject:"Basic Electrical & Electronics Engineering",testDay:"Monday",mockQuestions:30,mockMinutes:20},topics:[],questions:[],practice:{list:[],idx:0,score:0},mock:{list:[],idx:0,answers:[],seconds:0,timer:null}};
-const $=id=>document.getElementById(id);
-const esc=s=>String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+const $=id=>document.getElementById(id), esc=s=>String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+const colors=["#00e5ff","#9b5cff","#ff4f9a","#35e98b","#ffc857","#5e8bff"];
+const state={settings:{mockQuestions:30,mockMinutes:20},topics:[],questions:[],practice:{list:[],idx:0,score:0,id:""},mock:{list:[],idx:0,answers:[],seconds:0,timer:null}};
 
-document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>setPage(b.dataset.page)));
-document.querySelectorAll(".ripple").forEach(b=>b.addEventListener("pointerdown",e=>{const r=b.getBoundingClientRect();b.style.setProperty("--x",(e.clientX-r.left)+"px");b.style.setProperty("--y",(e.clientY-r.top)+"px")}));
-
-function setPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("hidden",p.id!==id));document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));window.scrollTo({top:0,behavior:"smooth"})}
-async function getJSON(path){const r=await fetch(path+"?v="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error(path);return r.json()}
-function getQuestions(topicId){return state.questions.filter(q=>q.topicId===topicId)}
+document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>showPage(b.dataset.page));
+function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("hidden",p.id!==id));document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));window.scrollTo({top:0,behavior:"smooth"})}
+async function load(path){const r=await fetch(path+"?v="+Date.now(),{cache:"no-store"});if(!r.ok)throw Error(path);return r.json()}
+function qs(id){return state.questions.filter(q=>q.topicId===id)}
 
 function render(){
-$("appName").textContent=state.settings.appName;$("appSub").textContent=state.settings.semester+" • "+state.settings.subject;
-$("status").textContent="Online • "+state.questions.length+" MCQs";
+$("appName").textContent=state.settings.appName||"BEEE Monday Test Preparation";
+$("appSub").textContent=(state.settings.semester||"B.Tech 1st Semester")+" • "+(state.settings.subject||"Basic Electrical & Electronics Engineering");
+$("status").textContent="Online data: LIVE • "+state.questions.length+" questions";
 $("mockBank").textContent=state.questions.length;
-$("stats").innerHTML=
-'<div class="stat"><span>Question bank</span><b>'+state.questions.length+'</b></div>'+
-'<div class="stat"><span>Topics</span><b>'+state.topics.length+'</b></div>'+
-'<div class="stat"><span>Mock test</span><b>'+state.settings.mockMinutes+' min</b></div>'+
-'<div class="stat"><span>Class test</span><b>'+esc(state.settings.testDay)+'</b></div>';
-$("homeTopics").innerHTML=state.topics.map((t,i)=>'<div class="topic"><h3>'+esc(t.name)+' <span class="pill">'+getQuestions(t.id).length+' Q</span></h3><div class="muted">'+esc(t.summary)+' • Notes pages: '+esc(t.pages)+'</div><div style="margin-top:9px"><button type="button" class="action secondary ripple topic-open" data-id="'+esc(t.id)+'">Open practice →</button></div></div>').join("");
-$("topicList").innerHTML=state.topics.map(t=>'<div class="topic searchable" data-search="'+esc((t.name+" "+t.summary).toLowerCase())+'"><h3>'+esc(t.name)+' <span class="pill">'+getQuestions(t.id).length+' Q</span></h3><div class="muted">'+esc(t.summary)+' • Notes pages: '+esc(t.pages)+'</div><div style="margin-top:9px"><button type="button" class="action secondary topic-open" data-id="'+esc(t.id)+'">Practice this topic</button></div></div>').join("");
-$("practiceTopicButtons").innerHTML=state.topics.map(t=>'<button type="button" class="action secondary practice-topic ripple" data-id="'+esc(t.id)+'">'+esc(t.name)+' ('+getQuestions(t.id).length+')</button>').join("");
-document.querySelectorAll(".topic-open").forEach(b=>b.onclick=()=>{setPage("practice");startPractice(b.dataset.id)});
-document.querySelectorAll(".practice-topic").forEach(b=>b.onclick=()=>startPractice(b.dataset.id));
+$("stats").innerHTML=state.topics.map((t,i)=>'<div class="stat"><span>'+esc(t.name.split(":")[0])+'</span><b>'+qs(t.id).length+'</b></div>').join("");
+const topicHTML=state.topics.map((t,i)=>'<div class="topic" style="--topic:'+colors[i%colors.length]+'"><h3>'+esc(t.name)+'</h3><div class="desc">'+esc(t.summary)+'</div><div class="chips"><span class="chip">'+qs(t.id).length+' questions</span><span class="chip">Notes p. '+esc(t.pages)+'</span></div><div class="actions"><button class="action ai">🤖 Ask AI</button><button class="action yt" data-topic="'+esc(t.name)+'">▶ YouTube</button><button class="action done">✅ Mark as Done</button></div></div>').join("");
+$("homeTopics").innerHTML=topicHTML;
+$("topicList").innerHTML=state.topics.map((t,i)=>'<div class="topic searchable" data-search="'+esc((t.name+" "+t.summary).toLowerCase())+'" style="--topic:'+colors[i%colors.length]+'"><h3>'+esc(t.name)+' <span class="chip">'+qs(t.id).length+' Q</span></h3><div class="desc">'+esc(t.summary)+' • Notes '+esc(t.pages)+'</div><div class="actions"><button class="action primary openTopic" data-id="'+esc(t.id)+'">Practice this topic →</button><button class="action done">✅ Mark as Done</button></div></div>').join("");
+$("practiceTopicButtons").innerHTML=state.topics.map((t,i)=>'<button class="action secondary practiceBtn" data-id="'+esc(t.id)+'">'+esc(t.name)+' ('+qs(t.id).length+')</button>').join("");
+document.querySelectorAll(".openTopic,.practiceBtn").forEach(b=>b.onclick=()=>{showPage("practice");startPractice(b.dataset.id)});
+document.querySelectorAll(".done").forEach(b=>b.onclick=()=>{b.textContent=b.textContent.includes("Done")?"✅ Done ✓":"✅ Mark as Done";b.classList.toggle("flash")});
+document.querySelectorAll(".yt").forEach(b=>b.onclick=()=>window.open("https://www.youtube.com/results?search_query="+encodeURIComponent("BEEE "+b.dataset.topic)," _blank"));
 updateBest();
 }
-$("topicSearch").addEventListener("input",e=>{const q=e.target.value.toLowerCase().trim();document.querySelectorAll(".searchable").forEach(x=>x.classList.toggle("hidden",q&&!x.dataset.search.includes(q)))});
+$("topicSearch").oninput=e=>{const q=e.target.value.toLowerCase().trim();document.querySelectorAll(".searchable").forEach(x=>x.classList.toggle("hidden",q&&!x.dataset.search.includes(q)))}
+function startPractice(id){state.practice={list:qs(id),idx:0,score:0,id};$("practiceQuiz").classList.remove("hidden");renderPractice()}
+function renderPractice(){const p=state.practice,q=p.list[p.idx];if(!q){$("practiceQuiz").innerHTML='<div class="error">No questions found.</div>';return}
+$("practiceQuiz").innerHTML='<div class="row"><div class="muted">Question '+(p.idx+1)+' / '+p.list.length+'</div><div class="streak">🔥 '+p.score+' correct</div></div><div class="progress" style="margin:10px 0"><div style="width:'+(p.idx/p.list.length*100)+'%"></div></div><div class="question">'+esc(q.q)+'</div><div id="opts"></div><div id="exp" class="muted" style="margin-top:9px"></div><div class="row" style="margin-top:13px"><button class="action secondary" id="back">Back</button><button class="action primary" id="next" disabled>Next</button></div>';
+q.options.forEach((x,i)=>{const b=document.createElement("button");b.className="option";b.textContent=String.fromCharCode(65+i)+". "+x;b.onclick=()=>answer(i);$("opts").appendChild(b)});
+$("back").onclick=()=>showPage("practice");
+}
+function answer(i){const p=state.practice,q=p.list[p.idx],opts=[...$("opts").children];opts.forEach(b=>b.disabled=true);opts[q.answer].classList.add("correct");if(i===q.answer)p.score++;else opts[i].classList.add("wrong");$("exp").textContent=q.explanation||"";const n=$("next");n.disabled=false;n.textContent=p.idx===p.list.length-1?"Finish":"Next";n.onclick=()=>{if(p.idx===p.list.length-1){$("practiceQuiz").innerHTML='<div style="text-align:center"><h2>🎉 Topic complete</h2><div class="score">'+p.score+'/'+p.list.length+'</div><p class="muted">Revise the wrong answers and try again.</p></div>'}else{p.idx++;renderPractice()}}}
+function startMock(){clearInterval(state.mock.timer);let a=[...state.questions];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}state.mock={list:a.slice(0,30),idx:0,answers:Array(30).fill(null),seconds:1200,timer:null};$("mockResult").classList.add("hidden");$("mockQuiz").classList.remove("hidden");state.mock.timer=setInterval(()=>{state.mock.seconds--;renderMock();if(state.mock.seconds<=0)finishMock()},1000);renderMock()}
+function renderMock(){const m=state.mock,q=m.list[m.idx],s=Math.max(0,m.seconds),mm=String(Math.floor(s/60)).padStart(2,"0"),ss=String(s%60).padStart(2,"0");$("mockQuiz").innerHTML='<div class="row"><div class="muted">Question '+(m.idx+1)+' / 30</div><div class="timer">'+mm+':'+ss+'</div></div><div class="progress" style="margin:10px 0 16px"><div style="width:'+((m.idx+1)/30*100)+'%"></div></div><div class="question">'+esc(q.q)+'</div><div id="mopts"></div><div class="row" style="margin-top:13px"><button class="action secondary" id="prev" '+(m.idx===0?"disabled":"")+'>Previous</button><button class="action primary" id="mn">'+(m.idx===29?"Submit":"Next")+'</button></div>';q.options.forEach((x,i)=>{const b=document.createElement("button");b.className="option";b.textContent=String.fromCharCode(65+i)+". "+x;if(m.answers[m.idx]===i)b.classList.add("selected");b.onclick=()=>{m.answers[m.idx]=i;renderMock()};$("mopts").appendChild(b)});$("prev").onclick=()=>{if(m.idx>0){m.idx--;renderMock()}};$("mn").onclick=()=>{if(m.idx===29)finishMock();else{m.idx++;renderMock()}}}
+function finishMock(){clearInterval(state.mock.timer);const m=state.mock;let c=0;m.list.forEach((q,i)=>{if(m.answers[i]===q.answer)c++});const pct=Math.round(c/30*100),best=Math.max(Number(localStorage.getItem("best")||0),pct);localStorage.setItem("best",best);$("mockQuiz").classList.add("hidden");$("mockResult").classList.remove("hidden");$("mockResult").innerHTML='<div class="score">'+c+'/30</div><h2>'+pct+'%</h2><p class="muted">Best score: '+best+'%</p><button class="action primary" id="retry">Retry Mock</button>';$("retry").onclick=startMock;updateBest()}
+function updateBest(){$("bestScore").textContent=(localStorage.getItem("best")||0)+"%"}
 
-function startPractice(id){const list=getQuestions(id);state.practice={list,idx:0,score:0,id};$("practiceQuiz").classList.remove("hidden");if(!list.length){$("practiceQuiz").innerHTML='<div class="error">No questions found for this topic.</div>';return}renderPractice()}
-function renderPractice(){const p=state.practice,q=p.list[p.idx];$("practiceQuiz").innerHTML='<div class="row"><div class="muted">Question '+(p.idx+1)+' / '+p.list.length+'</div><div class="streak" style="margin-left:auto">🔥 '+p.score+' correct</div></div><div class="progress" style="margin:10px 0"><div style="width:'+((p.idx)/p.list.length*100)+'%"></div></div><div class="question">'+esc(q.q)+'</div><div id="pOptions"></div><div id="pExplanation" class="muted" style="margin-top:8px"></div><div class="row" style="margin-top:14px"><button type="button" class="action secondary" id="pBack">Back</button><button type="button" class="action" id="pNext" disabled>Next</button></div>';q.options.forEach((text,i)=>{const b=document.createElement("button");b.type="button";b.className="option";b.textContent=String.fromCharCode(65+i)+". "+text;b.onclick=()=>answerPractice(i);$("pOptions").appendChild(b)});$("pBack").onclick=()=>setPage("practice")}
-function answerPractice(i){const p=state.practice,q=p.list[p.idx],opts=[...$("pOptions").children];opts.forEach(b=>b.disabled=true);opts[q.answer].classList.add("correct");if(i===q.answer)p.score++;else opts[i].classList.add("wrong");$("pExplanation").textContent=q.explanation||"";const n=$("pNext");n.disabled=false;n.textContent=p.idx===p.list.length-1?"Finish":"Next";n.onclick=()=>{if(p.idx===p.list.length-1){$("practiceQuiz").innerHTML='<div class="center"><h2>🎉 Practice complete</h2><div class="score">'+p.score+'/'+p.list.length+'</div><p class="muted">Keep revising weak topics before Monday.</p></div>'}else{p.idx++;renderPractice()}}}
-
-function buildMock(){const a=[...state.questions];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a.slice(0,Math.min(30,a.length))}
-function startMock(){clearInterval(state.mock.timer);state.mock={list:buildMock(),idx:0,answers:[],seconds:(Number(state.settings.mockMinutes)||20)*60,timer:null};state.mock.answers=new Array(state.mock.list.length).fill(null);$("mockResult").classList.add("hidden");$("mockQuiz").classList.remove("hidden");state.mock.timer=setInterval(()=>{state.mock.seconds--;renderMock();if(state.mock.seconds<=0)finishMock()},1000);renderMock()}
-function renderMock(){const m=state.mock,q=m.list[m.idx];if(!q)return;const s=Math.max(0,m.seconds),mm=String(Math.floor(s/60)).padStart(2,"0"),ss=String(s%60).padStart(2,"0");$("mockQuiz").innerHTML='<div class="row"><div class="muted">Question '+(m.idx+1)+' / '+m.list.length+'</div><div class="timer">'+mm+':'+ss+'</div></div><div class="progress" style="margin:10px 0 16px"><div style="width:'+(((m.idx+1)/m.list.length)*100)+'%"></div></div><div class="question">'+esc(q.q)+'</div><div id="mOptions"></div><div class="row" style="margin-top:14px"><button type="button" class="action secondary" id="mPrev" '+(m.idx===0?"disabled":"")+'>Previous</button><button type="button" class="action" id="mNext">'+(m.idx===m.list.length-1?"Submit":"Next")+'</button></div>';q.options.forEach((t,i)=>{const b=document.createElement("button");b.type="button";b.className="option";b.textContent=String.fromCharCode(65+i)+". "+t;if(m.answers[m.idx]===i)b.classList.add("selected");b.onclick=()=>{m.answers[m.idx]=i;renderMock()};$("mOptions").appendChild(b)});$("mPrev").onclick=()=>{if(m.idx>0){m.idx--;renderMock()}};$("mNext").onclick=()=>{if(m.idx===m.list.length-1)finishMock();else{m.idx++;renderMock()}}}
-function finishMock(){clearInterval(state.mock.timer);const m=state.mock;let c=0;m.list.forEach((q,i)=>{if(m.answers[i]===q.answer)c++});const pct=m.list.length?Math.round(c/m.list.length*100):0;const best=Math.max(Number(localStorage.getItem("beeeBest")||0),pct);localStorage.setItem("beeeBest",String(best));$("mockQuiz").classList.add("hidden");$("mockResult").classList.remove("hidden");$("mockResult").innerHTML='<div class="muted">Mock test complete</div><div class="score">'+c+'/'+m.list.length+'</div><h3>'+pct+'%</h3><p class="muted">Best score on this device: '+best+'%</p><button type="button" class="action" id="retry">Retry</button>';$("retry").onclick=startMock;updateBest()}
-function updateBest(){$("bestScore").textContent=(localStorage.getItem("beeeBest")||0)+"%"}
-$("quickPractice").onclick=()=>{setPage("practice");if(state.topics.length)startPractice(state.topics[0].id)}
-$("quickMock").onclick=()=>{setPage("mock");startMock()}
+$("quickPractice").onclick=()=>{showPage("practice");startPractice(state.topics[0].id)}
+$("quickMock").onclick=()=>{showPage("mock");startMock()}
 $("startMock").onclick=startMock
-$("resetBest").onclick=()=>{localStorage.removeItem("beeeBest");updateBest()}
+$("resetBest").onclick=()=>{localStorage.removeItem("best");updateBest()}
 
-(async()=>{try{const [s,t,q]=await Promise.all([getJSON("data/settings.json"),getJSON("data/topics.json"),getJSON("data/questions.json")]);state.settings=s;state.topics=t;state.questions=q;render()}catch(e){$("status").textContent="Data load error";$("homeTopics").innerHTML='<div class="error">Question data could not be loaded. Refresh after checking internet connection.</div>'}})();
-})();
+(async()=>{try{const [s,t,q]=await Promise.all([load("data/settings.json"),load("data/topics.json"),load("data/questions.json")]);state.settings=s;state.topics=t;state.questions=q;render()}catch(e){$("status").textContent="Data load error"}})();
 </script>
 </body>
 </html>
