@@ -69,3 +69,11 @@ Questions now include a stable topicId, so Practice does not depend on exact dis
 - Shake/flash feedback on wrong answers
 - Tap/ripple interaction animation
 - 30-question, 20-minute Monday mock remains available
+
+## v8 UI refresh
+- High-fidelity dark neon dashboard inspired by the provided reference layout.
+- 1000 practice questions distributed across 6 topics (167/167/166/167/167/166).
+- Animated opening splash, particle effects, animated progress, confetti and answer feedback.
+- Search questions/topics, mark questions, add-note feedback, YouTube search and mock test.
+- Local progress, accuracy, best mock score and light/dark theme saved in browser.
+- PWA manifest + service worker included for a more app-like experience.
