@@ -60,3 +60,12 @@ Questions now include a stable topicId, so Practice does not depend on exact dis
 - Dark colorful animated UI inspired by the supplied reference screenshot
 - Topic actions: Ask AI placeholder, YouTube search, Mark as Done
 - Topic-wise question counts and animated practice feedback
+
+
+## v7
+- Exactly 1000 BEEE practice questions in the same six-topic syllabus
+- Animated splash/opening screen with particles
+- Confetti + flash burst on correct answers
+- Shake/flash feedback on wrong answers
+- Tap/ripple interaction animation
+- 30-question, 20-minute Monday mock remains available

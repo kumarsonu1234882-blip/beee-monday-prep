@@ -6,7 +6,7 @@
   "mockQuestions": 30,
   "mockMinutes": 20,
   "updatedNote": "v5 adds animated UI and expanded question bank based on the uploaded BEEE class notes.",
-  "questionBankGoal": 60,
-  "questionBankVersion": "v6",
+  "questionBankGoal": 1000,
+  "questionBankVersion": "v7",
   "topLevelTopics": 6
 }

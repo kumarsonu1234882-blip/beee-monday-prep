@@ -33,9 +33,44 @@ main{padding:8px 12px 40px}.page.hidden{display:none}.card{background:linear-gra
 .score{text-align:center;font-size:50px;font-weight:950;background:linear-gradient(90deg,#45efff,#9b72ff,#ff6fb3);-webkit-background-clip:text;color:transparent}.streak{padding:7px 10px;border-radius:999px;background:#2a220e;border:1px solid #73550f;color:#ffd86a;font-size:12px;font-weight:900}.error{padding:12px;border-radius:12px;background:#35101b;color:#ffafbb;border:1px solid #8e2336}
 footer{text-align:center;color:#6f82a6;font-size:13px;padding:18px}
 @media(max-width:700px){.header-row{flex-direction:column}.status{align-self:flex-start}.stats{grid-template-columns:repeat(2,1fr)}h1{font-size:23px}.nav{grid-template-columns:repeat(2,1fr)}}
+
+.splash{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;
+background:radial-gradient(circle at 50% 45%,#163a82 0,#071228 45%,#02050d 100%);transition:opacity .7s,visibility .7s}
+.splash.hide{opacity:0;visibility:hidden;pointer-events:none}.splash-orb{position:absolute;width:230px;height:230px;border-radius:50%;
+background:conic-gradient(#00e5ff,#8d5cff,#ff4f9a,#31e981,#00e5ff);filter:blur(22px);opacity:.3;animation:orb 3s linear infinite}
+@keyframes orb{to{transform:rotate(360deg) scale(1.15)}}.splash-logo{font-size:70px;z-index:1;animation:logoIn .9s cubic-bezier(.2,1.6,.3,1)}
+@keyframes logoIn{from{transform:scale(.2) rotate(-30deg);opacity:0}to{transform:none;opacity:1}}
+.splash-title{font-size:30px;font-weight:1000;letter-spacing:3px;z-index:1;background:linear-gradient(90deg,#00e5ff,#fff,#ff6fb3);
+-webkit-background-clip:text;color:transparent;animation:titleGlow 1.6s ease-in-out infinite alternate}
+.splash-sub{z-index:1;color:#b9c9e9;margin-top:5px;font-weight:800}.splash-loader{z-index:1;width:220px;height:6px;background:#ffffff18;border-radius:99px;overflow:hidden;margin-top:25px}
+.splash-loader i{display:block;height:100%;width:35%;background:linear-gradient(90deg,#00e5ff,#9b5cff,#ff4f9a);animation:load 1.1s ease-in-out infinite}
+@keyframes load{50%{transform:translateX(185px)}100%{transform:translateX(0)}}.splash-tip{z-index:1;color:#8094bb;font-size:12px;margin-top:11px}
+@keyframes titleGlow{to{text-shadow:0 0 24px #00e5ff66}}.particle-layer{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.particle{position:absolute;width:5px;height:5px;border-radius:50%;background:#fff;opacity:.35;animation:floatUp linear infinite}
+@keyframes floatUp{from{transform:translateY(110vh) scale(.4);opacity:0}20%{opacity:.5}to{transform:translateY(-20vh) scale(1.4);opacity:0}}
+.answer-flash{position:fixed;inset:0;z-index:200;pointer-events:none;opacity:0}.answer-flash.good{background:radial-gradient(circle,#31e98144,transparent 55%);animation:flash .65s ease}
+.answer-flash.bad{background:radial-gradient(circle,#ff4f6d44,transparent 55%);animation:flash .65s ease}
+@keyframes flash{0%{opacity:0}25%{opacity:1}100%{opacity:0}}
+.confetti{position:fixed;z-index:300;width:9px;height:14px;pointer-events:none;animation:confetti 900ms cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes confetti{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(720deg);opacity:0}}
+.answer-correct{animation:answerCorrect .55s ease}.answer-wrong{animation:answerWrong .5s ease}
+@keyframes answerCorrect{35%{transform:scale(1.035);box-shadow:0 0 35px #31e98155}100%{transform:none}}
+@keyframes answerWrong{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}100%{transform:none}}
+.tap-ring{position:fixed;z-index:250;border:3px solid #00e5ff;border-radius:50%;pointer-events:none;animation:ring .55s ease-out forwards}
+@keyframes ring{from{width:10px;height:10px;opacity:.9}to{width:85px;height:85px;opacity:0;margin:-37px}}
 </style>
 </head>
 <body>
+<div id="splash" class="splash">
+  <div class="splash-orb"></div>
+  <div class="splash-logo">⚡</div>
+  <div class="splash-title">BEEE MONDAY</div>
+  <div class="splash-sub">Test Preparation</div>
+  <div class="splash-loader"><i></i></div>
+  <div class="splash-tip">Preparing your 1000-question bank…</div>
+</div>
+<div id="particleLayer" class="particle-layer"></div>
+
 <header><div class="shine"></div><div class="wrap header-row">
 <div><h1 id="appName">BEEE Monday Test Preparation</h1><div class="sub" id="appSub">B.Tech 1st Semester • Basic Electrical & Electronics Engineering</div></div>
 <div class="status" id="status">Online data: loading…</div>
@@ -110,9 +145,9 @@ $("practiceQuiz").innerHTML='<div class="row"><div class="muted">Question '+(p.i
 q.options.forEach((x,i)=>{const b=document.createElement("button");b.className="option";b.textContent=String.fromCharCode(65+i)+". "+x;b.onclick=()=>answer(i);$("opts").appendChild(b)});
 $("back").onclick=()=>showPage("practice");
 }
-function answer(i){const p=state.practice,q=p.list[p.idx],opts=[...$("opts").children];opts.forEach(b=>b.disabled=true);opts[q.answer].classList.add("correct");if(i===q.answer)p.score++;else opts[i].classList.add("wrong");$("exp").textContent=q.explanation||"";const n=$("next");n.disabled=false;n.textContent=p.idx===p.list.length-1?"Finish":"Next";n.onclick=()=>{if(p.idx===p.list.length-1){$("practiceQuiz").innerHTML='<div style="text-align:center"><h2>🎉 Topic complete</h2><div class="score">'+p.score+'/'+p.list.length+'</div><p class="muted">Revise the wrong answers and try again.</p></div>'}else{p.idx++;renderPractice()}}}
+function answer(i){const p=state.practice,q=p.list[p.idx],opts=[...$("opts").children];opts.forEach(b=>b.disabled=true);opts[q.answer].classList.add("correct");if(i===q.answer){p.score++;$("practiceQuiz").classList.add("answer-correct");burst(innerWidth/2,innerHeight/2,true);setTimeout(()=>$("practiceQuiz").classList.remove("answer-correct"),600)}else{opts[i].classList.add("wrong");$("practiceQuiz").classList.add("answer-wrong");burst(innerWidth/2,innerHeight/2,false);setTimeout(()=>$("practiceQuiz").classList.remove("answer-wrong"),550)}$("exp").textContent=q.explanation||"";const n=$("next");n.disabled=false;n.textContent=p.idx===p.list.length-1?"Finish":"Next";n.onclick=()=>{if(p.idx===p.list.length-1){$("practiceQuiz").innerHTML='<div style="text-align:center"><h2>🎉 Topic complete</h2><div class="score">'+p.score+'/'+p.list.length+'</div><p class="muted">Revise the wrong answers and try again.</p></div>'}else{p.idx++;renderPractice()}}}
 function startMock(){clearInterval(state.mock.timer);let a=[...state.questions];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}state.mock={list:a.slice(0,30),idx:0,answers:Array(30).fill(null),seconds:1200,timer:null};$("mockResult").classList.add("hidden");$("mockQuiz").classList.remove("hidden");state.mock.timer=setInterval(()=>{state.mock.seconds--;renderMock();if(state.mock.seconds<=0)finishMock()},1000);renderMock()}
-function renderMock(){const m=state.mock,q=m.list[m.idx],s=Math.max(0,m.seconds),mm=String(Math.floor(s/60)).padStart(2,"0"),ss=String(s%60).padStart(2,"0");$("mockQuiz").innerHTML='<div class="row"><div class="muted">Question '+(m.idx+1)+' / 30</div><div class="timer">'+mm+':'+ss+'</div></div><div class="progress" style="margin:10px 0 16px"><div style="width:'+((m.idx+1)/30*100)+'%"></div></div><div class="question">'+esc(q.q)+'</div><div id="mopts"></div><div class="row" style="margin-top:13px"><button class="action secondary" id="prev" '+(m.idx===0?"disabled":"")+'>Previous</button><button class="action primary" id="mn">'+(m.idx===29?"Submit":"Next")+'</button></div>';q.options.forEach((x,i)=>{const b=document.createElement("button");b.className="option";b.textContent=String.fromCharCode(65+i)+". "+x;if(m.answers[m.idx]===i)b.classList.add("selected");b.onclick=()=>{m.answers[m.idx]=i;renderMock()};$("mopts").appendChild(b)});$("prev").onclick=()=>{if(m.idx>0){m.idx--;renderMock()}};$("mn").onclick=()=>{if(m.idx===29)finishMock();else{m.idx++;renderMock()}}}
+function renderMock(){const m=state.mock,q=m.list[m.idx],s=Math.max(0,m.seconds),mm=String(Math.floor(s/60)).padStart(2,"0"),ss=String(s%60).padStart(2,"0");$("mockQuiz").innerHTML='<div class="row"><div class="muted">Question '+(m.idx+1)+' / 30</div><div class="timer">'+mm+':'+ss+'</div></div><div class="progress" style="margin:10px 0 16px"><div style="width:'+((m.idx+1)/30*100)+'%"></div></div><div class="question">'+esc(q.q)+'</div><div id="mopts"></div><div class="row" style="margin-top:13px"><button class="action secondary" id="prev" '+(m.idx===0?"disabled":"")+'>Previous</button><button class="action primary" id="mn">'+(m.idx===29?"Submit":"Next")+'</button></div>';q.options.forEach((x,i)=>{const b=document.createElement("button");b.className="option";b.textContent=String.fromCharCode(65+i)+". "+x;if(m.answers[m.idx]===i)b.classList.add("selected");b.onclick=(ev)=>{m.answers[m.idx]=i; burst(ev.clientX,ev.clientY,true); renderMock()};$("mopts").appendChild(b)});$("prev").onclick=()=>{if(m.idx>0){m.idx--;renderMock()}};$("mn").onclick=()=>{if(m.idx===29)finishMock();else{m.idx++;renderMock()}}}
 function finishMock(){clearInterval(state.mock.timer);const m=state.mock;let c=0;m.list.forEach((q,i)=>{if(m.answers[i]===q.answer)c++});const pct=Math.round(c/30*100),best=Math.max(Number(localStorage.getItem("best")||0),pct);localStorage.setItem("best",best);$("mockQuiz").classList.add("hidden");$("mockResult").classList.remove("hidden");$("mockResult").innerHTML='<div class="score">'+c+'/30</div><h2>'+pct+'%</h2><p class="muted">Best score: '+best+'%</p><button class="action primary" id="retry">Retry Mock</button>';$("retry").onclick=startMock;updateBest()}
 function updateBest(){$("bestScore").textContent=(localStorage.getItem("best")||0)+"%"}
 
@@ -120,6 +155,41 @@ $("quickPractice").onclick=()=>{showPage("practice");startPractice(state.topics[
 $("quickMock").onclick=()=>{showPage("mock");startMock()}
 $("startMock").onclick=startMock
 $("resetBest").onclick=()=>{localStorage.removeItem("best");updateBest()}
+
+
+function makeParticles(){
+  const layer=document.getElementById("particleLayer");
+  for(let i=0;i<32;i++){
+    const p=document.createElement("span"); p.className="particle";
+    p.style.left=(Math.random()*100)+"%"; p.style.animationDuration=(7+Math.random()*10)+"s";
+    p.style.animationDelay=(-Math.random()*12)+"s"; p.style.opacity=(.15+Math.random()*.45);
+    layer.appendChild(p);
+  }
+}
+function burst(x,y,good=true){
+  const flash=document.createElement("div"); flash.className="answer-flash "+(good?"good":"bad"); document.body.appendChild(flash);
+  setTimeout(()=>flash.remove(),700);
+  if(good){
+    for(let i=0;i<24;i++){
+      const c=document.createElement("span"); c.className="confetti";
+      c.style.left=x+"px"; c.style.top=y+"px";
+      c.style.setProperty("--dx",((Math.random()-.5)*260)+"px");
+      c.style.setProperty("--dy",((Math.random()-.8)*260)+"px");
+      c.style.background=["#00e5ff","#31e981","#ffc857","#ff4f9a","#9b5cff"][i%5];
+      document.body.appendChild(c); setTimeout(()=>c.remove(),950);
+    }
+  }
+}
+document.addEventListener("pointerdown",e=>{
+  if(e.target.matches(".action,.option,.nav button")){
+    const r=document.createElement("span");r.className="tap-ring";r.style.left=e.clientX+"px";r.style.top=e.clientY+"px";
+    document.body.appendChild(r);setTimeout(()=>r.remove(),600);
+  }
+});
+makeParticles();
+window.addEventListener("load",()=>{
+  setTimeout(()=>document.getElementById("splash")?.classList.add("hide"),1500);
+});
 
 (async()=>{try{const [s,t,q]=await Promise.all([load("data/settings.json"),load("data/topics.json"),load("data/questions.json")]);state.settings=s;state.topics=t;state.questions=q;render()}catch(e){$("status").textContent="Data load error"}})();
 </script>
