@@ -173,7 +173,7 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:16px}
   function render(){
     $("appName").textContent=state.settings.appName;
     $("appSub").textContent=state.settings.semester+" • "+state.settings.subject;
-    $("status").textContent=state.questions.length ? "Online data: LIVE" : "Data not loaded";
+    $("status").textContent=state.questions.length ? ("Online data: LIVE • "+state.questions.length+" MCQs") : "Data not loaded";
 
     $("stats").innerHTML=
       '<div class="stat"><span>Question bank</span><b>'+state.questions.length+'</b></div>'+
@@ -221,10 +221,25 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:16px}
     });
   });
 
+  // The topic names shown to the student are broader groups than the
+  // individual topic tags used by the question bank. Keep this mapping
+  // in the app so every topic button returns the right questions.
+  const topicMap = {
+    resistance: ["Resistance","Ohm's Law"],
+    lcr: ["Inductance","Capacitance"],
+    elements: ["Bilateral & Unilateral","Linear & Non-linear","Passive Elements"],
+    kclkvl: ["KCL","KVL"],
+    sources: ["Sources","Source Transformation"],
+    mesh: ["Mesh Analysis"],
+    node: ["Node Analysis"],
+    divider: ["Voltage Divider","Current Divider"],
+    star_delta: ["Star-Delta"]
+  };
+
   function getTopicQuestions(topicId){
-    const t=state.topics.find(x=>x.id===topicId);
-    if(!t) return [];
-    return state.questions.filter(q=>q.topic===t.name);
+    const allowed = topicMap[topicId];
+    if(!allowed) return [];
+    return state.questions.filter(q=>allowed.includes(q.topic));
   }
 
   function startPractice(topicId){
