@@ -1,0 +1,9 @@
+{
+  "appName": "BEEE Monday Test Preparation",
+  "semester": "B.Tech 1st Semester",
+  "subject": "Basic Electrical & Electronics Engineering",
+  "testDay": "Monday",
+  "mockQuestions": 30,
+  "mockMinutes": 20,
+  "updatedNote": "Edit data/questions.json or data/topics.json in Termux, then git push. The online app fetches the latest data."
+}
