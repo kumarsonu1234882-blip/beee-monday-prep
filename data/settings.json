@@ -5,5 +5,6 @@
   "testDay": "Monday",
   "mockQuestions": 30,
   "mockMinutes": 20,
-  "updatedNote": "Edit data/questions.json or data/topics.json in Termux, then git push. The online app fetches the latest data."
+  "updatedNote": "v5 adds animated UI and expanded question bank based on the uploaded BEEE class notes.",
+  "questionBankGoal": 60
 }

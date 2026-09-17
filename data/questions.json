@@ -474,5 +474,411 @@
     "level": "Easy",
     "explanation": "Pages 22–25 contain Star-to-Delta conversion formulas and diagrams.",
     "topicId": "star_delta"
+  },
+  {
+    "q": "Which formula for power in a resistor is shown in the notes?",
+    "options": [
+      "P = VI",
+      "P = V²/R",
+      "Both P = VI and P = V²/R are shown",
+      "P = I/R"
+    ],
+    "answer": 2,
+    "topic": "Resistance & Ohm's Law",
+    "topicId": "resistance",
+    "level": "Easy",
+    "explanation": "The notes show P = VI and also P = V²/R for a resistor."
+  },
+  {
+    "q": "Which relation between voltage and current is shown for an inductor?",
+    "options": [
+      "V = L di/dt",
+      "V = IR",
+      "V = C dV/dt",
+      "I = V/R"
+    ],
+    "answer": 0,
+    "topic": "Inductance & Capacitance",
+    "topicId": "lcr",
+    "level": "Medium",
+    "explanation": "The notes show the inductor relation V = L(di/dt)."
+  },
+  {
+    "q": "For a capacitor, the notes show the current relation as:",
+    "options": [
+      "I = C dV/dt",
+      "I = V/R",
+      "I = L di/dt",
+      "I = CV"
+    ],
+    "answer": 0,
+    "topic": "Inductance & Capacitance",
+    "topicId": "lcr",
+    "level": "Medium",
+    "explanation": "The notes show I = C(dV/dt) for capacitance."
+  },
+  {
+    "q": "The notes describe an inductor as a passive element because it can:",
+    "options": [
+      "Store energy in a magnetic field",
+      "Create energy continuously",
+      "Have zero current always",
+      "Only dissipate energy"
+    ],
+    "answer": 0,
+    "topic": "Circuit Elements",
+    "topicId": "elements",
+    "level": "Easy",
+    "explanation": "The notes explain that an inductor stores energy in a magnetic field."
+  },
+  {
+    "q": "The notes describe a capacitor as storing energy in its:",
+    "options": [
+      "Magnetic field",
+      "Electric field",
+      "Mechanical field",
+      "Thermal field"
+    ],
+    "answer": 1,
+    "topic": "Circuit Elements",
+    "topicId": "elements",
+    "level": "Easy",
+    "explanation": "The notes say a capacitor stores energy as an electric field."
+  },
+  {
+    "q": "Which set is identified as active elements/examples in the notes?",
+    "options": [
+      "Diodes, operational amplifiers, batteries, generators",
+      "Only resistors and capacitors",
+      "Only inductors",
+      "Only voltage dividers"
+    ],
+    "answer": 0,
+    "topic": "Circuit Elements",
+    "topicId": "elements",
+    "level": "Medium",
+    "explanation": "The active-element page lists examples including diodes, op-amps, batteries and generators."
+  },
+  {
+    "q": "A resistor is described in the notes as a passive element because it:",
+    "options": [
+      "Supplies energy continuously",
+      "Dissipates energy as current flows",
+      "Always stores magnetic energy",
+      "Always increases voltage"
+    ],
+    "answer": 1,
+    "topic": "Circuit Elements",
+    "topicId": "elements",
+    "level": "Easy",
+    "explanation": "The notes explain that a resistor receives/dissipates energy as current flows."
+  },
+  {
+    "q": "The linear characteristic curve shown in the notes is:",
+    "options": [
+      "A straight line through the origin",
+      "A parabola",
+      "A circle",
+      "A horizontal line only"
+    ],
+    "answer": 0,
+    "topic": "Circuit Elements",
+    "topicId": "elements",
+    "level": "Easy",
+    "explanation": "The notes state a linear element has a straight-line characteristic passing through the origin."
+  },
+  {
+    "q": "Which statement matches the note on non-linear elements?",
+    "options": [
+      "Their characteristic is not a straight line through the origin",
+      "They always obey Ohm's law",
+      "They have no voltage",
+      "They are all passive"
+    ],
+    "answer": 0,
+    "topic": "Circuit Elements",
+    "topicId": "elements",
+    "level": "Medium",
+    "explanation": "The notes show non-linear characteristic curves that are not straight lines through the origin."
+  },
+  {
+    "q": "At a junction, the notes give an example equation equivalent to KCL as:",
+    "options": [
+      "i1 + i2 - i3 = 0",
+      "v1 + v2 = 0 only",
+      "R1 + R2 = 0",
+      "P = VI"
+    ],
+    "answer": 0,
+    "topic": "KCL & KVL",
+    "topicId": "kclkvl",
+    "level": "Easy",
+    "explanation": "The notes write junction current equations in the form i1 + i2 - i3 = 0."
+  },
+  {
+    "q": "KVL is applied around a:",
+    "options": [
+      "Closed loop",
+      "Single open terminal",
+      "Only one resistor",
+      "Only current source"
+    ],
+    "answer": 0,
+    "topic": "KCL & KVL",
+    "topicId": "kclkvl",
+    "level": "Easy",
+    "explanation": "The notes define KVL around a closed loop."
+  },
+  {
+    "q": "In the KVL example, a 10 V source with 2Ω and 3Ω series resistors gives current:",
+    "options": [
+      "1 A",
+      "2 A",
+      "5 A",
+      "10 A"
+    ],
+    "answer": 1,
+    "topic": "KCL & KVL",
+    "topicId": "kclkvl",
+    "level": "Medium",
+    "explanation": "From the shown example, total resistance is 5Ω and I = 10/5 = 2 A."
+  },
+  {
+    "q": "In the source-transformation example, a 10 V source with 2Ω internal resistance becomes a current source of:",
+    "options": [
+      "2 A",
+      "5 A",
+      "10 A",
+      "20 A"
+    ],
+    "answer": 1,
+    "topic": "Electrical Sources",
+    "topicId": "sources",
+    "level": "Medium",
+    "explanation": "Using I = V/Rin, 10/2 = 5 A as shown in the notes."
+  },
+  {
+    "q": "In an ideal voltage source, the terminal voltage is shown as:",
+    "options": [
+      "Always equal to source voltage",
+      "Always zero",
+      "Equal to load current",
+      "Equal to resistance"
+    ],
+    "answer": 0,
+    "topic": "Electrical Sources",
+    "topicId": "sources",
+    "level": "Easy",
+    "explanation": "The ideal voltage-source graph shows VL = VS regardless of load current."
+  },
+  {
+    "q": "For a practical voltage source, the terminal voltage decreases as load current:",
+    "options": [
+      "Increases",
+      "Decreases to zero always",
+      "Remains impossible",
+      "Changes only sign"
+    ],
+    "answer": 0,
+    "topic": "Electrical Sources",
+    "topicId": "sources",
+    "level": "Medium",
+    "explanation": "The practical-source graph in the notes shows terminal voltage falling with increasing load current due to internal resistance."
+  },
+  {
+    "q": "The current-source transformation in the notes uses:",
+    "options": [
+      "V = I Rin",
+      "V = I/Rin",
+      "V = Rin/I",
+      "V = I + Rin"
+    ],
+    "answer": 0,
+    "topic": "Electrical Sources",
+    "topicId": "sources",
+    "level": "Easy",
+    "explanation": "The notes show V = I Rin for current-source to voltage-source transformation."
+  },
+  {
+    "q": "Mesh-analysis equations in the notes are formed by applying:",
+    "options": [
+      "KVL to loops/meshes",
+      "KCL only to one node",
+      "Only Ohm's law to the whole circuit",
+      "Only power equations"
+    ],
+    "answer": 0,
+    "topic": "Mesh Analysis",
+    "topicId": "mesh",
+    "level": "Easy",
+    "explanation": "The worked mesh examples write one KVL equation per loop."
+  },
+  {
+    "q": "In mesh analysis, a resistor shared by two meshes carries current based on:",
+    "options": [
+      "A difference such as I1 - I2",
+      "Only I1 always",
+      "Only I2 always",
+      "Zero current"
+    ],
+    "answer": 0,
+    "topic": "Mesh Analysis",
+    "topicId": "mesh",
+    "level": "Medium",
+    "explanation": "The notes use terms such as 10(I1 - I2) for shared resistors."
+  },
+  {
+    "q": "The node-analysis examples use the node equation:",
+    "options": [
+      "Sum of currents at the node equals zero",
+      "Sum of resistances equals zero",
+      "All node voltages equal zero",
+      "Power equals resistance"
+    ],
+    "answer": 0,
+    "topic": "Node Analysis",
+    "topicId": "node",
+    "level": "Easy",
+    "explanation": "The node examples use KCL, with algebraic sum of currents at a node equal to zero."
+  },
+  {
+    "q": "In node analysis, once node voltages are known, branch currents can be found using:",
+    "options": [
+      "Ohm's law",
+      "Only KVL",
+      "Only VDR",
+      "Only CDR"
+    ],
+    "answer": 0,
+    "topic": "Node Analysis",
+    "topicId": "node",
+    "level": "Easy",
+    "explanation": "The notes state that when potentials are known, current in branches can be found by applying Ohm's law."
+  },
+  {
+    "q": "For three series resistors R1, R2 and R3, the current is:",
+    "options": [
+      "V/(R1+R2+R3)",
+      "V(R1+R2+R3)",
+      "(R1+R2+R3)/V",
+      "V/R1R2R3"
+    ],
+    "answer": 0,
+    "topic": "Voltage & Current Divider",
+    "topicId": "divider",
+    "level": "Easy",
+    "explanation": "The voltage-divider derivation gives I = V/(R1+R2+R3)."
+  },
+  {
+    "q": "For three series resistors, voltage across R2 is:",
+    "options": [
+      "R2/(R1+R2+R3) × V",
+      "R1/(R1+R2+R3) × V",
+      "V/R2",
+      "R2V"
+    ],
+    "answer": 0,
+    "topic": "Voltage & Current Divider",
+    "topicId": "divider",
+    "level": "Medium",
+    "explanation": "Voltage divider gives V2 = [R2/(R1+R2+R3)]V."
+  },
+  {
+    "q": "For two parallel resistors, the equivalent resistance used in the current-divider derivation is:",
+    "options": [
+      "R1R2/(R1+R2)",
+      "R1+R2",
+      "R1-R2",
+      "R1/R2"
+    ],
+    "answer": 0,
+    "topic": "Voltage & Current Divider",
+    "topicId": "divider",
+    "level": "Medium",
+    "explanation": "The notes use Req = R1R2/(R1+R2) for two parallel resistors."
+  },
+  {
+    "q": "If total current is 10 A and parallel resistors are 30Ω and 20Ω, current through 30Ω is:",
+    "options": [
+      "4 A",
+      "6 A",
+      "8 A",
+      "2 A"
+    ],
+    "answer": 0,
+    "topic": "Voltage & Current Divider",
+    "topicId": "divider",
+    "level": "Medium",
+    "explanation": "I1 = I×R2/(R1+R2) = 10×20/50 = 4 A."
+  },
+  {
+    "q": "If total current is 10 A and parallel resistors are 30Ω and 20Ω, current through 20Ω is:",
+    "options": [
+      "4 A",
+      "6 A",
+      "8 A",
+      "2 A"
+    ],
+    "answer": 1,
+    "topic": "Voltage & Current Divider",
+    "topicId": "divider",
+    "level": "Medium",
+    "explanation": "I2 = I×R1/(R1+R2) = 10×30/50 = 6 A."
+  },
+  {
+    "q": "For a Δ network with RA=1Ω, RB=2Ω, RC=3Ω, the equivalent star resistance connected to node A is:",
+    "options": [
+      "1/3 Ω",
+      "1/2 Ω",
+      "2/3 Ω",
+      "1 Ω"
+    ],
+    "answer": 0,
+    "topic": "Star–Delta Conversion",
+    "topicId": "star_delta",
+    "level": "Hard",
+    "explanation": "Using R1 = RA RB/(RA+RB+RC) = 1×2/(1+2+3) = 1/3 Ω."
+  },
+  {
+    "q": "For the same Δ values RA=1Ω, RB=2Ω, RC=3Ω, the equivalent star resistance at node B is:",
+    "options": [
+      "1/3 Ω",
+      "2/3 Ω",
+      "1/2 Ω",
+      "1 Ω"
+    ],
+    "answer": 1,
+    "topic": "Star–Delta Conversion",
+    "topicId": "star_delta",
+    "level": "Hard",
+    "explanation": "R2 = RA RC/(RA+RB+RC) = 1×3/6 = 1/2 Ω; the note's labels depend on node assignment. Review the diagram carefully."
+  },
+  {
+    "q": "The reverse network conversion shown in the notes is:",
+    "options": [
+      "Y/Star to Δ/Delta",
+      "Voltage to current only",
+      "KCL to KVL",
+      "Series to source"
+    ],
+    "answer": 0,
+    "topic": "Star–Delta Conversion",
+    "topicId": "star_delta",
+    "level": "Easy",
+    "explanation": "Pages 22–25 show star-to-delta formulas and diagrams."
+  },
+  {
+    "q": "Which transformation is especially useful for simplifying mixed resistor networks?",
+    "options": [
+      "Star–Delta or Delta–Star",
+      "Only Ohm's law",
+      "Only KVL",
+      "Only capacitance"
+    ],
+    "answer": 0,
+    "topic": "Star–Delta Conversion",
+    "topicId": "star_delta",
+    "level": "Easy",
+    "explanation": "The final pages use network transformation to simplify resistor networks."
   }
 ]

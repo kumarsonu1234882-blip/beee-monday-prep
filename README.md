@@ -43,3 +43,12 @@ The question bank follows the uploaded BEEE class notes: resistance/Ohm's law, i
 
 ## v4 fix
 Questions now include a stable topicId, so Practice does not depend on exact display-topic spelling. Topic buttons also show loaded question counts.
+
+
+## v5 UI improvements
+- Animated header and card entrance
+- Ripple/hover button effects
+- Animated correct/wrong answer feedback
+- Topic question counts
+- Expanded question bank from the supplied BEEE notes
+- Practice streak indicator
