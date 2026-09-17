@@ -10,7 +10,8 @@
     "answer": 0,
     "topic": "Ohm's Law",
     "level": "Easy",
-    "explanation": "The notes show V = IR and also R = V/I, I = V/R."
+    "explanation": "The notes show V = IR and also R = V/I, I = V/R.",
+    "topicId": "resistance"
   },
   {
     "q": "The SI unit of resistance is:",
@@ -23,7 +24,8 @@
     "answer": 2,
     "topic": "Resistance",
     "level": "Easy",
-    "explanation": "The notes identify the unit of resistance as ohm (Ω)."
+    "explanation": "The notes identify the unit of resistance as ohm (Ω).",
+    "topicId": "resistance"
   },
   {
     "q": "The SI unit of inductance is:",
@@ -36,7 +38,8 @@
     "answer": 1,
     "topic": "Inductance",
     "level": "Easy",
-    "explanation": "The notes state the unit of inductance is Henry."
+    "explanation": "The notes state the unit of inductance is Henry.",
+    "topicId": "lcr"
   },
   {
     "q": "The SI unit of capacitance is:",
@@ -49,7 +52,8 @@
     "answer": 0,
     "topic": "Capacitance",
     "level": "Easy",
-    "explanation": "The notes state the unit of capacitance is Farad."
+    "explanation": "The notes state the unit of capacitance is Farad.",
+    "topicId": "lcr"
   },
   {
     "q": "Which relation is written for resistance in terms of resistivity and conductor dimensions?",
@@ -62,7 +66,8 @@
     "answer": 0,
     "topic": "Resistance",
     "level": "Medium",
-    "explanation": "Page 1 shows R = ρ l/A."
+    "explanation": "Page 1 shows R = ρ l/A.",
+    "topicId": "resistance"
   },
   {
     "q": "Which elements are listed as passive elements in the notes?",
@@ -75,7 +80,8 @@
     "answer": 0,
     "topic": "Passive Elements",
     "level": "Easy",
-    "explanation": "The notes list resistor, inductor and capacitor as passive elements."
+    "explanation": "The notes list resistor, inductor and capacitor as passive elements.",
+    "topicId": "elements"
   },
   {
     "q": "According to the notes, a bilateral element has:",
@@ -88,7 +94,8 @@
     "answer": 0,
     "topic": "Bilateral & Unilateral",
     "level": "Easy",
-    "explanation": "The notes describe bilateral elements as having the same conduction behavior in both directions."
+    "explanation": "The notes describe bilateral elements as having the same conduction behavior in both directions.",
+    "topicId": "elements"
   },
   {
     "q": "Which is given as an example of a unilateral element?",
@@ -101,7 +108,8 @@
     "answer": 2,
     "topic": "Bilateral & Unilateral",
     "level": "Easy",
-    "explanation": "The notes give diode and transistor as examples of unilateral elements."
+    "explanation": "The notes give diode and transistor as examples of unilateral elements.",
+    "topicId": "elements"
   },
   {
     "q": "Ohm’s law is stated in the notes as applicable to:",
@@ -114,7 +122,8 @@
     "answer": 0,
     "topic": "Linear & Non-linear",
     "level": "Easy",
-    "explanation": "The notes explicitly say Ohm’s law is applicable to only linear elements."
+    "explanation": "The notes explicitly say Ohm’s law is applicable to only linear elements.",
+    "topicId": "elements"
   },
   {
     "q": "The characteristic curve of a linear element in the notes is described as:",
@@ -127,7 +136,8 @@
     "answer": 0,
     "topic": "Linear & Non-linear",
     "level": "Medium",
-    "explanation": "The notes state the characteristic curve of a linear element will be a straight line passing through the origin."
+    "explanation": "The notes state the characteristic curve of a linear element will be a straight line passing through the origin.",
+    "topicId": "elements"
   },
   {
     "q": "At a junction, KCL states:",
@@ -140,7 +150,8 @@
     "answer": 0,
     "topic": "KCL",
     "level": "Easy",
-    "explanation": "The notes state the sum of current entering a junction equals the sum of current leaving."
+    "explanation": "The notes state the sum of current entering a junction equals the sum of current leaving.",
+    "topicId": "kclkvl"
   },
   {
     "q": "The compact form of KCL shown in the notes is:",
@@ -153,7 +164,8 @@
     "answer": 1,
     "topic": "KCL",
     "level": "Easy",
-    "explanation": "Page 9 shows ΣI = 0 at a junction."
+    "explanation": "Page 9 shows ΣI = 0 at a junction.",
+    "topicId": "kclkvl"
   },
   {
     "q": "KVL states that in a closed loop:",
@@ -166,7 +178,8 @@
     "answer": 0,
     "topic": "KVL",
     "level": "Easy",
-    "explanation": "The notes state that the algebraic sum of change in potential around a closed loop is zero."
+    "explanation": "The notes state that the algebraic sum of change in potential around a closed loop is zero.",
+    "topicId": "kclkvl"
   },
   {
     "q": "The compact form of KVL shown in the notes is:",
@@ -179,7 +192,8 @@
     "answer": 1,
     "topic": "KVL",
     "level": "Easy",
-    "explanation": "Page 9 shows ΣV = 0 for a closed loop."
+    "explanation": "Page 9 shows ΣV = 0 for a closed loop.",
+    "topicId": "kclkvl"
   },
   {
     "q": "An ideal voltage source provides:",
@@ -192,7 +206,8 @@
     "answer": 0,
     "topic": "Sources",
     "level": "Easy",
-    "explanation": "The notes define an ideal voltage source as providing constant voltage across the circuit."
+    "explanation": "The notes define an ideal voltage source as providing constant voltage across the circuit.",
+    "topicId": "sources"
   },
   {
     "q": "The internal resistance of an ideal voltage source is:",
@@ -205,7 +220,8 @@
     "answer": 0,
     "topic": "Sources",
     "level": "Easy",
-    "explanation": "The practical voltage-source discussion in the notes shows the ideal source has r_o = 0."
+    "explanation": "The practical voltage-source discussion in the notes shows the ideal source has r_o = 0.",
+    "topicId": "sources"
   },
   {
     "q": "A practical voltage source is represented as an ideal voltage source in series with:",
@@ -218,7 +234,8 @@
     "answer": 0,
     "topic": "Sources",
     "level": "Easy",
-    "explanation": "Page 11 describes a practical voltage source as an ideal voltage source with a small internal resistance in series."
+    "explanation": "Page 11 describes a practical voltage source as an ideal voltage source with a small internal resistance in series.",
+    "topicId": "sources"
   },
   {
     "q": "An ideal current source provides:",
@@ -231,7 +248,8 @@
     "answer": 0,
     "topic": "Sources",
     "level": "Easy",
-    "explanation": "The notes define an ideal current source as giving constant current even if load changes."
+    "explanation": "The notes define an ideal current source as giving constant current even if load changes.",
+    "topicId": "sources"
   },
   {
     "q": "For the ideal current source, the internal resistance is shown as:",
@@ -244,7 +262,8 @@
     "answer": 1,
     "topic": "Sources",
     "level": "Medium",
-    "explanation": "The notes state the ideal current-source case has r_o = ∞."
+    "explanation": "The notes state the ideal current-source case has r_o = ∞.",
+    "topicId": "sources"
   },
   {
     "q": "For voltage-source to current-source transformation, the current is:",
@@ -257,7 +276,8 @@
     "answer": 0,
     "topic": "Source Transformation",
     "level": "Easy",
-    "explanation": "Page 12 shows I = V/Rin."
+    "explanation": "Page 12 shows I = V/Rin.",
+    "topicId": "sources"
   },
   {
     "q": "For current-source to voltage-source transformation, the voltage is:",
@@ -270,7 +290,8 @@
     "answer": 0,
     "topic": "Source Transformation",
     "level": "Easy",
-    "explanation": "Page 12 shows V = I Rin."
+    "explanation": "Page 12 shows V = I Rin.",
+    "topicId": "sources"
   },
   {
     "q": "Mesh analysis is used in the notes to find:",
@@ -283,7 +304,8 @@
     "answer": 0,
     "topic": "Mesh Analysis",
     "level": "Easy",
-    "explanation": "The notes use mesh-analysis equations to determine loop/mesh currents."
+    "explanation": "The notes use mesh-analysis equations to determine loop/mesh currents.",
+    "topicId": "mesh"
   },
   {
     "q": "Node analysis applies KCL at:",
@@ -296,7 +318,8 @@
     "answer": 0,
     "topic": "Node Analysis",
     "level": "Easy",
-    "explanation": "The node-analysis pages write current equations at a junction using KCL."
+    "explanation": "The node-analysis pages write current equations at a junction using KCL.",
+    "topicId": "node"
   },
   {
     "q": "In the node-analysis steps, the first step is to:",
@@ -309,7 +332,8 @@
     "answer": 0,
     "topic": "Node Analysis",
     "level": "Medium",
-    "explanation": "Page 17 begins by writing potential starting from the junction."
+    "explanation": "Page 17 begins by writing potential starting from the junction.",
+    "topicId": "node"
   },
   {
     "q": "Voltage Divider Rule is used for resistors connected:",
@@ -322,7 +346,8 @@
     "answer": 0,
     "topic": "Voltage Divider",
     "level": "Easy",
-    "explanation": "The notes say VDR is applicable where resistances are connected in series in a circuit/one loop."
+    "explanation": "The notes say VDR is applicable where resistances are connected in series in a circuit/one loop.",
+    "topicId": "divider"
   },
   {
     "q": "In a simple series resistor circuit, the current through the resistors is:",
@@ -335,7 +360,8 @@
     "answer": 0,
     "topic": "Voltage Divider",
     "level": "Easy",
-    "explanation": "The notes use a common series current I for all series resistors."
+    "explanation": "The notes use a common series current I for all series resistors.",
+    "topicId": "divider"
   },
   {
     "q": "The total series current in the voltage-divider derivation is:",
@@ -348,7 +374,8 @@
     "answer": 0,
     "topic": "Voltage Divider",
     "level": "Medium",
-    "explanation": "Page 19 gives I = V/(R1+R2+...+Rn)."
+    "explanation": "Page 19 gives I = V/(R1+R2+...+Rn).",
+    "topicId": "divider"
   },
   {
     "q": "For a series voltage divider, the voltage across R1 is:",
@@ -361,7 +388,8 @@
     "answer": 0,
     "topic": "Voltage Divider",
     "level": "Medium",
-    "explanation": "The notes derive V1 = (R1/(R1+R2+...+Rn))V."
+    "explanation": "The notes derive V1 = (R1/(R1+R2+...+Rn))V.",
+    "topicId": "divider"
   },
   {
     "q": "Current Divider Rule is used to find current through branches connected:",
@@ -374,7 +402,8 @@
     "answer": 0,
     "topic": "Current Divider",
     "level": "Easy",
-    "explanation": "Page 24 states CDR is applicable to find current flowing through resistors connected parallel."
+    "explanation": "Page 24 states CDR is applicable to find current flowing through resistors connected parallel.",
+    "topicId": "divider"
   },
   {
     "q": "For two parallel resistors, the current through R1 is:",
@@ -387,7 +416,8 @@
     "answer": 0,
     "topic": "Current Divider",
     "level": "Medium",
-    "explanation": "Page 24 boxes I1 = I × R2/(R1+R2)."
+    "explanation": "Page 24 boxes I1 = I × R2/(R1+R2).",
+    "topicId": "divider"
   },
   {
     "q": "For two parallel resistors, the current through R2 is:",
@@ -400,7 +430,8 @@
     "answer": 0,
     "topic": "Current Divider",
     "level": "Medium",
-    "explanation": "Page 24 boxes I2 = I × R1/(R1+R2)."
+    "explanation": "Page 24 boxes I2 = I × R1/(R1+R2).",
+    "topicId": "divider"
   },
   {
     "q": "In the notes, delta-to-star conversion is used for:",
@@ -413,7 +444,8 @@
     "answer": 0,
     "topic": "Star-Delta",
     "level": "Easy",
-    "explanation": "The notes show a Delta (Δ) network converted into a Star (Y) network."
+    "explanation": "The notes show a Delta (Δ) network converted into a Star (Y) network.",
+    "topicId": "star_delta"
   },
   {
     "q": "In a Δ→Y conversion, one star resistance is formed from:",
@@ -426,7 +458,8 @@
     "answer": 0,
     "topic": "Star-Delta",
     "level": "Medium",
-    "explanation": "Page 21 gives formulas such as R1 = RARB/(RA+RB+RC)."
+    "explanation": "Page 21 gives formulas such as R1 = RARB/(RA+RB+RC).",
+    "topicId": "star_delta"
   },
   {
     "q": "The notes also show the reverse conversion as:",
@@ -439,6 +472,7 @@
     "answer": 0,
     "topic": "Star-Delta",
     "level": "Easy",
-    "explanation": "Pages 22–25 contain Star-to-Delta conversion formulas and diagrams."
+    "explanation": "Pages 22–25 contain Star-to-Delta conversion formulas and diagrams.",
+    "topicId": "star_delta"
   }
 ]

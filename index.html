@@ -198,7 +198,7 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:16px}
     ).join("") || '<div class="muted">No topics loaded.</div>';
 
     $("practiceTopicButtons").innerHTML=state.topics.map(t=>
-      '<button type="button" class="action secondary practiceTopic" data-topic="'+esc(t.id)+'">'+esc(t.name)+'</button>'
+      '<button type="button" class="action secondary practiceTopic" data-topic="'+esc(t.id)+'">'+esc(t.name)+' ('+getTopicQuestions(t.id).length+')</button>'
     ).join("") || '<div class="muted">No topics loaded.</div>';
 
     bindTopicButtons();
@@ -221,24 +221,23 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:16px}
     });
   });
 
-  // The topic names shown to the student are broader groups than the
-  // individual topic tags used by the question bank. Keep this mapping
-  // in the app so every topic button returns the right questions.
-  const topicMap = {
-    resistance: ["Resistance","Ohm's Law"],
-    lcr: ["Inductance","Capacitance"],
-    elements: ["Bilateral & Unilateral","Linear & Non-linear","Passive Elements"],
-    kclkvl: ["KCL","KVL"],
-    sources: ["Sources","Source Transformation"],
-    mesh: ["Mesh Analysis"],
-    node: ["Node Analysis"],
-    divider: ["Voltage Divider","Current Divider"],
-    star_delta: ["Star-Delta"]
-  };
-
+  // Use a stable topicId stored with each question. This avoids
+  // display-name spelling differences breaking Practice.
   function getTopicQuestions(topicId){
-    const allowed = topicMap[topicId];
-    if(!allowed) return [];
+    const direct = state.questions.filter(q=>q.topicId===topicId);
+    if(direct.length) return direct;
+    const legacy = {
+      resistance:["Resistance","Ohm's Law"],
+      lcr:["Inductance","Capacitance"],
+      elements:["Bilateral & Unilateral","Linear & Non-linear","Passive Elements"],
+      kclkvl:["KCL","KVL"],
+      sources:["Sources","Source Transformation"],
+      mesh:["Mesh Analysis"],
+      node:["Node Analysis"],
+      divider:["Voltage Divider","Current Divider"],
+      star_delta:["Star-Delta"]
+    };
+    const allowed=legacy[topicId]||[];
     return state.questions.filter(q=>allowed.includes(q.topic));
   }
 
@@ -247,7 +246,9 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:16px}
     state.practice={list:list,idx:0,score:0,topicId:topicId};
     $("practiceQuiz").classList.remove("hidden");
     if(!list.length){
-      $("practiceQuiz").innerHTML='<div class="error">No questions found for this topic.</div>';
+      $("practiceQuiz").innerHTML=
+        '<div class="error"><b>No questions found for this topic.</b><br>'+
+        '<span class="muted">The question bank loaded '+state.questions.length+' questions. Refresh after the new online data is published.</span></div>';
       return;
     }
     renderPractice();

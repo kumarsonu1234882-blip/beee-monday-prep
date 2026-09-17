@@ -39,3 +39,7 @@ This version is a **preparation app**, not a Monday-only locked app. v2 fixes mo
 
 ## Source basis
 The question bank follows the uploaded BEEE class notes: resistance/Ohm's law, inductance/capacitance, active/passive and bilateral/unilateral elements, linear/non-linear elements, KCL/KVL, ideal/practical sources, source transformation, mesh analysis, node analysis, voltage divider, current divider, and star-delta conversion.
+
+
+## v4 fix
+Questions now include a stable topicId, so Practice does not depend on exact display-topic spelling. Topic buttons also show loaded question counts.
