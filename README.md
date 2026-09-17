@@ -95,3 +95,10 @@ Questions now include a stable topicId, so Practice does not depend on exact dis
 - Clear topic cards and larger buttons
 - Lightweight answer animations without the heavy visual effects
 - Creator credit: @thesonukumar80
+
+
+## v12 — realistic clean UI
+- Rebuilt the presentation as a clean student dashboard with a restrained, professional visual system.
+- Kept exactly 1000 questions and the six-topic syllabus.
+- Preserved topic practice, explanations, Monday mock, best score and creator credit.
+- Simplified controls so the UI is easier to understand on mobile.

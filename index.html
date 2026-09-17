@@ -2,65 +2,67 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0b1630">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1224">
 <title>BEEE Monday Test Preparation</title>
 <style>
 :root{
-  --bg:#f4f7fb;--card:#ffffff;--text:#162033;--muted:#667085;
-  --primary:#2563eb;--primary2:#4f46e5;--soft:#edf4ff;
-  --border:#dbe4f0;--ok:#16a34a;--bad:#dc2626
+  --bg:#f5f7fb;--card:#fff;--text:#101828;--muted:#667085;--line:#e4e7ec;
+  --blue:#2563eb;--blue2:#1d4ed8;--soft:#eef4ff;--green:#16a34a;--red:#dc2626;
+  --shadow:0 10px 30px rgba(16,24,40,.07)
 }
-*{box-sizing:border-box}
-body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
-.wrap{max-width:980px;margin:auto}
-header{background:linear-gradient(135deg,#0b1630,#193d96);color:#fff;padding:20px 14px}
-.header{display:flex;justify-content:space-between;gap:16px;align-items:center}
-.brand h1{margin:0;font-size:25px}
-.brand p{margin:5px 0 0;color:#d7e3ff;font-size:14px}
-.credit{font-size:12px;color:#c7d6f6;text-align:right}
-.nav{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:12px 0;position:sticky;top:0;z-index:20;background:#f4f7fbdd;backdrop-filter:blur(10px)}
-.nav button{border:1px solid var(--border);background:#fff;color:var(--text);padding:11px 8px;border-radius:11px;font-weight:800;cursor:pointer}
-.nav button.active{background:var(--primary);color:#fff;border-color:var(--primary)}
-main{padding:0 12px 32px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:17px;padding:18px;margin:12px 0;box-shadow:0 7px 24px rgba(17,35,68,.06)}
-.hero{background:linear-gradient(135deg,#eaf2ff,#f7f8ff);border-color:#cfe0ff}
-.hero h2{margin:0;font-size:24px}.hero p{color:var(--muted);line-height:1.5}
-.actions{display:flex;gap:9px;flex-wrap:wrap}
-.btn{border:0;border-radius:11px;padding:12px 16px;font-weight:800;cursor:pointer}
-.primary{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff}
-.secondary{background:#eaf1ff;color:#173b88}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:14px}
-.stat{padding:12px;border:1px solid var(--border);border-radius:13px;background:#fbfdff}
-.stat span{display:block;color:var(--muted);font-size:12px}.stat b{display:block;font-size:22px;margin-top:4px}
-.section-title{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.topic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.topic{padding:15px;border:1px solid var(--border);border-radius:14px;background:#fff}
-.topic h3{margin:0 0 5px;font-size:17px}.topic p{margin:0;color:var(--muted);font-size:13px;line-height:1.45}
-.topic small{display:inline-block;margin-top:9px;padding:5px 8px;background:#eef4ff;color:#2351a7;border-radius:999px;font-weight:700}
-.hidden{display:none}
-.question{font-size:20px;font-weight:800;line-height:1.45;margin:12px 0}
-.option{display:block;width:100%;text-align:left;border:1px solid var(--border);background:#fff;color:var(--text);padding:13px;border-radius:11px;margin:8px 0;cursor:pointer}
-.option:hover{border-color:#8db1ff;background:#f8fbff}
-.option.correct{background:#ecfdf3;border-color:#22a06b}.option.wrong{background:#fff1f2;border-color:#dc2626}
-.progress{height:8px;background:#e8edf5;border-radius:99px;overflow:hidden}.progress>div{height:100%;background:var(--primary);transition:width .25s}
-.timer{margin-left:auto;font-size:20px;font-weight:900;color:#b45309}
-.result{text-align:center}.score{font-size:44px;font-weight:900}
-.muted{color:var(--muted);font-size:14px;line-height:1.5}
-.search{width:100%;padding:11px 13px;border:1px solid var(--border);border-radius:11px;font-size:15px}
-.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,20px);opacity:0;background:#122449;color:#fff;padding:10px 14px;border-radius:999px;font-size:12px;font-weight:800;transition:.25s;z-index:999}
-.toast.show{opacity:1;transform:translate(-50%,0)}
-.answer-ok{animation:ok .45s ease}.answer-bad{animation:shake .4s ease}
-@keyframes ok{40%{transform:scale(1.012);box-shadow:0 0 0 4px #16a34a13}}@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
-footer{text-align:center;color:var(--muted);padding:18px;font-size:13px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(#f8faff,#f5f7fb 35%,#f5f7fb);color:var(--text)}
+a{color:inherit}.wrap{max-width:980px;margin:auto}
+header{background:linear-gradient(135deg,#0b1224,#123c9e);color:#fff;padding:20px 14px 22px}
+.header{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+.brand h1{margin:0;font-size:25px;letter-spacing:-.4px}.brand p{margin:6px 0 0;color:#d7e3ff;font-size:13px}
+.header-actions{display:flex;gap:7px;align-items:center}
+.badge{font-size:11px;font-weight:800;padding:8px 10px;border:1px solid #ffffff2b;background:#ffffff12;border-radius:999px}
+.icon{width:38px;height:38px;border-radius:11px;border:1px solid #ffffff26;background:#ffffff10;color:#fff;display:grid;place-items:center;text-decoration:none;font-size:17px}
+.nav{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:10px 0;position:sticky;top:0;z-index:20;background:#f5f7fbdd;backdrop-filter:blur(12px)}
+.nav button{border:1px solid var(--line);background:#fff;color:#25314a;padding:11px 8px;border-radius:12px;font-weight:850;cursor:pointer;transition:.2s}
+.nav button.active{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 6px 16px rgba(37,99,235,.22)}
+main{padding:0 12px 34px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin:12px 0;box-shadow:var(--shadow)}
+.hidden{display:none}.muted{color:var(--muted);font-size:13px;line-height:1.5}
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#eef4ff,#f9fbff);border-color:#d7e5ff}
+.hero:after{content:"";position:absolute;width:170px;height:170px;border-radius:50%;right:-70px;top:-55px;background:radial-gradient(circle,#7aa2ff33,transparent 70%)}
+.eyebrow{font-size:11px;font-weight:900;letter-spacing:.14em;color:#3159a8}
+.hero h2{font-size:28px;line-height:1.12;margin:7px 0}.hero .quote{font-size:14px;font-weight:700;color:#475467;margin-bottom:15px}
+.btn{border:0;border-radius:12px;padding:11px 15px;font-weight:850;cursor:pointer;min-height:44px;transition:.18s transform,.18s box-shadow}
+.btn:active{transform:scale(.98)}.primary{background:linear-gradient(135deg,var(--blue),#4f46e5);color:#fff;box-shadow:0 8px 18px rgba(37,99,235,.22)}
+.secondary{background:#edf2fe;color:#173b88}.ghost{background:#fff;border:1px solid var(--line);color:#344054}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:15px}
+.stat{padding:12px;border:1px solid var(--line);border-radius:14px;background:#fcfdff}
+.stat span{display:block;color:var(--muted);font-size:11px}.stat b{display:block;font-size:22px;margin-top:4px}
+.section-title{display:flex;justify-content:space-between;align-items:center;gap:10px}.section-title h2{margin:0;font-size:20px}
+.topic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.topic{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff;transition:.2s transform,.2s box-shadow,.2s border}
+.topic:hover{transform:translateY(-2px);box-shadow:0 12px 22px rgba(16,24,40,.07);border-color:#c6d6f5}
+.topic .tag{display:inline-block;margin-top:8px;padding:5px 8px;border-radius:999px;background:#eef4ff;color:#2453a6;font-size:11px;font-weight:800}
+.topic h3{margin:0 0 5px;font-size:16px}.topic p{margin:0;color:var(--muted);font-size:12px;line-height:1.4}
+.progress{height:8px;background:#edf0f5;border-radius:999px;overflow:hidden}.progress>div{height:100%;background:linear-gradient(90deg,#2563eb,#7c3aed);transition:width .25s}
+.search{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:12px;font-size:14px;outline:none;background:#fff}.search:focus{border-color:#86a5ef;box-shadow:0 0 0 4px #2563eb12}
+.question{font-size:20px;line-height:1.45;font-weight:850;margin:14px 0}
+.option{width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px 14px;margin:8px 0;cursor:pointer;font-size:14px;color:var(--text);transition:.16s}
+.option:hover{border-color:#9bb6f4;background:#fbfdff}.option.correct{border-color:#22a06b;background:#ecfdf3}.option.wrong{border-color:#dc2626;background:#fff1f2}
+.timer{margin-left:auto;font-weight:900;color:#9a6700;font-size:18px}
+.score{text-align:center;font-size:46px;font-weight:950}
+.result{text-align:center}
+.sticky-note{border-left:4px solid #2563eb;padding:11px 12px;background:#f8fbff;border-radius:10px;color:#475467;font-size:13px}
+.credit{font-size:11px;color:#d3def6;text-align:right}
+footer{text-align:center;color:#98a2b3;padding:16px;font-size:12px}
+.answer-good{animation:good .45s ease}.answer-bad{animation:bad .42s ease}
+@keyframes good{40%{transform:scale(1.012);box-shadow:0 0 0 4px #16a34a12}}@keyframes bad{25%,75%{transform:translateX(-4px)}50%{transform:translateX(4px)}}
 @media(max-width:700px){
-  .header{align-items:flex-start}.credit{display:none}.brand h1{font-size:21px}.stats{grid-template-columns:repeat(2,1fr)}
-  .topic-grid{grid-template-columns:1fr}.nav{grid-template-columns:repeat(2,1fr)}
+ .header{align-items:flex-start}.credit{display:none}.brand h1{font-size:22px}
+ .stats{grid-template-columns:repeat(2,1fr)}.topic-grid{grid-template-columns:1fr}.nav{grid-template-columns:repeat(2,1fr)}
 }
 </style>
 </head>
 <body>
-<div id="toast" class="toast"></div>
 
 <header>
   <div class="wrap header">
@@ -68,7 +70,11 @@ footer{text-align:center;color:var(--muted);padding:18px;font-size:13px}
       <h1>⚡ BEEE Monday Test Preparation</h1>
       <p>B.Tech 1st Semester • Basic Electrical & Electronics Engineering</p>
     </div>
-    <div class="credit">Creator<br><b>@thesonukumar80</b></div>
+    <div class="header-actions">
+      <span class="badge">1000 QUESTIONS</span>
+      <a class="icon" href="https://www.instagram.com/thesonukumar80/" target="_blank" rel="noopener" title="Instagram">@</a>
+      <span class="credit">Creator<br><b>@thesonukumar80</b></span>
+    </div>
   </div>
 </header>
 
@@ -82,149 +88,214 @@ footer{text-align:center;color:var(--muted);padding:18px;font-size:13px}
 
 <section id="home" class="page">
   <div class="card hero">
-    <h2>Practice today. Be ready for Monday.</h2>
-    <p>Simple dashboard, simple practice, clear results. Start with a topic or take the 30-question mock.</p>
+    <div class="eyebrow">BEEE • MONDAY CLASS TEST</div>
+    <h2>Practice today.<br>Be ready for Monday.</h2>
+    <div class="quote">Small steps, big engineers 🚀</div>
     <div class="actions">
-      <button class="btn primary" id="startPractice">Start Practice</button>
+      <button class="btn primary" id="startPractice">Start Practicing →</button>
       <button class="btn secondary" id="startMockHome">30 Q Mock Test</button>
     </div>
     <div class="stats" id="stats"></div>
   </div>
 
   <div class="card">
-    <div class="section-title"><h2>Six core topics</h2><span class="muted">1000 questions</span></div>
+    <div class="section-title">
+      <h2>Choose a topic</h2>
+      <span class="muted">6 core topics</span>
+    </div>
     <div class="topic-grid" id="homeTopics"></div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">
+      <h2>Your next step</h2>
+      <span class="muted">Simple plan</span>
+    </div>
+    <div class="sticky-note">Start with one topic → solve questions → review mistakes → take the Monday mock.</div>
   </div>
 </section>
 
 <section id="learn" class="page hidden">
   <div class="card">
-    <div class="section-title"><h2>Topics</h2><span class="muted">Choose one</span></div>
-    <input class="search" id="search" placeholder="Search topic…">
-    <div class="topic-grid" id="topicList" style="margin-top:10px"></div>
+    <div class="section-title">
+      <h2>Topics</h2><span class="muted">Pick one to practice</span>
+    </div>
+    <input id="search" class="search" placeholder="Search topic…" style="margin-top:10px">
+    <div class="topic-grid" id="topicList"></div>
   </div>
 </section>
 
 <section id="practice" class="page hidden">
-  <div class="card">
-    <div class="section-title"><h2>Practice</h2><span class="muted">Choose a topic</span></div>
-    <div class="topic-grid" id="practiceTopics" style="margin-top:10px"></div>
+  <div class="card" id="practiceChooser">
+    <div class="section-title">
+      <h2>Practice</h2><span class="muted">Choose a topic</span>
+    </div>
+    <div class="topic-grid" id="practiceTopics"></div>
   </div>
   <div id="practiceBox" class="card hidden"></div>
 </section>
 
 <section id="mock" class="page hidden">
   <div class="card">
-    <h2>Monday Mock Test</h2>
-    <p class="muted">30 random questions • 20 minutes</p>
+    <div class="section-title">
+      <h2>Monday Mock Test</h2><span class="muted">Real-test style</span>
+    </div>
+    <p class="muted">30 random questions • 20 minutes • result at the end.</p>
     <div class="stats">
-      <div class="stat"><span>Total bank</span><b id="bankCount">1000</b></div>
+      <div class="stat"><span>Question bank</span><b id="bankCount">1000</b></div>
       <div class="stat"><span>Mock</span><b>30 Q</b></div>
       <div class="stat"><span>Time</span><b>20 min</b></div>
       <div class="stat"><span>Best</span><b id="best">0%</b></div>
     </div>
-    <button class="btn primary" id="startMock" style="margin-top:12px">Start Mock</button>
+    <div class="actions" style="margin-top:12px">
+      <button class="btn primary" id="startMock">Start Mock →</button>
+    </div>
   </div>
   <div id="mockBox" class="card hidden"></div>
 </section>
 </main>
 
-<footer>Made with ❤️ by <a href="https://www.instagram.com/thesonukumar80/" target="_blank" rel="noopener">@thesonukumar80</a> • Keep Learning 🚀</footer>
+<footer>
+  Made with ❤️ by <a href="https://www.instagram.com/thesonukumar80/" target="_blank" rel="noopener">@thesonukumar80</a> • Keep Learning 🚀
+</footer>
 
 <script>
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
-const state={topics:[],questions:[],practice:{list:[],i:0,score:0},mock:{list:[],i:0,ans:[],seconds:1200,timer:null}};
-function toast(msg){const t=$("toast");t.textContent=msg;t.classList.add("show");clearTimeout(window.__t);window.__t=setTimeout(()=>t.classList.remove("show"),1600)}
-function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("hidden",p.id!==id));document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));scrollTo({top:0,behavior:"smooth"})}
+const state={topics:[],questions:[],practice:{list:[],i:0,score:0,id:""},mock:{list:[],i:0,ans:[],seconds:1200,timer:null}};
+
+function showPage(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.toggle("hidden",p.id!==id));
+  document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));
+  scrollTo({top:0,behavior:"smooth"});
+}
 document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>showPage(b.dataset.page));
 
-async function getJSON(path){const r=await fetch(path+"?v="+Date.now(),{cache:"no-store"});if(!r.ok)throw Error(path);return r.json()}
+async function getJSON(path){
+  const r=await fetch(path+"?v="+Date.now(),{cache:"no-store"});
+  if(!r.ok) throw new Error(path);
+  return r.json();
+}
 function topicQs(id){return state.questions.filter(q=>q.topicId===id)}
+
 function render(){
   $("stats").innerHTML=
-    '<div class="stat"><span>Questions</span><b>'+state.questions.length+'</b></div>'+
-    '<div class="stat"><span>Topics</span><b>'+state.topics.length+'</b></div>'+
+    '<div class="stat"><span>Questions</span><b>1000</b></div>'+
+    '<div class="stat"><span>Topics</span><b>6</b></div>'+
     '<div class="stat"><span>Mock</span><b>30 Q</b></div>'+
     '<div class="stat"><span>Time</span><b>20 min</b></div>';
   $("bankCount").textContent=state.questions.length;
-  renderTopicList($("homeTopics"), false);
-  renderTopicList($("topicList"), true);
-  renderTopicList($("practiceTopics"), false, true);
   $("best").textContent=(localStorage.getItem("beeeBest")||0)+"%";
+  renderTopics($("homeTopics"),false);
+  renderTopics($("topicList"),true);
+  renderPracticeTopics();
 }
-function renderTopicList(box, detailed=false, practice=false){
-  box.innerHTML=state.topics.map(t=>{
-    const n=topicQs(t.id).length;
-    return '<div class="topic searchable" data-name="'+esc(t.name.toLowerCase())+'">'+
+function renderTopics(box,detailed){
+  box.innerHTML=state.topics.map(t=>
+    '<div class="topic">'+
       '<h3>'+esc(t.name)+'</h3>'+
-      (detailed?'<p>'+esc(t.summary)+'</p>':'<p>'+esc(t.short||t.summary)+'</p>')+
-      '<small>'+n+' Questions</small>'+
-      (practice?'<div style="margin-top:10px"><button class="btn primary openPractice" data-id="'+esc(t.id)+'">Start →</button></div>':'')+
-      '</div>';
-  }).join("");
-  box.querySelectorAll(".openPractice").forEach(b=>b.onclick=()=>startPractice(b.dataset.id));
-  if(detailed) box.querySelectorAll(".topic").forEach(x=>x.onclick=(e)=>{if(e.target.closest("button"))return;startPractice(state.topics.find(t=>t.name.toLowerCase()===x.dataset.name)?.id||"")});
+      '<p>'+esc(detailed?t.summary:(t.short||t.summary))+'</p>'+
+      '<span class="tag">'+topicQs(t.id).length+' Questions</span>'+
+      '<div style="margin-top:10px"><button class="btn secondary openTopic" data-id="'+esc(t.id)+'">Practice →</button></div>'+
+    '</div>'
+  ).join("");
+  box.querySelectorAll(".openTopic").forEach(b=>b.onclick=()=>startPractice(b.dataset.id));
 }
-$("search").oninput=e=>{const q=e.target.value.toLowerCase().trim();$("topicList").querySelectorAll(".topic").forEach(t=>t.classList.toggle("hidden",q&&!t.dataset.name.includes(q)))};
+function renderPracticeTopics(){
+  $("practiceTopics").innerHTML=state.topics.map(t=>
+    '<div class="topic"><h3>'+esc(t.name)+'</h3><p>'+esc(t.short||t.summary)+'</p><span class="tag">'+topicQs(t.id).length+' Questions</span><div style="margin-top:10px"><button class="btn primary openPractice" data-id="'+esc(t.id)+'">Start →</button></div></div>'
+  ).join("");
+  $("practiceTopics").querySelectorAll(".openPractice").forEach(b=>b.onclick=()=>startPractice(b.dataset.id));
+}
+$("search").oninput=e=>{
+  const q=e.target.value.toLowerCase().trim();
+  $("topicList").querySelectorAll(".topic").forEach(t=>t.classList.toggle("hidden",q && !t.textContent.toLowerCase().includes(q)));
+};
 
-function startPractice(id){showPage("practice");state.practice={list:topicQs(id),i:0,score:0};$("practiceBox").classList.remove("hidden");renderPractice()}
+function startPractice(id){
+  state.practice={list:topicQs(id),i:0,score:0,id};
+  $("practiceChooser").classList.add("hidden");
+  $("practiceBox").classList.remove("hidden");
+  renderPractice();
+  setTimeout(()=>$("practiceBox").scrollIntoView({behavior:"smooth",block:"start"}),60);
+}
 function renderPractice(){
   const s=state.practice,q=s.list[s.i];
-  if(!q){$("practiceBox").innerHTML='<div class="result"><h2>Practice complete 🎉</h2><div class="score">'+s.score+'/'+s.list.length+'</div><p class="muted">Try another topic or repeat this topic.</p></div>';return}
+  if(!q){
+    $("practiceBox").innerHTML='<div class="result"><h2>Practice complete 🎉</h2><div class="score">'+s.score+'/'+s.list.length+'</div><p class="muted">Choose another topic or practice this one again.</p><button class="btn primary" id="chooseAgain">Choose another topic</button></div>';
+    $("chooseAgain").onclick=()=>{ $("practiceBox").classList.add("hidden");$("practiceChooser").classList.remove("hidden");scrollTo({top:0,behavior:"smooth"}) };
+    return;
+  }
   $("practiceBox").innerHTML=
-    '<div class="section-title"><div class="muted">Question '+(s.i+1)+' / '+s.list.length+'</div><div class="muted">'+s.score+' correct</div></div>'+
+    '<div class="section-title"><span class="muted">Question '+(s.i+1)+' / '+s.list.length+'</span><span class="muted">'+s.score+' correct</span></div>'+
     '<div class="progress" style="margin:10px 0"><div style="width:'+((s.i)/s.list.length*100)+'%"></div></div>'+
     '<div class="question">'+esc(q.q)+'</div><div id="opts"></div>'+
     '<p id="explain" class="muted"></p>'+
-    '<div class="actions"><button class="btn secondary" id="backPractice">Back</button><button class="btn primary" id="next" disabled>Next</button></div>';
-  q.options.forEach((x,i)=>{const b=document.createElement("button");b.className="option";b.textContent=String.fromCharCode(65+i)+". "+x;b.onclick=()=>answerPractice(i);$("opts").appendChild(b)});
-  $("backPractice").onclick=()=>showPage("practice");
+    '<div class="actions"><button class="btn ghost" id="backPractice">← Topics</button><button class="btn primary" id="next" disabled>Next</button></div>';
+  q.options.forEach((x,i)=>{
+    const b=document.createElement("button");b.className="option";b.textContent=String.fromCharCode(65+i)+". "+x;b.onclick=()=>answerPractice(i);$("opts").appendChild(b);
+  });
+  $("backPractice").onclick=()=>{ $("practiceBox").classList.add("hidden");$("practiceChooser").classList.remove("hidden");scrollTo({top:0,behavior:"smooth"}) };
 }
 function answerPractice(i){
   const s=state.practice,q=s.list[s.i],opts=[...$("opts").children];
   opts.forEach(x=>x.disabled=true);
   opts[q.answer].classList.add("correct");
-  if(i===q.answer){s.score++;$("practiceBox").classList.add("answer-ok");toast("✅ Correct");setTimeout(()=>$("practiceBox").classList.remove("answer-ok"),500)}
-  else{opts[i].classList.add("wrong");$("practiceBox").classList.add("answer-bad");toast("❌ Review this one");setTimeout(()=>$("practiceBox").classList.remove("answer-bad"),450)}
-  $("explain").textContent=q.explanation||"";
-  $("next").disabled=false;$("next").textContent=s.i===s.list.length-1?"Finish":"Next";$("next").onclick=()=>{s.i++;renderPractice()}
+  if(i===q.answer){
+    s.score++;$("practiceBox").classList.add("answer-good");setTimeout(()=>$("practiceBox").classList.remove("answer-good"),520);
+    $("explain").textContent="✅ Correct. "+(q.explanation||"Good job.");
+  }else{
+    opts[i].classList.add("wrong");$("practiceBox").classList.add("answer-bad");setTimeout(()=>$("practiceBox").classList.remove("answer-bad"),450);
+    $("explain").textContent="❌ "+(q.explanation||"Review this concept and try again.");
+  }
+  $("next").disabled=false;
+  $("next").textContent=s.i===s.list.length-1?"Finish":"Next";
+  $("next").onclick=()=>{s.i++;renderPractice()};
 }
-
 function startMock(){
   clearInterval(state.mock.timer);
-  const a=[...state.questions];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}
-  state.mock={list:a.slice(0,30),i:0,ans:Array(30).fill(null),seconds:1200,timer:null};$("mockBox").classList.remove("hidden");
-  state.mock.timer=setInterval(()=>{state.mock.seconds--;renderMock();if(state.mock.seconds<=0)finishMock()},1000);renderMock();
+  const a=[...state.questions];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}
+  state.mock={list:a.slice(0,30),i:0,ans:Array(30).fill(null),seconds:1200,timer:null};
+  $("mockBox").classList.remove("hidden");
+  state.mock.timer=setInterval(()=>{state.mock.seconds--;renderMock();if(state.mock.seconds<=0)finishMock()},1000);
+  renderMock();
 }
 function renderMock(){
   const m=state.mock,q=m.list[m.i],s=Math.max(0,m.seconds);
   const mm=String(Math.floor(s/60)).padStart(2,"0"),ss=String(s%60).padStart(2,"0");
-  $("mockBox").innerHTML='<div class="section-title"><div class="muted">Question '+(m.i+1)+' / 30</div><div class="timer">'+mm+':'+ss+'</div></div>'+
-  '<div class="progress" style="margin:10px 0"><div style="width:'+((m.i+1)/30*100)+'%"></div></div>'+
-  '<div class="question">'+esc(q.q)+'</div><div id="mopts"></div>'+
-  '<div class="actions"><button class="btn secondary" id="prev" '+(m.i===0?"disabled":"")+'>Previous</button><button class="btn primary" id="mnext">'+(m.i===29?"Submit":"Next")+'</button></div>';
-  q.options.forEach((x,i)=>{const b=document.createElement("button");b.className="option";b.textContent=String.fromCharCode(65+i)+". "+x;if(m.ans[m.i]===i)b.classList.add("correct");b.onclick=()=>{m.ans[m.i]=i;toast("Answer saved");renderMock()};$("mopts").appendChild(b)});
-  $("prev").onclick=()=>{if(m.i>0){m.i--;renderMock()}};$("mnext").onclick=()=>{if(m.i===29)finishMock();else{m.i++;renderMock()}};
+  $("mockBox").innerHTML=
+    '<div class="section-title"><span class="muted">Question '+(m.i+1)+' / 30</span><span class="timer">'+mm+':'+ss+'</span></div>'+
+    '<div class="progress" style="margin:10px 0"><div style="width:'+((m.i+1)/30*100)+'%"></div></div>'+
+    '<div class="question">'+esc(q.q)+'</div><div id="mopts"></div>'+
+    '<div class="actions"><button class="btn ghost" id="prev" '+(m.i===0?"disabled":"")+'>Previous</button><button class="btn primary" id="mnext">'+(m.i===29?"Submit":"Next")+'</button></div>';
+  q.options.forEach((x,i)=>{
+    const b=document.createElement("button");b.className="option";b.textContent=String.fromCharCode(65+i)+". "+x;
+    if(m.ans[m.i]===i)b.classList.add("correct");
+    b.onclick=()=>{m.ans[m.i]=i;renderMock()};$("mopts").appendChild(b);
+  });
+  $("prev").onclick=()=>{if(m.i>0){m.i--;renderMock()}};
+  $("mnext").onclick=()=>{if(m.i===29)finishMock();else{m.i++;renderMock()}};
 }
 function finishMock(){
-  clearInterval(state.mock.timer);const m=state.mock;let c=0;m.list.forEach((q,i)=>{if(m.ans[i]===q.answer)c++});
-  const pct=Math.round(c/30*100),best=Math.max(Number(localStorage.getItem("beeeBest")||0),pct);localStorage.setItem("beeeBest",best);
-  $("mockBox").innerHTML='<div class="result"><h2>Test Complete 🎉</h2><div class="score">'+c+'/30</div><h3>'+pct+'%</h3><p class="muted">Best score: '+best+'%</p><button class="btn primary" id="retry">Retry</button></div>';
+  clearInterval(state.mock.timer);
+  const m=state.mock;let c=0;m.list.forEach((q,i)=>{if(m.ans[i]===q.answer)c++});
+  const pct=Math.round(c/30*100),best=Math.max(Number(localStorage.getItem("beeeBest")||0),pct);
+  localStorage.setItem("beeeBest",best);
+  $("mockBox").innerHTML='<div class="result"><h2>Test complete 🎉</h2><div class="score">'+c+'/30</div><h3>'+pct+'%</h3><p class="muted">Best score: '+best+'%</p><button class="btn primary" id="retry">Retry Mock</button></div>';
   $("retry").onclick=startMock;$("best").textContent=best+"%";
 }
-$("startPractice").onclick=()=>showPage("learn");
-$("startMockHome").onclick=()=>{showPage("mock");startMock()}
+$("startPractice").onclick=()=>showPage("practice");
+$("startMockHome").onclick=()=>{showPage("mock");startMock()};
 $("startMock").onclick=startMock;
 
 (async()=>{
- try{
-  const [t,q]=await Promise.all([getJSON("data/topics.json"),getJSON("data/questions.json")]);
-  state.topics=t;state.questions=q;render();
-  setTimeout(()=>{toast("1000 questions ready ✅")},650);
- }catch(e){
-  $("stats").innerHTML='<div class="stat" style="grid-column:1/-1"><span>Data</span><b>Load error</b></div>';
- }
+  try{
+    const [t,q]=await Promise.all([getJSON("data/topics.json"),getJSON("data/questions.json")]);
+    state.topics=t;state.questions=q;render();
+  }catch(e){
+    $("stats").innerHTML='<div class="stat" style="grid-column:1/-1"><span>Data status</span><b>Could not load</b></div>';
+  }
 })();
 </script>
 </body>
