@@ -29,13 +29,21 @@ a{color:inherit;text-decoration:none}.wrap{max-width:1280px;margin:auto;padding:
 .footer{margin-top:28px;border-top:1px solid #ffffff10;padding:24px 0 34px;color:#8194b3;font-size:12px}.footerrow{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 @media(max-width:1050px){.grid{grid-template-columns:repeat(2,1fr)}.sidebar-layout{grid-template-columns:1fr}}
 @media(max-width:700px){.links{display:none}.search{width:100%;order:10}.nav{flex-wrap:wrap}.hero h1{font-size:34px}.metrics{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.wrap{padding:0 12px}}
+
+.manager-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.manager-grid .full{grid-column:1/-1}.manager-grid label{display:block;color:#aab8cf;font-size:12px;font-weight:800;margin-bottom:6px}
+.manager-grid input,.manager-grid select{width:100%;padding:11px 12px;border:1px solid #2a4772;border-radius:11px;background:#091630;color:#fff;outline:none}
+.manager-grid input:focus,.manager-grid select:focus{border-color:#55dfff;box-shadow:0 0 0 4px #55dfff12}
+.align-end{display:flex;align-items:end}.manager-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:13px}
+code{background:#101f3c;padding:2px 5px;border-radius:5px}
+@media(max-width:700px){.manager-grid{grid-template-columns:1fr}.manager-grid .full{grid-column:auto}}
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap nav">
 <a class="brand" href="#" onclick="topHome();return false"><div class="logo">🎓</div><div><b>StudyVault</b><small>Your Notes, Our Mission</small></div></a>
 <input id="search" class="search" placeholder="Search subject, notes, topic…">
-<div class="links"><a href="#subjects">Subjects</a><a href="#resources">Resources</a><a href="#timetable">Timetable</a></div>
+<div class="links"><a href="#subjects">Subjects</a><a href="#resources">Resources</a><a href="#timetable">Timetable</a><a class="manage-nav" href="#manager">🔗 Manage Links</a></div>
 <a class="avatar" href="https://www.instagram.com/thesonukumar80/" target="_blank">S</a>
 </div></header>
 
@@ -57,6 +65,63 @@ a{color:inherit;text-decoration:none}.wrap{max-width:1280px;margin:auto;padding:
 <section id="resources" class="section">
 <div class="head"><div><h2>Latest Resources</h2><div class="muted">Add Drive links in one data file; the site updates automatically.</div></div></div>
 <div class="sidebar-layout"><div class="card"><div class="list" id="resourceList"></div></div><div class="card"><h3>Drive Library</h3><p class="desc">Each subject opens its own resource library with Notes, PYQs, Lab, Assignments, E-books and Important Questions.</p><div class="list-item">☁️ Google Drive<br><small>Direct links added by you</small></div></div></div>
+</section>
+
+
+<section id="manager" class="section"><div class="card" style="border-color:#315c9b;background:linear-gradient(135deg,#0d2144,#11285a)"><h2 style="margin:0 0 6px">🔗 Add / Manage Drive Links</h2><div class="muted">Use this section to add your Google Drive links to any subject. On phone, tap “Manage Links” above.</div></div>
+  <div class="card">
+    <div class="head">
+      <div><h2>Manage Drive Links</h2><div class="muted">Select a subject, choose Notes/PYQ/Lab/etc., paste the Drive link, and tap Add Link. Then export the updated data for Termux.</div></div>
+      <button class="btn secondary" id="reloadLinks">Reload</button>
+    </div>
+
+    <div class="manager-grid">
+      <div>
+        <label>Subject</label>
+        <select id="mSubject"></select>
+      </div>
+      <div>
+        <label>Resource type</label>
+        <select id="mType">
+          <option value="notes">Notes</option>
+          <option value="pyq">PYQs</option>
+          <option value="lab">Lab Manuals</option>
+          <option value="assignments">Assignments</option>
+          <option value="ebooks">E-Books</option>
+          <option value="important">Important Questions</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="full">
+        <label>Title</label>
+        <input id="mTitle" placeholder="e.g. BEEE Unit 1 Notes">
+      </div>
+      <div class="full">
+        <label>Google Drive / Web URL</label>
+        <input id="mUrl" placeholder="https://drive.google.com/...">
+      </div>
+      <div>
+        <label>Meta (optional)</label>
+        <input id="mMeta" placeholder="PDF • 12 MB">
+      </div>
+      <div class="align-end">
+        <button class="btn primary" id="addLink">Add Link</button>
+      </div>
+    </div>
+
+    <div class="manager-actions"><button class="btn primary" id="goToManager">🔗 Add New Link</button>
+      <button class="btn secondary" id="exportJson">Download resources.json</button>
+      <button class="btn secondary" id="copyJson">Copy JSON</button>
+      <button class="btn secondary" id="clearDraft">Clear Draft</button>
+    </div>
+
+    <div class="sticky-note" style="margin-top:14px">
+      <b>How online updating works:</b> Add links here → download the updated <code>resources.json</code> → replace <code>data/resources.json</code> in the GitHub repository → <code>git add .</code> → <code>git commit</code> → <code>git push</code>. The website then loads the new links automatically.
+    </div>
+
+    <h3 style="margin-top:18px">Current links</h3>
+    <div id="managerList" class="list"></div>
+  </div>
 </section>
 
 <section id="timetable" class="section">
@@ -84,6 +149,69 @@ function openSubject(id){
  if(!any)out+="<div class='list-item' style='margin-top:12px'>No links added yet.<small>Edit <b>data/resources.json</b> in Termux and add your Drive URLs.</small></div>";
  openModal(s.name+" • "+s.code,out);
 }
+
+function managerDraft(){
+  try{
+    const x=JSON.parse(localStorage.getItem("studyvaultResources")||"null");
+    return Array.isArray(x)?x:JSON.parse(JSON.stringify(D.resources));
+  }catch(_){return JSON.parse(JSON.stringify(D.resources))}
+}
+function saveManagerDraft(x){localStorage.setItem("studyvaultResources",JSON.stringify(x))}
+function fillSubjectSelect(){
+  const s=document.getElementById("mSubject");
+  if(!s)return;
+  s.innerHTML=D.subjects.map(x=>"<option value='"+x.id+"'>"+escapeHtml(x.short+" — "+x.name)+"</option>").join("");
+}
+function flattenManagerResources(){
+  const r=managerDraft(), rows=[];
+  r.forEach(x=>["notes","pyq","lab","assignments","ebooks","important","other"].forEach(k=>(x[k]||[]).forEach(v=>{
+    rows.push({subjectId:x.subjectId,type:k,title:v.title||"",meta:v.meta||"",url:v.url||""});
+  })));
+  return rows;
+}
+function renderManager(){
+  const box=document.getElementById("managerList"); if(!box)return;
+  const rows=flattenManagerResources();
+  box.innerHTML=rows.map((x,i)=>
+    "<div class='list-item'><div style='display:flex;justify-content:space-between;gap:10px'><b>"+escapeHtml(x.title)+"</b><span class='chip'>"+escapeHtml(x.type)+"</span></div><small>"+escapeHtml(x.subjectId)+" • "+escapeHtml(x.meta)+"</small><div style='margin-top:6px'><a class='drive' target='_blank' href='"+escapeAttr(x.url)+"'>Open ↗</a></div></div>"
+  ).join("") || "<div class='empty'>No links added yet.</div>";
+}
+function addManagerLink(){
+  const id=document.getElementById("mSubject").value;
+  const type=document.getElementById("mType").value;
+  const title=document.getElementById("mTitle").value.trim();
+  const url=document.getElementById("mUrl").value.trim();
+  const meta=document.getElementById("mMeta").value.trim();
+  if(!title||!url){alert("Title and URL are required.");return;}
+  if(!/^https?:\/\//i.test(url)){alert("Please enter a valid http/https URL.");return;}
+  const r=managerDraft();
+  const item=r.find(x=>x.subjectId===id);
+  if(!item){alert("Subject not found.");return;}
+  item[type]=item[type]||[];
+  item[type].push({title,meta,url});
+  saveManagerDraft(r);
+  D.resources=r;
+  document.getElementById("mTitle").value="";
+  document.getElementById("mUrl").value="";
+  document.getElementById("mMeta").value="";
+  renderResources();renderManager();
+  alert("Link added to your local draft. Export resources.json and push it to GitHub to make it live for everyone.");
+}
+function exportResources(){
+  const data=JSON.stringify(managerDraft(),null,2);
+  const blob=new Blob([data],{type:"application/json"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="resources.json";a.click();URL.revokeObjectURL(a.href);
+}
+async function copyResources(){
+  const data=JSON.stringify(managerDraft(),null,2);
+  try{await navigator.clipboard.writeText(data);alert("resources.json copied.");}
+  catch(_){prompt("Copy resources.json:",data);}
+}
+function clearDraft(){
+  localStorage.removeItem("studyvaultResources");
+  location.reload();
+}
+
 function renderSubjects(){
  document.getElementById("subjectCount").textContent=D.subjects.length;
  document.getElementById("subjectGrid").innerHTML=D.subjects.map(s=>"<article class='card'><div class='iconbox'>"+s.icon+"</div><h3>"+esc(s.short)+"</h3><div class='desc'>"+esc(s.name)+"</div><div><span class='chip'>"+s.code+"</span><span class='chip'>"+s.type+"</span></div><p class='desc'>"+esc(s.description)+"</p><button class='btn primary' style='width:100%;margin-top:8px' onclick=\"openSubject('"+s.id+"')\">Open Notes →</button></article>").join("");
@@ -105,6 +233,13 @@ document.getElementById("search").addEventListener("input",e=>{
  document.querySelectorAll("#subjectGrid article").forEach(card=>card.classList.toggle("hidden",q&&!card.textContent.toLowerCase().includes(q)));
 });
 (async()=>{try{[D.settings,D.subjects,D.resources,D.timetable]=await Promise.all([getJSON("data/settings.json"),getJSON("data/subjects.json"),getJSON("data/resources.json"),getJSON("data/timetable.json")]);renderSubjects();renderImportant();renderResources();renderTT()}catch(e){document.getElementById("subjectGrid").innerHTML="<div class='empty'>Study data could not be loaded.</div>"}})();
+
+document.getElementById("goToManager").onclick=()=>{document.getElementById("mTitle").focus()};
+document.getElementById("addLink").onclick=addManagerLink;
+document.getElementById("exportJson").onclick=exportResources;
+document.getElementById("copyJson").onclick=copyResources;
+document.getElementById("clearDraft").onclick=clearDraft;
+document.getElementById("reloadLinks").onclick=()=>{renderManager();alert("Manager reloaded from the current draft.")};
 </script>
 </body>
 </html>
