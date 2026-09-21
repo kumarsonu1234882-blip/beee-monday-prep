@@ -76,3 +76,10 @@ This avoids exposing a GitHub Personal Access Token in the public website.
 - A status line shows when subjects are ready.
 - A Refresh Subjects button was added.
 - The selector falls back to a clear state instead of remaining blank.
+
+
+## v6 — Stable link manager
+- Subject selector is embedded directly in the HTML and no longer depends on async data.
+- Link Manager initializes immediately when the page loads.
+- Adding a link works from the browser even if online resource data is still loading.
+- Local links can be exported as `resources.json` and then published through Termux/GitHub.
