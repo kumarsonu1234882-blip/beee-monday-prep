@@ -1,0 +1,74 @@
+[
+  {
+    "id": "em1",
+    "code": "100102",
+    "short": "EM-I",
+    "name": "Engineering Mathematics - I",
+    "icon": "∑",
+    "type": "Theory",
+    "description": "Formula sheets, unit notes, numericals and previous-year questions."
+  },
+  {
+    "id": "ep",
+    "code": "100104",
+    "short": "EP",
+    "name": "Engineering Physics",
+    "icon": "⚛",
+    "type": "Theory",
+    "description": "Unit notes, experiments, PYQs and revision material."
+  },
+  {
+    "id": "iai",
+    "code": "100105",
+    "short": "IAI",
+    "name": "Introduction to AI",
+    "icon": "✦",
+    "type": "Theory",
+    "description": "AI concepts, notes, important questions and resources."
+  },
+  {
+    "id": "cfet",
+    "code": "100108",
+    "short": "CFET",
+    "name": "Computer Fundamentals & Emerging Technologies",
+    "icon": "▣",
+    "type": "Theory",
+    "description": "Computer fundamentals and emerging technologies notes."
+  },
+  {
+    "id": "uhv",
+    "code": "100109",
+    "short": "UHV",
+    "name": "Universal Human Values",
+    "icon": "◉",
+    "type": "Theory",
+    "description": "UHV notes, summaries and important questions."
+  },
+  {
+    "id": "eic",
+    "code": "100110",
+    "short": "EIC",
+    "name": "Essence of Indian Constitution",
+    "icon": "▤",
+    "type": "Theory",
+    "description": "Constitution topics, notes and important questions."
+  },
+  {
+    "id": "beee",
+    "code": "100111",
+    "short": "BEEE",
+    "name": "Basics of Electrical & Electronics Engineering",
+    "icon": "ϟ",
+    "type": "Theory",
+    "description": "Circuits, laws, network analysis, notes and PYQs."
+  },
+  {
+    "id": "pps-lab",
+    "code": "100112P",
+    "short": "PPS Lab",
+    "name": "Programming for Problem Solving Lab",
+    "icon": "⌘",
+    "type": "Lab",
+    "description": "Programs, practical manual, viva questions and experiments."
+  }
+]

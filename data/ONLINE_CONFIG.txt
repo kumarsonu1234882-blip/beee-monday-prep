@@ -1,0 +1,6 @@
+Put your Supabase publishable key into index.html:
+const SUPABASE_PUBLISHABLE_KEY='YOUR_SUPABASE_PUBLISHABLE_KEY';
+Project URL is already set to:
+https://bdzhjmvxankfqzbfwovi.supabase.co
+Function is already set to:
+https://bdzhjmvxankfqzbfwovi.supabase.co/functions/v1/swift-worker

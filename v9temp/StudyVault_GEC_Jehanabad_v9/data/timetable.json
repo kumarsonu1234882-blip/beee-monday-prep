@@ -1,0 +1,81 @@
+{
+  "effectiveFrom": "07/09/2026",
+  "branch": "Computer Science & Engineering (Cyber Security)",
+  "semester": "B.Tech 1st Semester (2026-30)",
+  "room": "127",
+  "groupA": "Roll No: 01-30",
+  "groupB": "Roll No: 31-Rest",
+  "days": [
+    "MON",
+    "TUE",
+    "WED",
+    "THU",
+    "FRI",
+    "SAT"
+  ],
+  "slots": [
+    "10:00-11:00 AM",
+    "11:00-12:00 PM",
+    "12:00-01:00 PM",
+    "01:00-02:00 PM",
+    "02:00-03:00 PM",
+    "03:00-04:00 PM",
+    "04:00-05:00 PM"
+  ],
+  "classes": {
+    "MON": [
+      "BEEE",
+      "IAI",
+      "CFET",
+      "LUNCH",
+      "LUNCH",
+      "Library/Sports",
+      "EIC"
+    ],
+    "TUE": [
+      "PPS Lab (A1)/EP Lab (A2)",
+      "EM-I",
+      "LUNCH",
+      "LUNCH",
+      "EP",
+      "Class Test",
+      "Library/Sports"
+    ],
+    "WED": [
+      "EP",
+      "BEEE Lab (A1)/Library (A2)",
+      "LUNCH",
+      "LUNCH",
+      "EM-I",
+      "BEEE",
+      "EIC"
+    ],
+    "THU": [
+      "PPS Lab (A2)/EP Lab (A1)",
+      "BEEE",
+      "LUNCH",
+      "LUNCH",
+      "EM-I",
+      "Class Test",
+      "EIC"
+    ],
+    "FRI": [
+      "IAI",
+      "CFET",
+      "UHV",
+      "LUNCH",
+      "Class Test",
+      "BEEE Lab (A2)/Library (A1)",
+      ""
+    ],
+    "SAT": [
+      "IAI",
+      "EP",
+      "UHV",
+      "LUNCH",
+      "CFET",
+      "Library/Sports",
+      ""
+    ]
+  }
+}
