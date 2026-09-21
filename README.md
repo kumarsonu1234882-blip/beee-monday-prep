@@ -68,3 +68,11 @@ This avoids exposing a GitHub Personal Access Token in the public website.
 - Manager initializes after online subject/resource data loads.
 - Local draft resources are normalized before use.
 - Add/Export/Copy/Clear buttons are re-bound in one initialization step.
+
+
+## v5 — Final subject selector fix
+- `initManager()` is explicitly called after online data loads.
+- Subject dropdown is populated automatically.
+- A status line shows when subjects are ready.
+- A Refresh Subjects button was added.
+- The selector falls back to a clear state instead of remaining blank.

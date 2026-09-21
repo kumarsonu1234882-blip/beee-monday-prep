@@ -72,13 +72,13 @@ code{background:#101f3c;padding:2px 5px;border-radius:5px}
   <div class="card">
     <div class="head">
       <div><h2>Manage Drive Links</h2><div class="muted">Select a subject, choose Notes/PYQ/Lab/etc., paste the Drive link, and tap Add Link. Then export the updated data for Termux.</div></div>
-      <button class="btn secondary" id="reloadLinks">Reload</button>
+      <button class="btn secondary" id="reloadLinks">Reload</button><button class="btn secondary" id="refreshSubjects">Refresh Subjects</button>
     </div>
 
     <div class="manager-grid">
       <div>
         <label>Subject</label>
-        <select id="mSubject" aria-label="Select subject"></select>
+        <select id="mSubject" aria-label="Select subject"><option value="">Loading subjects…</option></select><div id="subjectStatus" class="muted" style="margin-top:5px">Loading subject list…</div>
       </div>
       <div>
         <label>Resource type</label>
@@ -164,6 +164,8 @@ function initManager(){
   if(clear) clear.onclick=clearDraft;
   const reload=document.getElementById("reloadLinks");
   if(reload) reload.onclick=()=>{fillSubjectSelect();renderManager()};
+  const rs=document.getElementById("refreshSubjects");
+  if(rs) rs.onclick=()=>{fillSubjectSelect();alert("✅ Subject list refreshed.")};
   const go=document.getElementById("goToManager");
   if(go) go.onclick=()=>document.getElementById("mTitle").focus();
 }
@@ -182,15 +184,22 @@ function managerDraft(){
 function saveManagerDraft(x){localStorage.setItem("studyvaultResources",JSON.stringify(x))}
 function fillSubjectSelect(){
   const s=document.getElementById("mSubject");
+  const status=document.getElementById("subjectStatus");
   if(!s || !Array.isArray(D.subjects)) return;
   s.innerHTML="";
+  if(!D.subjects.length){
+    s.innerHTML="<option value=\"\">No subjects available</option>";
+    if(status) status.textContent="No subjects loaded.";
+    return;
+  }
   D.subjects.forEach(x=>{
     const o=document.createElement("option");
     o.value=x.id;
     o.textContent=x.short+" — "+x.name;
     s.appendChild(o);
   });
-  if(!s.value && s.options.length) s.selectedIndex=0;
+  s.selectedIndex=0;
+  if(status) status.textContent=D.subjects.length+" subjects ready. Select one.";
 }
 function addManagerLink(){
   const subject=document.getElementById("mSubject");
@@ -263,7 +272,27 @@ document.getElementById("search").addEventListener("input",e=>{
  const q=e.target.value.toLowerCase().trim();
  document.querySelectorAll("#subjectGrid article").forEach(card=>card.classList.toggle("hidden",q&&!card.textContent.toLowerCase().includes(q)));
 });
-(async()=>{try{[D.settings,D.subjects,D.resources,D.timetable]=await Promise.all([getJSON("data/settings.json"),getJSON("data/subjects.json"),getJSON("data/resources.json"),getJSON("data/timetable.json")]);renderSubjects();renderImportant();renderResources();renderTT()}catch(e){document.getElementById("subjectGrid").innerHTML="<div class='empty'>Study data could not be loaded. Refresh the page and check the online data files.</div>"; fillSubjectSelect();}})();
+(async()=>{try{
+  [D.settings,D.subjects,D.resources,D.timetable]=await Promise.all([
+    getJSON("data/settings.json"),
+    getJSON("data/subjects.json"),
+    getJSON("data/resources.json"),
+    getJSON("data/timetable.json")
+  ]);
+  const saved=localStorage.getItem("studyvaultResources");
+  if(saved){try{D.resources=JSON.parse(saved)}catch(_){}}
+  renderSubjects();
+  renderImportant();
+  renderResources();
+  renderTT();
+  initManager();
+  fillSubjectSelect();
+}catch(e){
+  console.error(e);
+  document.getElementById("subjectGrid").innerHTML="<div class='empty'>Study data could not be loaded. Refresh the page and check the online data files.</div>";
+  fillSubjectSelect();
+  initManager();
+}})();
 
 document.getElementById("goToManager").onclick=()=>{document.getElementById("mTitle").focus()};
 </script>
