@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#071224"><title>StudyVault • GEC Jehanabad</title>
+<meta name="theme-color" content="#071224"><meta name="studyvault-version" content="v11"><title>StudyVault • GEC Jehanabad</title>
 
 <style>
 :root{--bg:#071224;--panel:#0c1932;--line:#20385e;--text:#f5f8ff;--muted:#a8b7cf;--blue:#4c7dff;--cyan:#3bddff;--violet:#8c5cff;--green:#37e59e;--gold:#ffd06a}
@@ -64,4 +64,8 @@ function renderTT(){const t={days:['MON','TUE','WED','THU','FRI','SAT'],slots:['
 document.getElementById('search').addEventListener('input',e=>{const q=e.target.value.toLowerCase().trim();document.querySelectorAll('#subjectGrid .card').forEach(c=>c.classList.toggle('hidden',q&&!c.textContent.toLowerCase().includes(q)))})
 document.getElementById('adminOpen').onclick=openLogin;document.getElementById('unlock').onclick=unlock;document.getElementById('mAdd').onclick=upload;document.getElementById('mRefresh').onclick=fetchOnline;document.getElementById('mLock').onclick=lock;
 renderSubjects();renderResources();renderTT();fillSubject();fetchOnline();
+</script><script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js", {updateViaCache:"none"}).catch(()=>{}));
+}
 </script></body></html>

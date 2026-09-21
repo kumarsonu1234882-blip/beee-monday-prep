@@ -20,3 +20,8 @@ Do not put any secret/service-role key in the website.
 
 ## v10 — No publishable key in the website
 The browser no longer requires the Supabase publishable key. It reads and writes resources through the `swift-worker` Edge Function. This avoids the repeated “Publishable key is not configured” problem. Turn OFF `Verify JWT with legacy secret` for the function.
+
+
+## v11 — Cache fix
+This build includes a cache-resetting service worker and explicitly registers it with `updateViaCache: "none"`.
+The older "Publishable key is not configured in index.html yet." message is not present in this build.
