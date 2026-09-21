@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#071224"><meta name="studyvault-version" content="v13"><title>StudyVault • GEC Jehanabad</title>
+<meta name="theme-color" content="#071224"><meta name="studyvault-version" content="v14"><title>StudyVault • GEC Jehanabad</title>
 
 <style>
 :root{--bg:#071224;--panel:#0c1932;--line:#20385e;--text:#f5f8ff;--muted:#a8b7cf;--blue:#4c7dff;--cyan:#3bddff;--violet:#8c5cff;--green:#37e59e;--gold:#ffd06a}
@@ -19,6 +19,10 @@
 .resource-row{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .resource-row small{display:block}
 .delete-btn{border:1px solid #633544;background:#2b1320;color:#ff9fae;border-radius:10px;padding:7px 9px;cursor:pointer}
+.delete-btn:active{transform:scale(.96)}
+
+.pub-row{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.delete-btn{border:1px solid #6b3440;background:#2a1218;color:#ffb0bb;border-radius:10px;padding:7px 9px;font-size:14px}
 .delete-btn:active{transform:scale(.96)}
 </style></head>
 <body>
@@ -96,11 +100,51 @@ async function openSubject(id){
 function closeModal(){document.getElementById('resourceModal').classList.remove('show')}
 function openLogin(){document.getElementById('loginModal').classList.add('show');document.getElementById('uploadPw').focus()}
 function closeLogin(){document.getElementById('loginModal').classList.remove('show')}
-function renderPublished(rows){const b=document.getElementById('publishedList');b.innerHTML=rows.length?rows.map(r=>`<div class="list-item"><b>${esc(r.title)}</b><small>${esc(r.subject_id)} • ${esc(TYPE_LABELS[r.resource_type]||r.resource_type)}</small><div style="margin-top:5px"><a class="drive" target="_blank" href="${esc(r.url)}">Open ↗</a></div></div>`).join(''):'<div class="empty">No published links yet.</div>'}
+function renderPublished(rows){
+  const b=document.getElementById('publishedList');
+  b.innerHTML=rows.length
+    ? rows.map(r=>`<div class="list-item">
+        <div class="pub-row">
+          <div>
+            <b>${esc(r.title)}</b>
+            <small>${esc(r.subject_id)} • ${esc(TYPE_LABELS[r.resource_type]||r.resource_type)}</small>
+          </div>
+          <button class="delete-btn" data-id="${Number(r.id)}" title="Delete">🗑️</button>
+        </div>
+        <div style="margin-top:5px">
+          <a class="drive" target="_blank" href="${esc(r.url)}">Open ↗</a>
+        </div>
+      </div>`).join('')
+    : '<div class="empty">No published links yet.</div>';
+
+  b.querySelectorAll('.delete-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>deleteResource(Number(btn.dataset.id)));
+  });
+}
 async function fetchOnline(){try{const r=await fetch(FUNCTION_URL,{method:'GET',cache:'no-store'});const d=await r.json().catch(()=>({}));if(!r.ok){setState('onlineState',d.error||'Online read error','error');return}D.onlineRows=d.rows||[];D.resources=normalizeOnline(D.onlineRows);renderResources();renderPublished(D.onlineRows);setState('onlineState',unlockedSession?'UPLOAD MODE':'ONLINE','online')}catch(e){setState('onlineState','Offline / backend unavailable','warn')}}
 function fillSubject(){document.getElementById('mSubject').innerHTML=SUBJECTS.map(s=>`<option value="${s.id}">${esc(s.short+' — '+s.name)}</option>`).join('')}
 async function unlock(){const pw=document.getElementById('uploadPw').value.trim();if(!pw){document.getElementById('loginMsg').textContent='Enter the password.';return}try{const r=await fetch(FUNCTION_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'check',password:pw})});const d=await r.json().catch(()=>({}));if(!r.ok){document.getElementById('loginMsg').textContent='❌ '+(d.error||'Wrong password.');return}unlockedSession=pw;document.getElementById('managerHint').classList.add('hidden');document.getElementById('managerPanel').classList.remove('hidden');closeLogin();fillSubject();setState('onlineState','UPLOAD MODE','online');}catch(e){document.getElementById('loginMsg').textContent='❌ Backend unavailable.'}}
 async function upload(){if(!unlockedSession){openLogin();return}const subject_id=document.getElementById('mSubject').value,resource_type=document.getElementById('mType').value,title=document.getElementById('mTitle').value.trim(),url=document.getElementById('mUrl').value.trim(),meta=document.getElementById('mMeta').value.trim();if(!title||!url){alert('Title and URL are required.');return}try{const r=await fetch(FUNCTION_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'add',password:unlockedSession,subject_id,resource_type,title,url,meta})});const d=await r.json().catch(()=>({}));if(!r.ok){alert(d.error||'Upload failed.');return}document.getElementById('mTitle').value='';document.getElementById('mUrl').value='';document.getElementById('mMeta').value='';await fetchOnline();alert('✅ Link published online. Open another phone to verify it.')}catch(e){alert('Backend unavailable.')}}
+async function deleteResource(id){
+  if(!unlockedSession){openLogin();return}
+  if(!confirm('Delete this resource permanently?')) return;
+  try{
+    const r=await fetch(FUNCTION_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({action:'delete',password:unlockedSession,id})
+    });
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok){
+      alert(d.error||'Delete failed.');
+      return;
+    }
+    await fetchOnline();
+    alert('✅ Resource deleted.');
+  }catch(e){
+    alert('Backend unavailable.');
+  }
+}
 function lock(){unlockedSession='';document.getElementById('managerPanel').classList.add('hidden');document.getElementById('managerHint').classList.remove('hidden');setState('onlineState','LOCKED','warn')}
 function renderTT(){const t={days:['MON','TUE','WED','THU','FRI','SAT'],slots:['10:00-11:00','11:00-12:00','12:00-01:00','01:00-02:00','02:00-03:00','03:00-04:00','04:00-05:00'],classes:{MON:['BEEE','IAI','CFET','LUNCH','LUNCH','Library/Sports','EIC'],TUE:['PPS Lab (A1)/EP Lab (A2)','EM-I','LUNCH','LUNCH','EP','Class Test','Library/Sports'],WED:['EP','BEEE Lab (A1)/Library (A2)','LUNCH','LUNCH','EM-I','BEEE','EIC'],THU:['PPS Lab (A2)/EP Lab (A1)','BEEE','LUNCH','LUNCH','EM-I','Class Test','EIC'],FRI:['IAI','CFET','UHV','LUNCH','Class Test','BEEE Lab (A2)/Library (A1)',''],SAT:['IAI','EP','UHV','LUNCH','CFET','Library/Sports','']}};let h='<thead><tr><th>Day</th>'+t.slots.map(x=>'<th>'+x+'</th>').join('')+'</tr></thead><tbody>';t.days.forEach(d=>{h+='<tr><th>'+d+'</th>';t.classes[d].forEach(c=>{let cls=c.includes('Class Test')?'test':c.includes('Lab')?'lab':'';h+='<td class="'+cls+'">'+esc(c)+'</td>'});h+='</tr>'});document.getElementById('tt').innerHTML=h+'</tbody>'}
 document.getElementById('search').addEventListener('input',e=>{const q=e.target.value.toLowerCase().trim();document.querySelectorAll('#subjectGrid .card').forEach(c=>c.classList.toggle('hidden',q&&!c.textContent.toLowerCase().includes(q)))})

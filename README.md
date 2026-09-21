@@ -38,3 +38,9 @@ The older "Publishable key is not configured in index.html yet." message is not 
 - Admin can delete a published note/resource from the online list using the 🗑️ button.
 - Deletion requires the same upload password.
 - The Edge Function accepts `action: "delete"` and deletes by resource id.
+
+
+## v14 — Delete fully wired
+The admin Published Links list now shows a 🗑️ button. The same upload password authorizes deletion, and the `swift-worker` Edge Function handles `action: "delete"` against the `resources` table.
+
+The updated function code is also included as `SWIFT_WORKER_DELETE_CODE.txt` for easy copying into the Supabase Dashboard.
