@@ -83,3 +83,14 @@ This avoids exposing a GitHub Personal Access Token in the public website.
 - Link Manager initializes immediately when the page loads.
 - Adding a link works from the browser even if online resource data is still loading.
 - Local links can be exported as `resources.json` and then published through Termux/GitHub.
+
+
+## v7 — Real online storage
+Browser-local drafts are no longer the source of truth. v7 adds Supabase-backed resources, authentication and RLS so published Drive links are shared across devices.
+
+
+## v8 — Single-password online upload
+- One password unlocks the uploader.
+- Password verification and database writes happen server-side in a Supabase Edge Function.
+- Public users can read resources but cannot write to the database.
+- The service role key remains server-side only.

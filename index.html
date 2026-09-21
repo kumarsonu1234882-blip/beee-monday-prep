@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#081226"><title>StudyVault • GEC Jehanabad</title>
+<meta name="theme-color" content="#081226"><title>StudyVault • GEC Jehanabad</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{--bg:#071224;--panel:#0c1932;--panel2:#10213e;--line:#20385e;--text:#f5f8ff;--muted:#9fb0ca;--blue:#4c7dff;--cyan:#39ddff;--violet:#8d5cff;--green:#38e59d}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:radial-gradient(circle at 10% 0,#152d5d 0,#071224 36%,#050a14 100%);color:var(--text)}
@@ -37,6 +37,17 @@ a{color:inherit;text-decoration:none}.wrap{max-width:1280px;margin:auto;padding:
 .align-end{display:flex;align-items:end}.manager-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:13px}
 code{background:#101f3c;padding:2px 5px;border-radius:5px}
 @media(max-width:700px){.manager-grid{grid-template-columns:1fr}.manager-grid .full{grid-column:auto}}
+
+.manager-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.manager-grid .full{grid-column:1/-1}.manager-grid label{display:block;color:#aab8cf;font-size:12px;font-weight:800;margin-bottom:6px}
+.manager-grid input,.manager-grid select{width:100%;padding:11px 12px;border:1px solid #2a4772;border-radius:11px;background:#091630;color:#fff;outline:none}
+.manager-grid input:focus,.manager-grid select:focus{border-color:#55dfff;box-shadow:0 0 0 4px #55dfff12}
+.align-end{display:flex;align-items:end}.manager-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:13px}
+.modal{position:fixed;inset:0;background:#0009;display:none;align-items:center;justify-content:center;padding:18px;z-index:100}
+.modal.show{display:flex}.modal-box{width:min(480px,100%);background:#0b1932;border:1px solid #2a4a78;border-radius:17px;padding:18px}
+.modal-box input{width:100%;padding:11px 12px;margin-top:9px;border:1px solid #2a4772;border-radius:11px;background:#091630;color:#fff}
+.modal-close{float:right;border:0;background:#162849;color:#fff;border-radius:8px;padding:7px 10px}
+@media(max-width:700px){.manager-grid{grid-template-columns:1fr}.manager-grid .full{grid-column:auto}}
 </style>
 </head>
 <body>
@@ -60,6 +71,38 @@ code{background:#101f3c;padding:2px 5px;border-radius:5px}
 <div class="head"><div><h2>Subjects • 1st Semester (2026–30)</h2><div class="muted">Based on the uploaded college timetable.</div></div></div>
 <div class="sidebar-layout"><div class="grid" id="subjectGrid"></div>
 <aside class="card"><div class="iconbox">🏛️</div><h3>Government Engineering College, Jehanabad</h3><div class="desc">Walipur, Hulasganj, Jehanabad-804407</div><div class="actions" style="margin-top:12px"><a class="btn secondary" href="https://www.gecjehanabad.ac.in" target="_blank">Website</a><button class="btn secondary" onclick="document.getElementById('timetable').scrollIntoView({behavior:'smooth'})">Timetable</button></div><div style="margin-top:15px"><h3>Important Links</h3><div class="list" id="important"></div></div></aside></div>
+</section>
+
+
+<section id="onlineManager" class="section">
+  <div class="card" style="border-color:#315c9b;background:linear-gradient(135deg,#0d2144,#11285a)">
+    <div class="head">
+      <div><h2>☁️ Online Link Manager</h2><div class="muted">Publish links online so every phone sees the same notes.</div></div>
+      <span id="onlineStatus" class="chip">Not connected</span>
+    </div>
+    <div id="adminPanel" class="hidden">
+      <div class="manager-grid">
+        <div><label>Subject</label><select id="sSubject"></select></div>
+        <div><label>Resource type</label><select id="sType">
+          <option value="notes">Notes</option><option value="pyq">PYQs</option><option value="lab">Lab Manuals</option>
+          <option value="assignments">Assignments</option><option value="ebooks">E-Books</option><option value="important">Important Questions</option><option value="other">Other</option>
+        </select></div>
+        <div class="full"><label>Title</label><input id="sTitle" placeholder="e.g. BEEE Unit 1 Notes"></div>
+        <div class="full"><label>Google Drive / Web URL</label><input id="sUrl" placeholder="https://drive.google.com/..."></div>
+        <div><label>Meta (optional)</label><input id="sMeta" placeholder="PDF • 12 MB"></div>
+        <div class="align-end"><button class="btn primary" id="sAdd">Add Online Link</button></div>
+      </div>
+      <div class="manager-actions">
+        <button class="btn secondary" id="sRefresh">Refresh Online Links</button>
+        <button class="btn secondary" id="sLogout">Logout</button>
+      </div>
+      <h3 style="margin-top:15px">Current online links</h3>
+      <div id="sList" class="list"></div>
+    </div>
+    <div id="adminHint" class="sticky-note" style="margin-top:10px">
+      Tap 🔐 Admin, enter the upload password, and then publish a Drive link. The password is checked by the online backend.
+    </div>
+  </div>
 </section>
 
 <section id="resources" class="section">
@@ -130,6 +173,24 @@ code{background:#101f3c;padding:2px 5px;border-radius:5px}
 
 <footer class="footer"><div class="footerrow"><div><b style="color:#dce7ff">StudyVault</b><br>Made for GEC Jehanabad students</div><div>Creator: <a href="https://www.instagram.com/thesonukumar80/" target="_blank">@thesonukumar80</a></div><div>Keep Learning 🚀</div></div></footer>
 </main>
+
+
+
+</div>
+
+
+<div id="uploadGate" class="modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeUploadGate()">✕</button>
+    <h2>🔐 Upload Access</h2>
+    <p class="muted">Enter the admin upload password. The password is checked on the server.</p>
+    <input id="uploadPassword" class="search" type="password" placeholder="Upload password" autocomplete="off">
+    <div class="actions" style="margin-top:12px">
+      <button class="btn primary" id="unlockUpload">Unlock</button>
+    </div>
+    <div id="gateMsg" class="muted" style="margin-top:9px"></div>
+  </div>
+</div>
 
 <div id="modal" class="modal" onclick="if(event.target===this)this.classList.remove('show')"><div class="modal-box"><button class="modal-close" onclick="document.getElementById('modal').classList.remove('show')">✕</button><h2 id="modalTitle"></h2><div id="modalBody" class="desc"></div></div></div>
 
@@ -270,6 +331,101 @@ document.getElementById("search").addEventListener("input",e=>{
  const q=e.target.value.toLowerCase().trim();
  document.querySelectorAll("#subjectGrid article").forEach(card=>card.classList.toggle("hidden",q&&!card.textContent.toLowerCase().includes(q)));
 });
+
+
+const SUPABASE_URL="YOUR_SUPABASE_URL";
+const SUPABASE_PUBLISHABLE_KEY="YOUR_SUPABASE_PUBLISHABLE_KEY";
+const SUPABASE_FUNCTION_URL=SUPABASE_URL+"/functions/v1/add-resource";
+let sb=null;
+let uploadPasswordSession="";
+
+function configured(){return SUPABASE_URL.startsWith("https://") && SUPABASE_PUBLISHABLE_KEY!=="YOUR_SUPABASE_PUBLISHABLE_KEY";}
+function openUploadGate(){
+  if(uploadPasswordSession){showUploadPanel();return}
+  document.getElementById("uploadGate").classList.add("show");
+  setTimeout(()=>document.getElementById("uploadPassword")?.focus(),80);
+}
+function closeUploadGate(){document.getElementById("uploadGate").classList.remove("show")}
+function setOnlineStatus(text,good=false){
+  const e=document.getElementById("onlineStatus");if(!e)return;
+  e.textContent=text;e.style.color=good?"#67f0b5":"#ffd477";
+}
+function fillOnlineSubjects(){
+  const s=document.getElementById("sSubject");if(!s)return;
+  s.innerHTML=D.subjects.map(x=>`<option value="${x.id}">${escapeHtml(x.short+" — "+x.name)}</option>`).join("");
+}
+function showUploadPanel(){
+  document.getElementById("adminPanel")?.classList.remove("hidden");
+  document.getElementById("adminHint")?.classList.add("hidden");
+  fillOnlineSubjects();
+  document.getElementById("onlineManager")?.scrollIntoView({behavior:"smooth"});
+  setOnlineStatus("UPLOAD MODE",true);
+}
+function hideUploadPanel(){
+  document.getElementById("adminPanel")?.classList.add("hidden");
+  document.getElementById("adminHint")?.classList.remove("hidden");
+  setOnlineStatus(sb?"ONLINE":"Setup needed",!!sb);
+}
+async function loadOnline(){
+  if(!sb)return;
+  const {data,error}=await sb.from("resources").select("*").order("created_at",{ascending:false});
+  if(error){setOnlineStatus("Online read error");console.warn(error);return}
+  const bySubject={};
+  for(const r of data){
+    bySubject[r.subject_id]??={notes:[],pyq:[],lab:[],assignments:[],ebooks:[],important:[],other:[]};
+    if(r.resource_type in bySubject[r.subject_id]){
+      bySubject[r.subject_id][r.resource_type].push({title:r.title,meta:r.meta,url:r.url});
+    }
+  }
+  D.resources=D.subjects.map(s=>({subjectId:s.id,notes:[],pyq:[],lab:[],assignments:[],ebooks:[],important:[],other:[],...(bySubject[s.id]||{})}));
+  renderResources();renderOnlineList(data);setOnlineStatus(uploadPasswordSession?"UPLOAD MODE":"ONLINE",true);
+}
+function renderOnlineList(rows){
+  const b=document.getElementById("sList");if(!b)return;
+  b.innerHTML=rows.length?rows.map(r=>`<div class="list-item"><b>${escapeHtml(r.title)}</b><small>${escapeHtml(r.subject_id)} • ${escapeHtml(r.resource_type)}${r.meta?" • "+escapeHtml(r.meta):""}</small><div style="margin-top:6px"><a class="drive" target="_blank" href="${escapeAttr(r.url)}">Open ↗</a></div></div>`).join(""):"<div class='empty'>No online links yet.</div>";
+}
+async function unlockUpload(){
+  if(!configured()){document.getElementById("gateMsg").textContent="Set Supabase URL and publishable key first.";return}
+  const pw=document.getElementById("uploadPassword").value;
+  if(!pw){document.getElementById("gateMsg").textContent="Enter the password.";return}
+  // Lightweight validation happens by calling a protected endpoint.
+  const res=await fetch(SUPABASE_FUNCTION_URL,{
+    method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({action:"check",password:pw})
+  });
+  if(!res.ok){document.getElementById("gateMsg").textContent="❌ Wrong password.";return}
+  uploadPasswordSession=pw;
+  document.getElementById("uploadPassword").value="";
+  document.getElementById("gateMsg").textContent="";
+  closeUploadGate();showUploadPanel();
+}
+async function addOnline(){
+  if(!configured()){alert("Online backend is not configured yet.");return}
+  if(!uploadPasswordSession){openUploadGate();return}
+  const subject_id=document.getElementById("sSubject").value;
+  const resource_type=document.getElementById("sType").value;
+  const title=document.getElementById("sTitle").value.trim();
+  const url=document.getElementById("sUrl").value.trim();
+  const meta=document.getElementById("sMeta").value.trim();
+  if(!title||!url){alert("Title and URL are required.");return}
+  if(!/^https?:\/\//i.test(url)){alert("Use a valid https:// URL.");return}
+  const res=await fetch(SUPABASE_FUNCTION_URL,{
+    method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({action:"add",password:uploadPasswordSession,subject_id,resource_type,title,url,meta})
+  });
+  const data=await res.json().catch(()=>({}));
+  if(!res.ok){alert(data.error||"Upload failed.");if(res.status===401){uploadPasswordSession="";hideUploadPanel()}return}
+  document.getElementById("sTitle").value="";
+  document.getElementById("sUrl").value="";
+  document.getElementById("sMeta").value="";
+  await loadOnline();
+  alert("✅ Link uploaded online. It is now available to other phones.");
+}
+async function initOnline(){
+  if(!configured()){setOnlineStatus("Setup needed");return}
+  sb=supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+  await loadOnline();
+}
 (async()=>{
   // Manager is usable immediately even if online data loading is slow.
   initManagerStable();
@@ -289,6 +445,16 @@ document.getElementById("search").addEventListener("input",e=>{
   }
 })();
 
+
+document.getElementById("sAdd").onclick=addOnline;
+document.getElementById("sRefresh").onclick=loadOnline;
+window.addEventListener("load",initOnline);
+
+document.getElementById("adminOpen").onclick=openUploadGate;
+document.getElementById("unlockUpload").onclick=unlockUpload;
+document.getElementById("sAdd").onclick=addOnline;
+document.getElementById("sRefresh").onclick=loadOnline;
+window.addEventListener("load",initOnline);
 </script>
 </body>
 </html>

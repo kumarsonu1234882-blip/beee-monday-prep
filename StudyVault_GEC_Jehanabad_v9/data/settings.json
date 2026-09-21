@@ -1,0 +1,12 @@
+{
+  "appName": "StudyVault",
+  "tagline": "Your Notes, Our Mission",
+  "creator": "@thesonukumar80",
+  "creatorUrl": "https://www.instagram.com/thesonukumar80/",
+  "college": "Government Engineering College, Jehanabad",
+  "collegeAddress": "Walipur, Hulasganj, Jehanabad-804407",
+  "collegeWebsite": "https://www.gecjehanabad.ac.in",
+  "branch": "Computer Science & Engineering (Cyber Security)",
+  "semester": "B.Tech 1st Semester (2026-30)",
+  "driveNote": "Add your Google Drive URLs in data/resources.json."
+}
