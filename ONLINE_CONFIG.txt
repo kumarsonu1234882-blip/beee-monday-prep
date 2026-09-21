@@ -1,0 +1,4 @@
+StudyVault v10 no longer needs a Supabase Publishable Key in index.html.
+The public website talks only to the swift-worker Edge Function.
+Edge Function secrets: UPLOAD_PASSWORD and Supabase default secret key via SUPABASE_SECRET_KEYS.
+Important: turn OFF Verify JWT for swift-worker so the function can receive its own password POST/GET requests.

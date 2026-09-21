@@ -1,0 +1,70 @@
+import { createClient } from "jsr:@supabase/supabase-js@2";
+
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "content-type",
+  "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+  "Content-Type": "application/json",
+};
+
+function json(body: unknown, status = 200) {
+  return new Response(JSON.stringify(body), { status, headers: corsHeaders });
+}
+
+function getAdminClient() {
+  const url = Deno.env.get("SUPABASE_URL") ?? "";
+  const raw = Deno.env.get("SUPABASE_SECRET_KEYS") ?? "{}";
+  const keys = JSON.parse(raw);
+  const key = keys.default ?? "";
+  if (!url || !key) throw new Error("Server secrets are not configured.");
+  return createClient(url, key);
+}
+
+Deno.serve(async (req) => {
+  if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
+
+  try {
+    const db = getAdminClient();
+
+    if (req.method === "GET") {
+      const { data, error } = await db
+        .from("resources")
+        .select("id,subject_id,resource_type,title,url,meta,created_at")
+        .order("created_at", { ascending: false });
+      if (error) return json({ error: error.message }, 500);
+      return json({ rows: data ?? [] });
+    }
+
+    if (req.method !== "POST") return json({ error: "GET or POST only" }, 405);
+
+    const body = await req.json();
+    const password = Deno.env.get("UPLOAD_PASSWORD") ?? "";
+
+    if (!password || body.password !== password) {
+      return json({ error: "Wrong password." }, 401);
+    }
+
+    if (body.action === "check") return json({ ok: true });
+    if (body.action !== "add") return json({ error: "Invalid action." }, 400);
+
+    const allowed = new Set(["notes", "pyq", "lab", "assignments", "ebooks", "important", "other"]);
+    if (!body.subject_id || !body.resource_type || !body.title || !body.url) {
+      return json({ error: "Missing required fields." }, 400);
+    }
+    if (!allowed.has(body.resource_type)) return json({ error: "Invalid resource type." }, 400);
+    if (!/^https?:\/\//i.test(body.url)) return json({ error: "Invalid URL." }, 400);
+
+    const { error } = await db.from("resources").insert({
+      subject_id: String(body.subject_id),
+      resource_type: String(body.resource_type),
+      title: String(body.title).slice(0, 200),
+      url: String(body.url).slice(0, 2000),
+      meta: String(body.meta ?? "").slice(0, 200),
+    });
+
+    if (error) return json({ error: error.message }, 500);
+    return json({ ok: true });
+  } catch (e) {
+    return json({ error: "Server error." }, 500);
+  }
+});

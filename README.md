@@ -16,3 +16,7 @@ Set your Supabase publishable key in `index.html`:
 `const SUPABASE_PUBLISHABLE_KEY='YOUR_SUPABASE_PUBLISHABLE_KEY';`
 
 Do not put any secret/service-role key in the website.
+
+
+## v10 — No publishable key in the website
+The browser no longer requires the Supabase publishable key. It reads and writes resources through the `swift-worker` Edge Function. This avoids the repeated “Publishable key is not configured” problem. Turn OFF `Verify JWT with legacy secret` for the function.
