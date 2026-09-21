@@ -1,9 +1,9 @@
 {
-  "name": "BEEE Monday Test Preparation",
-  "short_name": "BEEE Prep",
+  "name": "StudyVault \u2022 GEC Jehanabad",
+  "short_name": "StudyVault",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#050b18",
-  "theme_color": "#071b45",
+  "theme_color": "#081226",
+  "background_color": "#071224",
   "icons": []
 }

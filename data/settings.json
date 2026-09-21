@@ -1,15 +1,12 @@
 {
-  "appName": "BEEE Monday Test Preparation",
-  "semester": "B.Tech 1st Semester",
-  "subject": "Basic Electrical & Electronics Engineering",
-  "testDay": "Monday",
-  "mockQuestions": 30,
-  "mockMinutes": 20,
-  "updatedNote": "v5 adds animated UI and expanded question bank based on the uploaded BEEE class notes.",
-  "questionBankGoal": 1000,
-  "questionBankVersion": "v8",
-  "topLevelTopics": 6,
-  "layout": "dashboard-reference",
-  "creator": "thesonukumar80",
-  "creatorPlatform": "Instagram"
+  "appName": "StudyVault",
+  "tagline": "Your Notes, Our Mission",
+  "creator": "@thesonukumar80",
+  "creatorUrl": "https://www.instagram.com/thesonukumar80/",
+  "college": "Government Engineering College, Jehanabad",
+  "collegeAddress": "Walipur, Hulasganj, Jehanabad-804407",
+  "collegeWebsite": "https://www.gecjehanabad.ac.in",
+  "branch": "Computer Science & Engineering (Cyber Security)",
+  "semester": "B.Tech 1st Semester (2026-30)",
+  "driveNote": "Add your Google Drive URLs in data/resources.json."
 }
