@@ -78,7 +78,7 @@ code{background:#101f3c;padding:2px 5px;border-radius:5px}
     <div class="manager-grid">
       <div>
         <label>Subject</label>
-        <select id="mSubject"></select>
+        <select id="mSubject" aria-label="Select subject"></select>
       </div>
       <div>
         <label>Resource type</label>
@@ -150,68 +150,99 @@ function openSubject(id){
  openModal(s.name+" • "+s.code,out);
 }
 
+
+function initManager(){
+  fillSubjectSelect();
+  renderManager();
+  const add=document.getElementById("addLink");
+  if(add) add.onclick=addManagerLink;
+  const exp=document.getElementById("exportJson");
+  if(exp) exp.onclick=exportResources;
+  const copy=document.getElementById("copyJson");
+  if(copy) copy.onclick=copyResources;
+  const clear=document.getElementById("clearDraft");
+  if(clear) clear.onclick=clearDraft;
+  const reload=document.getElementById("reloadLinks");
+  if(reload) reload.onclick=()=>{fillSubjectSelect();renderManager()};
+  const go=document.getElementById("goToManager");
+  if(go) go.onclick=()=>document.getElementById("mTitle").focus();
+}
+function ensureResourceShape(x){
+  const keys=["notes","pyq","lab","assignments","ebooks","important","other"];
+  keys.forEach(k=>{if(!Array.isArray(x[k]))x[k]=[]});
+  return x;
+}
 function managerDraft(){
   try{
-    const x=JSON.parse(localStorage.getItem("studyvaultResources")||"null");
-    return Array.isArray(x)?x:JSON.parse(JSON.stringify(D.resources));
-  }catch(_){return JSON.parse(JSON.stringify(D.resources))}
+    const saved=JSON.parse(localStorage.getItem("studyvaultResources")||"null");
+    if(Array.isArray(saved)) return saved.map(ensureResourceShape);
+  }catch(_){}
+  return (D.resources||[]).map(x=>ensureResourceShape({...x}));
 }
 function saveManagerDraft(x){localStorage.setItem("studyvaultResources",JSON.stringify(x))}
 function fillSubjectSelect(){
   const s=document.getElementById("mSubject");
-  if(!s)return;
-  s.innerHTML=D.subjects.map(x=>"<option value='"+x.id+"'>"+escapeHtml(x.short+" — "+x.name)+"</option>").join("");
-}
-function flattenManagerResources(){
-  const r=managerDraft(), rows=[];
-  r.forEach(x=>["notes","pyq","lab","assignments","ebooks","important","other"].forEach(k=>(x[k]||[]).forEach(v=>{
-    rows.push({subjectId:x.subjectId,type:k,title:v.title||"",meta:v.meta||"",url:v.url||""});
-  })));
-  return rows;
-}
-function renderManager(){
-  const box=document.getElementById("managerList"); if(!box)return;
-  const rows=flattenManagerResources();
-  box.innerHTML=rows.map((x,i)=>
-    "<div class='list-item'><div style='display:flex;justify-content:space-between;gap:10px'><b>"+escapeHtml(x.title)+"</b><span class='chip'>"+escapeHtml(x.type)+"</span></div><small>"+escapeHtml(x.subjectId)+" • "+escapeHtml(x.meta)+"</small><div style='margin-top:6px'><a class='drive' target='_blank' href='"+escapeAttr(x.url)+"'>Open ↗</a></div></div>"
-  ).join("") || "<div class='empty'>No links added yet.</div>";
+  if(!s || !Array.isArray(D.subjects)) return;
+  s.innerHTML="";
+  D.subjects.forEach(x=>{
+    const o=document.createElement("option");
+    o.value=x.id;
+    o.textContent=x.short+" — "+x.name;
+    s.appendChild(o);
+  });
+  if(!s.value && s.options.length) s.selectedIndex=0;
 }
 function addManagerLink(){
-  const id=document.getElementById("mSubject").value;
-  const type=document.getElementById("mType").value;
-  const title=document.getElementById("mTitle").value.trim();
-  const url=document.getElementById("mUrl").value.trim();
-  const meta=document.getElementById("mMeta").value.trim();
-  if(!title||!url){alert("Title and URL are required.");return;}
-  if(!/^https?:\/\//i.test(url)){alert("Please enter a valid http/https URL.");return;}
-  const r=managerDraft();
-  const item=r.find(x=>x.subjectId===id);
-  if(!item){alert("Subject not found.");return;}
-  item[type]=item[type]||[];
-  item[type].push({title,meta,url});
-  saveManagerDraft(r);
-  D.resources=r;
-  document.getElementById("mTitle").value="";
-  document.getElementById("mUrl").value="";
-  document.getElementById("mMeta").value="";
+  const subject=document.getElementById("mSubject");
+  const type=document.getElementById("mType");
+  const title=document.getElementById("mTitle");
+  const url=document.getElementById("mUrl");
+  const meta=document.getElementById("mMeta");
+  if(!subject || !type || !title || !url || !meta){
+    alert("Link manager is not initialized. Please refresh the page.");
+    return;
+  }
+  const titleVal=title.value.trim(), urlVal=url.value.trim();
+  if(!subject.value){alert("Please select a subject.");return}
+  if(!titleVal || !urlVal){alert("Title and Google Drive URL are required.");return}
+  if(!/^https?:\/\//i.test(urlVal)){alert("Please paste a valid https:// Drive link.");return}
+  const data=managerDraft();
+  let item=data.find(x=>x.subjectId===subject.value);
+  if(!item){item=ensureResourceShape({subjectId:subject.value});data.push(item)}
+  item[type.value].push({title:titleVal,meta:meta.value.trim(),url:urlVal});
+  saveManagerDraft(data);
+  D.resources=data;
+  title.value="";url.value="";meta.value="";
   renderResources();renderManager();
-  alert("Link added to your local draft. Export resources.json and push it to GitHub to make it live for everyone.");
+  alert("✅ Link added. Download resources.json and push it to GitHub to publish.");
+}
+function renderManager(){
+  const box=document.getElementById("managerList");if(!box)return;
+  const rows=[];
+  managerDraft().forEach(r=>{
+    ["notes","pyq","lab","assignments","ebooks","important","other"].forEach(k=>(r[k]||[]).forEach(v=>{
+      rows.push({subjectId:r.subjectId,type:k,title:v.title||"",meta:v.meta||"",url:v.url||""});
+    }))
+  });
+  box.innerHTML=rows.map(x=>"<div class='list-item'><div style='display:flex;justify-content:space-between;gap:10px'><b>"+escapeHtml(x.title)+"</b><span class='chip'>"+escapeHtml(x.type)+"</span></div><small>"+escapeHtml(x.subjectId)+" • "+escapeHtml(x.meta)+"</small><div style='margin-top:6px'><a class='drive' target='_blank' href='"+escapeAttr(x.url)+"'>Open ↗</a></div></div>").join("")||"<div class='empty'>No links added yet.</div>";
 }
 function exportResources(){
   const data=JSON.stringify(managerDraft(),null,2);
   const blob=new Blob([data],{type:"application/json"});
-  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="resources.json";a.click();URL.revokeObjectURL(a.href);
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);a.download="resources.json";a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
 }
 async function copyResources(){
   const data=JSON.stringify(managerDraft(),null,2);
-  try{await navigator.clipboard.writeText(data);alert("resources.json copied.");}
-  catch(_){prompt("Copy resources.json:",data);}
+  try{await navigator.clipboard.writeText(data);alert("✅ resources.json copied.")}catch(_){prompt("Copy resources.json:",data)}
 }
 function clearDraft(){
-  localStorage.removeItem("studyvaultResources");
-  location.reload();
+  if(confirm("Clear local draft links?")){
+    localStorage.removeItem("studyvaultResources");
+    location.reload();
+  }
 }
-
 function renderSubjects(){
  document.getElementById("subjectCount").textContent=D.subjects.length;
  document.getElementById("subjectGrid").innerHTML=D.subjects.map(s=>"<article class='card'><div class='iconbox'>"+s.icon+"</div><h3>"+esc(s.short)+"</h3><div class='desc'>"+esc(s.name)+"</div><div><span class='chip'>"+s.code+"</span><span class='chip'>"+s.type+"</span></div><p class='desc'>"+esc(s.description)+"</p><button class='btn primary' style='width:100%;margin-top:8px' onclick=\"openSubject('"+s.id+"')\">Open Notes →</button></article>").join("");
@@ -232,14 +263,9 @@ document.getElementById("search").addEventListener("input",e=>{
  const q=e.target.value.toLowerCase().trim();
  document.querySelectorAll("#subjectGrid article").forEach(card=>card.classList.toggle("hidden",q&&!card.textContent.toLowerCase().includes(q)));
 });
-(async()=>{try{[D.settings,D.subjects,D.resources,D.timetable]=await Promise.all([getJSON("data/settings.json"),getJSON("data/subjects.json"),getJSON("data/resources.json"),getJSON("data/timetable.json")]);renderSubjects();renderImportant();renderResources();renderTT()}catch(e){document.getElementById("subjectGrid").innerHTML="<div class='empty'>Study data could not be loaded.</div>"}})();
+(async()=>{try{[D.settings,D.subjects,D.resources,D.timetable]=await Promise.all([getJSON("data/settings.json"),getJSON("data/subjects.json"),getJSON("data/resources.json"),getJSON("data/timetable.json")]);renderSubjects();renderImportant();renderResources();renderTT()}catch(e){document.getElementById("subjectGrid").innerHTML="<div class='empty'>Study data could not be loaded. Refresh the page and check the online data files.</div>"; fillSubjectSelect();}})();
 
 document.getElementById("goToManager").onclick=()=>{document.getElementById("mTitle").focus()};
-document.getElementById("addLink").onclick=addManagerLink;
-document.getElementById("exportJson").onclick=exportResources;
-document.getElementById("copyJson").onclick=copyResources;
-document.getElementById("clearDraft").onclick=clearDraft;
-document.getElementById("reloadLinks").onclick=()=>{renderManager();alert("Manager reloaded from the current draft.")};
 </script>
 </body>
 </html>

@@ -62,3 +62,9 @@ This avoids exposing a GitHub Personal Access Token in the public website.
 - `🔗 Manage Links` is visible in the hero and mobile navigation.
 - A large Manage Links section is available for adding Drive URLs.
 - Add Link, Download `resources.json`, Copy JSON, and Clear Draft controls remain available.
+
+## v4 — Link manager subject dropdown fix
+- Subject dropdown is populated explicitly from `data/subjects.json`.
+- Manager initializes after online subject/resource data loads.
+- Local draft resources are normalized before use.
+- Add/Export/Copy/Clear buttons are re-bound in one initialization step.
