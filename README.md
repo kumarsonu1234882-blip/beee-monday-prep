@@ -32,3 +32,9 @@ The older "Publishable key is not configured in index.html yet." message is not 
 - Opening a subject refreshes online resources before rendering the notes modal.
 - Human-friendly subject names are shown in Latest Resources.
 - Modal has a manual Refresh resources button.
+
+
+## v13 — Delete resources
+- Admin can delete a published note/resource from the online list using the 🗑️ button.
+- Deletion requires the same upload password.
+- The Edge Function accepts `action: "delete"` and deletes by resource id.

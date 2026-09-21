@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#071224"><meta name="studyvault-version" content="v12"><title>StudyVault • GEC Jehanabad</title>
+<meta name="theme-color" content="#071224"><meta name="studyvault-version" content="v13"><title>StudyVault • GEC Jehanabad</title>
 
 <style>
 :root{--bg:#071224;--panel:#0c1932;--line:#20385e;--text:#f5f8ff;--muted:#a8b7cf;--blue:#4c7dff;--cyan:#3bddff;--violet:#8c5cff;--green:#37e59e;--gold:#ffd06a}
@@ -15,6 +15,11 @@
 .modal{position:fixed;inset:0;background:#000a;display:none;align-items:center;justify-content:center;padding:14px;z-index:120}.modal.show{display:flex}.modal-box{width:min(700px,100%);max-height:85vh;overflow:auto;background:#0a1730;border:1px solid #2b4c78;border-radius:17px;padding:17px}.close{float:right;border:0;background:#152848;color:#fff;border-radius:8px;padding:7px 10px}.resource-actions{display:flex;flex-wrap:wrap;gap:7px}.resource-pill{padding:8px 10px;border:1px solid #28486f;border-radius:9px;background:#0e2344;color:#d8e7ff;font-size:11px;font-weight:800}
 .tablewrap{overflow:auto}.table{width:100%;min-width:760px;border-collapse:collapse;font-size:11px}.table th,.table td{border:1px solid #21385d;padding:8px;background:#09162e}.table th{background:#10264b;color:#c7e9ff}.lab{color:#6af0b4}.test{color:#ffd16a;font-weight:900}.footer{border-top:1px solid #fff1;margin-top:28px;padding:24px 0 32px;color:#8396b4;font-size:11px}.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
 @media(max-width:1050px){.grid{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}}@media(max-width:700px){.links{display:none}.search{width:100%;order:5}.hero h1{font-size:34px}.metrics{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.manager-grid{grid-template-columns:1fr}.manager-grid .full{grid-column:auto}.wrap{padding:0 10px}}
+
+.resource-row{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.resource-row small{display:block}
+.delete-btn{border:1px solid #633544;background:#2b1320;color:#ff9fae;border-radius:10px;padding:7px 9px;cursor:pointer}
+.delete-btn:active{transform:scale(.96)}
 </style></head>
 <body>
 <header class="top"><div class="wrap nav"><a class="brand" href="#" onclick="scrollTo({top:0,behavior:'smooth'});return false"><div class="logo">🎓</div><div><b>StudyVault</b><small>Your Notes, Our Mission</small></div></a><input id="search" class="search" placeholder="Search subject, notes, topic…"><div class="links"><a href="#subjects">Subjects</a><a href="#resources">Resources</a><a href="#manager">Manage Links</a><a href="#timetable">Timetable</a></div><button class="iconbtn" id="adminOpen">🔐</button><div class="avatar">S</div></div></header>
@@ -107,3 +112,26 @@ if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js", {updateViaCache:"none"}).catch(()=>{}));
 }
 </script></body></html>
+async function deleteOnlineResource(id){
+  if(!unlockedSession){openLogin();return}
+  if(!confirm("Delete this resource permanently?")) return;
+  const res=await fetch(FUNCTION_URL,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      action:"delete",
+      password:unlockedSession,
+      id:Number(id)
+    })
+  });
+  const data=await res.json().catch(()=>({}));
+  if(!res.ok){
+    alert(data.error||"Delete failed.");
+    if(res.status===401){unlockedSession="";closeLogin();setState('onlineState','LOCKED','warn')}
+    return;
+  }
+  await fetchOnline();
+  alert("✅ Resource deleted.");
+}
+
+
