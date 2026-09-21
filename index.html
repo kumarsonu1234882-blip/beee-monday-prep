@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#071224"><meta name="studyvault-version" content="v11"><title>StudyVault • GEC Jehanabad</title>
+<meta name="theme-color" content="#071224"><meta name="studyvault-version" content="v12"><title>StudyVault • GEC Jehanabad</title>
 
 <style>
 :root{--bg:#071224;--panel:#0c1932;--line:#20385e;--text:#f5f8ff;--muted:#a8b7cf;--blue:#4c7dff;--cyan:#3bddff;--violet:#8c5cff;--green:#37e59e;--gold:#ffd06a}
@@ -26,7 +26,7 @@
 <section id="timetable" class="section"><div class="card"><div class="head"><div><h2>📅 Weekly Timetable</h2><div class="muted">Effective from 07/09/2026 • Room 127</div></div></div><div class="tablewrap"><table class="table" id="tt"></table></div></div></section>
 <footer class="footer"><div class="foot"><div><b style="color:#dce7ff">StudyVault</b><br>GEC Jehanabad • CSE Cyber Security</div><div>Creator: <a href="https://www.instagram.com/thesonukumar80/" target="_blank">@thesonukumar80</a></div><div>Keep Learning 🚀</div></div></footer>
 </main>
-<div id="resourceModal" class="modal"><div class="modal-box"><button class="close" onclick="closeModal()">✕</button><h2 id="modalTitle"></h2><p id="modalDesc" class="muted"></p><div id="modalBody"></div></div></div>
+<div id="resourceModal" class="modal"><div class="modal-box"><button class="close" onclick="closeModal()">✕</button><h2 id="modalTitle"></h2><p id="modalDesc" class="muted"></p><div id="modalBody"></div><div style="margin-top:12px"><button class="btn secondary" id="modalRefresh">↻ Refresh resources</button></div></div></div>
 <div id="loginModal" class="modal"><div class="modal-box"><button class="close" onclick="closeLogin()">✕</button><h2>🔐 Upload Access</h2><p class="muted">Enter the admin upload password.</p><input id="uploadPw" class="login-input" type="password" placeholder="Upload password"><div class="actions" style="margin-top:10px"><button class="btn primary" id="unlock">Unlock</button></div><div id="loginMsg" class="muted" style="margin-top:8px"></div></div></div>
 <script>
 const SUBJECTS=[
@@ -48,9 +48,46 @@ const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 function setState(id,text,cls='warn'){const e=document.getElementById(id);if(e){e.textContent=text;e.className='status '+cls}}
 function renderSubjects(){document.getElementById('subjectGrid').innerHTML=SUBJECTS.map(s=>`<article class="card"><div class="iconbox">${s.icon}</div><h3>${esc(s.short)}</h3><div class="desc">${esc(s.name)}</div><div><span class="chip">${s.code}</span><span class="chip">${s.type}</span></div><p class="desc">${esc(s.desc)}</p><button class="btn primary" onclick="openSubject('${s.id}')">Open Notes →</button></article>`).join('')}
 function blankResource(sid){return{subject_id:sid,notes:[],pyq:[],lab:[],assignments:[],ebooks:[],important:[],other:[]}}
-function normalizeOnline(rows){const m={};SUBJECTS.forEach(s=>m[s.id]=blankResource(s.id));rows.forEach(r=>{if(m[r.subject_id]&&m[r.resource_type])m[r.subject_id][r.resource_type].push({title:r.title,meta:r.meta||'',url:r.url})});return Object.values(m)}
-function renderResources(){const rows=[];D.resources.forEach(r=>Object.keys(TYPE_LABELS).forEach(k=>(r[k]||[]).forEach(x=>rows.push({...x,subject:r.subject_id,type:k}))));const box=document.getElementById('resourceList');box.innerHTML=rows.length?rows.slice(0,12).map(x=>`<div class="list-item"><div style="display:flex;justify-content:space-between;gap:8px"><b>${esc(x.title)}</b><a class="drive" href="${esc(x.url)}" target="_blank">Open ↗</a></div><small>${esc(x.subject)} • ${TYPE_LABELS[x.type]}${x.meta?' • '+esc(x.meta):''}</small></div>`).join(''):`<div class="empty">No Drive links have been published yet. The subject library is ready; add your links from 🔐 Admin.</div>`;document.getElementById('vaultStats').innerHTML=SUBJECTS.map(s=>{const r=D.resources.find(x=>x.subject_id===s.id)||{};const n=Object.values(TYPE_LABELS).reduce((a,_,i)=>a+((r[Object.keys(TYPE_LABELS)[i]]||[]).length),0);return `<div class="list-item"><b>${esc(s.short)}</b><small>${n} published resources</small></div>`}).join('')}
-function openSubject(id){const s=SUBJECTS.find(x=>x.id===id);const r=D.resources.find(x=>x.subject_id===id)||blankResource(id);let body='<div class="resource-actions">';Object.entries(TYPE_LABELS).forEach(([k,label])=>{const arr=r[k]||[];body+=`<div style="margin:9px 0"><div style="font-weight:900;margin-bottom:6px">${label}</div>${arr.length?arr.map(x=>`<a class="resource-pill" href="${esc(x.url)}" target="_blank">${esc(x.title)} ↗</a>`).join(' '):'<div class="empty">No '+label.toLowerCase()+' link added yet.</div>'}</div>`});body+='</div>';document.getElementById('modalTitle').textContent=s.name+' • '+s.code;document.getElementById('modalDesc').textContent=s.desc;document.getElementById('modalBody').innerHTML=body;document.getElementById('resourceModal').classList.add('show')}
+function normalizeOnline(rows){
+  const m={};
+  SUBJECTS.forEach(s=>m[s.id]=blankResource(s.id));
+  const clean=v=>String(v??'').trim().toLowerCase();
+  rows.forEach(r=>{
+    const sid=clean(r.subject_id);
+    const type=clean(r.resource_type);
+    const subject=SUBJECTS.find(s=>clean(s.id)===sid || clean(s.code)===sid || clean(s.short)===sid);
+    if(subject && m[subject.id] && m[subject.id][type]){
+      m[subject.id][type].push({title:r.title,meta:r.meta||'',url:r.url,id:r.id});
+    }
+  });
+  return Object.values(m);
+}
+function renderResources(){
+  const rows=[];
+  D.resources.forEach(r=>Object.keys(TYPE_LABELS).forEach(k=>(r[k]||[]).forEach(x=>{
+    const s=SUBJECTS.find(s=>s.id===r.subject_id);
+    rows.push({...x,subject:s?s.short:r.subject_id,type:k});
+  })));const box=document.getElementById('resourceList');box.innerHTML=rows.length?rows.slice(0,12).map(x=>`<div class="list-item"><div style="display:flex;justify-content:space-between;gap:8px"><b>${esc(x.title)}</b><a class="drive" href="${esc(x.url)}" target="_blank">Open ↗</a></div><small>${esc(x.subject)} • ${TYPE_LABELS[x.type]}${x.meta?' • '+esc(x.meta):''}</small></div>`).join(''):`<div class="empty">No Drive links have been published yet. The subject library is ready; add your links from 🔐 Admin.</div>`;document.getElementById('vaultStats').innerHTML=SUBJECTS.map(s=>{const r=D.resources.find(x=>x.subject_id===s.id)||{};const n=Object.values(TYPE_LABELS).reduce((a,_,i)=>a+((r[Object.keys(TYPE_LABELS)[i]]||[]).length),0);return `<div class="list-item"><b>${esc(s.short)}</b><small>${n} published resources</small></div>`}).join('')}
+async function openSubject(id){
+  window.currentSubjectId=id;
+  const s=SUBJECTS.find(x=>x.id===id);
+  if(!s)return;
+  if(typeof fetchOnline==='function'){await fetchOnline();}
+  const r=D.resources.find(x=>x.subject_id===id)||blankResource(id);
+  let body='<div class="resource-actions">';
+  Object.entries(TYPE_LABELS).forEach(([k,label])=>{
+    const arr=r[k]||[];
+    body+=`<div style="margin:9px 0"><div style="font-weight:900;margin-bottom:6px">${label}</div>`;
+    body+=arr.length
+      ?arr.map(x=>`<a class="resource-pill" href="${esc(x.url)}" target="_blank">${esc(x.title)} ↗</a>`).join(' ')
+      :'<div class="empty">No '+label.toLowerCase()+' link added yet.</div>';
+    body+='</div>';
+  });
+  document.getElementById('modalTitle').textContent=s.name+' • '+s.code;
+  document.getElementById('modalDesc').textContent=s.desc;
+  document.getElementById('modalBody').innerHTML=body;
+  document.getElementById('resourceModal').classList.add('show');
+}
 function closeModal(){document.getElementById('resourceModal').classList.remove('show')}
 function openLogin(){document.getElementById('loginModal').classList.add('show');document.getElementById('uploadPw').focus()}
 function closeLogin(){document.getElementById('loginModal').classList.remove('show')}
@@ -62,6 +99,7 @@ async function upload(){if(!unlockedSession){openLogin();return}const subject_id
 function lock(){unlockedSession='';document.getElementById('managerPanel').classList.add('hidden');document.getElementById('managerHint').classList.remove('hidden');setState('onlineState','LOCKED','warn')}
 function renderTT(){const t={days:['MON','TUE','WED','THU','FRI','SAT'],slots:['10:00-11:00','11:00-12:00','12:00-01:00','01:00-02:00','02:00-03:00','03:00-04:00','04:00-05:00'],classes:{MON:['BEEE','IAI','CFET','LUNCH','LUNCH','Library/Sports','EIC'],TUE:['PPS Lab (A1)/EP Lab (A2)','EM-I','LUNCH','LUNCH','EP','Class Test','Library/Sports'],WED:['EP','BEEE Lab (A1)/Library (A2)','LUNCH','LUNCH','EM-I','BEEE','EIC'],THU:['PPS Lab (A2)/EP Lab (A1)','BEEE','LUNCH','LUNCH','EM-I','Class Test','EIC'],FRI:['IAI','CFET','UHV','LUNCH','Class Test','BEEE Lab (A2)/Library (A1)',''],SAT:['IAI','EP','UHV','LUNCH','CFET','Library/Sports','']}};let h='<thead><tr><th>Day</th>'+t.slots.map(x=>'<th>'+x+'</th>').join('')+'</tr></thead><tbody>';t.days.forEach(d=>{h+='<tr><th>'+d+'</th>';t.classes[d].forEach(c=>{let cls=c.includes('Class Test')?'test':c.includes('Lab')?'lab':'';h+='<td class="'+cls+'">'+esc(c)+'</td>'});h+='</tr>'});document.getElementById('tt').innerHTML=h+'</tbody>'}
 document.getElementById('search').addEventListener('input',e=>{const q=e.target.value.toLowerCase().trim();document.querySelectorAll('#subjectGrid .card').forEach(c=>c.classList.toggle('hidden',q&&!c.textContent.toLowerCase().includes(q)))})
+document.getElementById('modalRefresh').onclick=()=>{if(window.currentSubjectId)openSubject(window.currentSubjectId)};
 document.getElementById('adminOpen').onclick=openLogin;document.getElementById('unlock').onclick=unlock;document.getElementById('mAdd').onclick=upload;document.getElementById('mRefresh').onclick=fetchOnline;document.getElementById('mLock').onclick=lock;
 renderSubjects();renderResources();renderTT();fillSubject();fetchOnline();
 </script><script>

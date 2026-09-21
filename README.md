@@ -25,3 +25,10 @@ The browser no longer requires the Supabase publishable key. It reads and writes
 ## v11 — Cache fix
 This build includes a cache-resetting service worker and explicitly registers it with `updateViaCache: "none"`.
 The older "Publishable key is not configured in index.html yet." message is not present in this build.
+
+
+## v12 — Resource display fix
+- Online resource subject IDs are normalized case-insensitively and can match subject id/code/short name.
+- Opening a subject refreshes online resources before rendering the notes modal.
+- Human-friendly subject names are shown in Latest Resources.
+- Modal has a manual Refresh resources button.
